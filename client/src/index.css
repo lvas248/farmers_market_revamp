@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  Form{
+    @apply flex flex-col border-2 border-black rounded-lg p-5
+  }
+  input{
+    @apply p-2 border-b my-4 w-full
+  }
+  button{
+    @apply p-2 w-fit m-auto rounded-full border mt-5
+  }
+  .error{
+    @apply text-red-500 text-xs block h-2
+  }
+}
+
