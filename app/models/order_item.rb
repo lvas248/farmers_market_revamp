@@ -1,2 +1,5 @@
 class OrderItem < ApplicationRecord
-end
+    belongs_to :product
+    belongs_to :order
+  
+  end
