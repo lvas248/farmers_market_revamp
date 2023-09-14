@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
 
 
+  resources :products
   post '/signup', to: 'users#create'
   get '/me', to: 'users#show'
 
