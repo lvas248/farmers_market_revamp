@@ -2,8 +2,7 @@ class OrdersController < ApplicationController
 
     def add_to_cart
         order = get_user.orders.find_or_create_by(open: true)
-        order_item =  order.order_items.find_by(product_id: product_params[:product_id])
-        order_item ? order_item.update!(order_qty: order_item.order_qty + product_params[:order_qty]) : order_item = order.order_items.create!(product_params)
+        order_item = order.update_or_create_order_item(product_params)
         render json: order_item, status: :created
 
         #   { "product": { "id": 6, "order_qty": 1 } }

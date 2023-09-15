@@ -3,6 +3,10 @@ class OrderItem < ApplicationRecord
     belongs_to :order
   
     validate :confirm_inventory_available
+
+    def add_to_qty(qty)
+      self.update!(order_qty: self.order_qty + qty)
+    end
     
     private
 
