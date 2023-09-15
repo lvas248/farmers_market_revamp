@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { addUser, removeUser } from './user/userSlice'
+import { addUser, removeUser } from './userSlice'
 
 
 //create signup async
