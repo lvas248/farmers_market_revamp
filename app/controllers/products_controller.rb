@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
 
     def index
-        render json: Product.all.where('qty_avail > 0'), status: :ok
+        render json: Product.all.order(:id), status: :ok
     end
 
     def reset_inventory_levels

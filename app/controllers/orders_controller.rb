@@ -33,6 +33,13 @@ class OrdersController < ApplicationController
         head :ok
     end
 
+    def submit_order
+        order = get_user.orders.find_by(open: true)
+        order.order_items.each{ |i| Product.find(i.product.id).update!(qty_avail: i.product.qty_avail - i.order_qty )}
+        order.update!(open: false)
+        render json: order, inlcude: ['order_items','order_items.product'], include: ['order_items.product'], status: :created
+    end
+
     private
 
     def get_user
