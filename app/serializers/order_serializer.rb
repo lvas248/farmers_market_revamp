@@ -3,4 +3,5 @@ class OrderSerializer < ActiveModel::Serializer
 
   has_many :order_items
 
+
 end

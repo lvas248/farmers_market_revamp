@@ -18,6 +18,22 @@ export const addToCart = createAsyncThunk(
     }
 )
 
+export const removeFromCart = createAsyncThunk(
+    // obj = {id: order_item.id} 
+    'removeFrom/cart',
+    async( obj, { rejectWithValue })=>{
+        const response = await fetch(`/orders/${obj.id}`,{
+            method:'DELETE',
+         })
+        const data = await response
+
+        if(response.ok) return obj.id
+        return rejectWithValue(data)
+    }
+)
+
+
+
 const initialState = {
     entity: [],
     status: 'idle',
@@ -27,7 +43,11 @@ const initialState = {
 const cartSlice = createSlice({
     name: 'cart',
     initialState,
-    reducers:{},
+    reducers:{
+        addCart: ( state, action )=>{
+            state.entity = action.payload
+        }
+    },
     extraReducers: ( builder )=>{
         builder
             .addCase( addToCart.pending, ( state )=>{
@@ -43,9 +63,24 @@ const cartSlice = createSlice({
             .addCase( addToCart.fulfilled, ( state, action )=>{
                 state.status = 'idle'
                 state.error = null
-                state.entity = action.payload
+                state.entity = [...state.entity, action.payload]
             })
+            .addCase( removeFromCart.pending, ( state )=>{
+                state.status = 'pending'
+                state.error = null
+            })
+            .addCase( removeFromCart.rejected, ( state, action )=>{
+                state.status = 'idle'
+                state.error = action.payload
+            })
+            .addCase( removeFromCart.fulfilled, ( state, action )=>{
+                state.status = 'idle'
+                state.error = null
+                state.entity = state.entity.filter( oItem => oItem.id !== action.payload)
+            })
+            
     }
 })
 
 export default cartSlice.reducer
+export const { addCart } = cartSlice.actions

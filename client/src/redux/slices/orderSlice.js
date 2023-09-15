@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 
 
@@ -11,8 +11,14 @@ const initialState = {
 export const orderSlice = createSlice({
     name: 'order',
     initialState,
-    reducers: {},
+    reducers: {
+        addOrders: (state, action)=>{
+            state.entity = action.payload
+        }
+    },
     extraReducers:{}
 })
 
 export default orderSlice.reducer
+
+export const { addOrders } = orderSlice.actions

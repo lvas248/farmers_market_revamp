@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { addUser, removeUser } from './userSlice'
+import { addCart } from "./cartSlice";
+import { addOrders } from "./orderSlice";
 
 
 //create signup async
@@ -37,7 +39,9 @@ export const loginuser = createAsyncThunk(
         const data = await response.json()
 
         if(response.ok){ 
-            dispatch(addUser(data))
+            dispatch(addUser(data.username))
+            dispatch(addCart(data.cart.order_items))
+            dispatch(addOrders(data.orders))
             return data
         }
         return rejectWithValue(data)
@@ -70,7 +74,9 @@ export const refreshSession = createAsyncThunk(
         const data = await response.json()
 
         if(response.ok){ 
-            dispatch(addUser(data))
+            dispatch(addUser(data.username))
+            dispatch(addCart(data.cart.order_items))
+            dispatch(addOrders(data.orders))
             return data
         }
         return rejectWithValue(data)
