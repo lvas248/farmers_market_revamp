@@ -4,7 +4,11 @@ import { Switch, Route } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { fetchProduct } from './redux/slices/productSlice';
 import { refreshSession } from './redux/slices/sessionSlice';
+
 import Navbar from './layout/Navbar';
+import Shop from './pages/shop/Shop';
+import ProductDetailCard from './components/ProductDetailCard';
+
 function App(){
 
   const [ leftIsOpen, setLeftisOpen ] = useState(false)
@@ -26,7 +30,6 @@ function App(){
     dispatch(refreshSession())
   },[dispatch])
 
-  console.log(rightIsOpen)
  
   return (
     <div className="relative min-w-[250px] h-screen">   
@@ -35,11 +38,9 @@ function App(){
 
       <Switch>
 
-        <Route exact path='/'>
-         
-  
-        </Route>
+        <Route exact path='/'> <Shop /> </Route>
 
+        <Route exact path='/product/:id'> <ProductDetailCard toggleRight={toggleRight}/> </Route>
 
       </Switch>
 

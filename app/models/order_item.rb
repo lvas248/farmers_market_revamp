@@ -5,7 +5,7 @@ class OrderItem < ApplicationRecord
     validate :confirm_inventory_available
 
     def add_to_qty(qty)
-      self.update!(order_qty: self.order_qty + qty)
+      self.update!(order_qty: self.order_qty + qty.to_i)
     end
 
     def fulfill_order_item

@@ -1,4 +1,4 @@
-import x from '../Assets/Icons/x.png'
+import x from '../assets/Icons/x.png'
 
 function RightSidePanel({isOpen, toggle}){
 

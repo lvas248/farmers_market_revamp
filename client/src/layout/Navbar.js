@@ -1,5 +1,5 @@
 import { Squash as Hamburger} from 'hamburger-react'
-import cart from '../Assets/Icons/cart.png'
+import cart from '../assets/Icons/cart.png'
 // import filled_cart from '../Assets/Icons/filled_cart.png'
 import LeftSideMenu from './LeftSideMenu';
 import RightSidePanel from './RightSidePanel';
