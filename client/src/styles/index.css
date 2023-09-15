@@ -14,5 +14,17 @@
       bg-white border-b border-stone-200 
       flex justify-between drop-shadow-sm 
   }
+
+  .leftPanel{
+    @apply
+      fixed top-0 w-[0] h-[100vh]
+      bg-black opacity-90
+      text-xs
+  }
+
+  .rightPanel{
+    @apply
+      leftPanel right-0
+  }
 }
 

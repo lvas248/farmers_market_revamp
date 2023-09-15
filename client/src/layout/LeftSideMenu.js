@@ -17,10 +17,8 @@ function LeftSideMenu({isOpen, toggle}){
     return ( 
         <div
             className={`
-                    fixed top-0 w-[0] h-[100vh]
-                    bg-black opacity-90
+                    leftPanel
                     transition-width duration-500 ease-out 
-                    text-xs
                     ${isOpen && 'w-[50vw] sm:w-[33vw]'}
                     `}
         >

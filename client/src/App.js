@@ -12,9 +12,11 @@ function App(){
 
   function toggleLeft(){
     setLeftisOpen(!leftIsOpen)
+    setRightisOpen(false)
   }
   function toggleRight(){
     setRightisOpen(!rightIsOpen)
+    setLeftisOpen(false)
   }
   
   const dispatch = useDispatch()
@@ -24,6 +26,8 @@ function App(){
     dispatch(refreshSession())
   },[dispatch])
 
+  console.log(rightIsOpen)
+ 
   return (
     <div className="relative min-w-[250px] h-screen">   
 
