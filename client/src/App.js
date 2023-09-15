@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchProduct } from './redux/slices/productSlice';
 import { addToCart, clearCart } from './redux/slices/cartSlice';
 import { loginuser, refreshSession } from './redux/slices/sessionSlice';
+import { submitOrder } from './redux/slices/orderSlice';
 
 import { useEffect } from 'react';
 function App(){
@@ -25,13 +26,16 @@ function App(){
     dispatch(clearCart())
   }
 
-
+  function submitCart(){
+    dispatch(submitOrder())
+  }
 
 
   const cart = useSelector( state => state.cart)
   const loggedIn = useSelector( state => state.session.loggedIn)
+  const orders = useSelector( state => state.order.entity)
 
-  console.log('cart:',cart)
+  console.log('cart:',cart, 'order: ', orders)
   return (
     <div>
 
@@ -42,7 +46,8 @@ function App(){
       <button onClick={addItemToCart}>add to cart</button>
 
 
-      <button onClick={removeEverythingFromCart}>clear cart</button>
+
+      <button onClick={submitCart}>submit order</button>
 
     </div>
 

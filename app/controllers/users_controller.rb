@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     #refresh
     def show
         user = get_user
-        render json: user, status: :ok
+        render json: user, include: [ 'orders.order_items.product'], status: :ok
     end
 
     private

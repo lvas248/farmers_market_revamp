@@ -1,4 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
+export const submitOrder = createAsyncThunk(
+    'submit/order',
+    async( _, { rejectWithValue })=>{
+        const response = await fetch('/submit_order',{
+            method:'POST',
+         })
+        const data = await response.json()
+
+        if(response.ok) return data
+        return rejectWithValue(data)
+    }
+)
 
 
 
@@ -16,7 +29,22 @@ export const orderSlice = createSlice({
             state.entity = action.payload
         }
     },
-    extraReducers:{}
+    extraReducers: ( builder ) =>{
+        builder
+            .addCase( submitOrder.pending, state =>{
+                state.status = 'pending'
+                state.error = null
+            })
+            .addCase( submitOrder.rejected, ( state, action )=>{
+                state.status = 'idle'
+                state.error = action.payload
+            })
+            .addCase( submitOrder.fulfilled, ( state, action ) =>{
+                state.status = 'idle'
+                state.error = null
+                state.entity = [...state.entity, action.payload]
+            } )
+    }
 })
 
 export default orderSlice.reducer
