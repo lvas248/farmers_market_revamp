@@ -28,6 +28,11 @@ class OrdersController < ApplicationController
 
     end
 
+    def clear_cart
+        get_user.orders.find_by(open: true).order_items.destroy_all
+        head :ok
+    end
+
     private
 
     def get_user

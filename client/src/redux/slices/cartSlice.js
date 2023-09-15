@@ -33,9 +33,7 @@ export const removeFromCart = createAsyncThunk(
 )
 
 export const updateOrderItem = createAsyncThunk(
-
     // { "order_item_id": 2,  submitObj: { "product": { "product_id": 6, "order_qty": 9 } } } 
-
     'updateCartItemQty/cart',
     async( obj, { rejectWithValue })=>{
         const response = await fetch(`/orders/${obj.order_item_id}`,{
