@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   
 
+  post '/orders', to: 'orders#add_to_cart'
 
-
+  
 
   get '/products', to: 'products#index'
   patch '/products', to: 'products#reset_inventory_levels'
