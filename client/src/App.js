@@ -1,4 +1,3 @@
-import './App.css';
 import { useDispatch } from 'react-redux'
 import { fetchProduct } from './redux/slices/productSlice';
 
@@ -9,13 +8,12 @@ function App(){
 
   useEffect(()=>{
     dispatch(fetchProduct())
-  },[])
+  },[dispatch])
 
   return (
     <div>
 
  
-        
 
     </div>
 

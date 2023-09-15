@@ -12,6 +12,21 @@ export const fetchProduct = createAsyncThunk(
     }
 )
 
+export const resetInventoryLevels = createAsyncThunk(
+    'resetInvetory/products',
+    async( _, { rejectWithValue })=>{
+        const response = await fetch('/products',{
+            method: 'PATCH'
+        })
+        const data = await response.json()
+
+        if(response.ok) return data
+        return rejectWithValue(data)
+    }
+)
+
+
+
 const initialState = {
     entity: [],
     status: 'idle',
@@ -36,6 +51,16 @@ const productSlice = createSlice({
                 state.status = 'idle'
                 state.error = null
                 state.entity = action.payload
+            })
+            .addCase( resetInventoryLevels.pending, ( state ) =>{
+                state.status = 'pending'
+            })
+            .addCase( resetInventoryLevels.rejected, ( state, action ) =>{
+                state.status = 'idle'
+                state.error = action.payload
+                state.enitity = state.entity.map( p =>  {
+                    return {...p, qty_avail: 10 }
+                })
             })
     }
 })
