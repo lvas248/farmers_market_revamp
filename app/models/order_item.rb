@@ -7,6 +7,10 @@ class OrderItem < ApplicationRecord
     def add_to_qty(qty)
       self.update!(order_qty: self.order_qty + qty)
     end
+
+    def fulfill_order_item
+      self.product.reduce_inventory_by(self.order_qty)
+    end
     
     private
 

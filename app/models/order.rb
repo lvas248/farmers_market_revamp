@@ -13,5 +13,14 @@ class Order < ApplicationRecord
     def remove_order_item_by_id(order_item_id)
       self.order_items.find_by(id: order_item_id).destroy
     end
+
+    def finalize_order
+      #update product qtys
+      self.order_items.each{ |o| o.fulfill_order_item }
+      #closes order
+      self.update!(open: false)
+    end
+
+    
   
   end
