@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProduct } from './redux/slices/productSlice';
-import { addToCart } from './redux/slices/cartSlice';
+import { addToCart, updateOrderItem } from './redux/slices/cartSlice';
 import { loginuser, refreshSession } from './redux/slices/sessionSlice';
 
 import { useEffect } from 'react';
@@ -21,7 +21,8 @@ function App(){
     dispatch(addToCart({product: { product_id: 5, order_qty:1}})).then(res => console.log(res.payload))
   }
 
- 
+
+
 
 
   const cart = useSelector( state => state.cart)
@@ -36,6 +37,7 @@ function App(){
 
       <button onClick={login}>login</button>
       <button onClick={addItemToCart}>add to cart</button>
+
  
 
     </div>
