@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProduct } from './redux/slices/productSlice';
-import { addToCart, updateOrderItem } from './redux/slices/cartSlice';
+import { addToCart, clearCart } from './redux/slices/cartSlice';
 import { loginuser, refreshSession } from './redux/slices/sessionSlice';
 
 import { useEffect } from 'react';
@@ -18,9 +18,12 @@ function App(){
   }
 
   function addItemToCart(){
-    dispatch(addToCart({product: { product_id: 5, order_qty:1}})).then(res => console.log(res.payload))
+    dispatch(addToCart({product: { product_id: 6, order_qty:4}})).then(res => console.log(res.payload))
   }
 
+  function removeEverythingFromCart(){
+    dispatch(clearCart())
+  }
 
 
 
@@ -38,7 +41,8 @@ function App(){
       <button onClick={login}>login</button>
       <button onClick={addItemToCart}>add to cart</button>
 
- 
+
+      <button onClick={removeEverythingFromCart}>clear cart</button>
 
     </div>
 

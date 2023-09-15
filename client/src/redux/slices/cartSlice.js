@@ -50,9 +50,18 @@ export const updateOrderItem = createAsyncThunk(
     }
 )
 
+export const clearCart = createAsyncThunk(
+    'clear/cart',
+    async( _, { rejectWithValue })=>{
+        const response = await fetch('/clear_cart',{
+            method:'DELETE',
+         })
+        const data = await response
 
-
-
+        if(response.ok) return 
+        return rejectWithValue(data)
+    }
+)
 
 const initialState = {
     entity: [],
@@ -113,8 +122,21 @@ const cartSlice = createSlice({
                     if( oItem.id === action.payload.id) return action.payload
                     else return oItem
                 })
-
             })
+            .addCase( clearCart.pending, state => {
+                state.status = 'pending'
+                state.error = null
+            })
+            .addCase( clearCart.rejected, ( state, action )=>{
+                state.status = 'idle'
+                state.error = action.payload
+            })
+            .addCase( clearCart.fulfilled, ( state )=>{
+                state.status = 'idle'
+                state.error = null
+                state.entity = []
+            })
+
     }
 })
 
