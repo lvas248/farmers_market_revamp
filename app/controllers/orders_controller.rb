@@ -10,14 +10,14 @@ class OrdersController < ApplicationController
     end
 
     def remove_from_cart
-        order = get_user.orders.find_by(open: true)
-        order.order_items.find_by(id: params[:order_item_id]).destroy
+        order = get_cart
+        order.remove_order_item_by_id(params[:order_item_id])
         head :no_content
         #   params - /:order_item_id
     end
 
     def updateOrderItemQtyInCart
-        order = get_user.orders.find_by(open: true)
+        order = get_cart
         order_item = order.order_items.find(params[:order_item_id])
         order_item.update!(product_params)
         render json: order_item, status: :created
@@ -28,12 +28,12 @@ class OrdersController < ApplicationController
     end
 
     def clear_cart
-        get_user.orders.find_by(open: true).order_items.destroy_all
+        get_cart.order_items.destroy_all
         head :ok
     end
 
     def submit_order
-        order = get_user.orders.find_by(open: true)
+        order = get_cart
         order.order_items.each{ |i| Product.find(i.product.id).update!(qty_avail: i.product.qty_avail - i.order_qty )}
         order.update!(open: false)
         render json: order, inlcude: ['order_items','order_items.product'], include: ['order_items.product'], status: :created
@@ -43,6 +43,10 @@ class OrdersController < ApplicationController
 
     def get_user
         User.find(session[:user_id])
+    end
+
+    def get_cart
+        get_user.orders.find_by(open: true)
     end
 
     def product_params

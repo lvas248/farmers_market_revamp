@@ -9,5 +9,9 @@ class Order < ApplicationRecord
       order_item ? order_item.add_to_qty(product_params[:order_qty]) : order_item = self.order_items.create!(product_params)
       order_item
     end
+
+    def remove_order_item_by_id(order_item_id)
+      self.order_items.find_by(id: order_item_id).destroy
+    end
   
   end
