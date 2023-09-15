@@ -17,6 +17,17 @@ class OrdersController < ApplicationController
         #   params - /:order_item_id
     end
 
+    def updateOrderItemQtyInCart
+        order = get_user.orders.find_by(open: true)
+        order_item = order.order_items.find(params[:order_item_id])
+        order_item.update!(product_params)
+        render json: order_item, status: :created
+
+        #   params - /:order_item_id
+        #   { "product": { "id": 6, "order_qty": 1 } }
+
+    end
+
     private
 
     def get_user
