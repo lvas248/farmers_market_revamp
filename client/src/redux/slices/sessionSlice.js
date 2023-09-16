@@ -7,7 +7,7 @@ import { addOrders } from "./orderSlice";
 //create signup async
 export const signupUser = createAsyncThunk(
     'signup/user',
-    async(obj, { dispatch, rejectWithValue })=>{
+    async(obj, { rejectWithValue })=>{
         const response = await fetch('/signup',{
             method:'POST',
             headers: {
@@ -18,7 +18,6 @@ export const signupUser = createAsyncThunk(
         const data = await response.json()
 
         if(response.ok){
-            dispatch(addUser(data))
             return data
         }
         return rejectWithValue(data)
@@ -39,7 +38,6 @@ export const loginuser = createAsyncThunk(
         const data = await response.json()
 
         if(response.ok){ 
-            dispatch(addUser(data.username))
             dispatch(addCart(data.cart.order_items))
             dispatch(addOrders(data.orders))
             return data
@@ -50,17 +48,14 @@ export const loginuser = createAsyncThunk(
 //create logout async
 export const logoutSession = createAsyncThunk(
     'logout/session',
-    async( _,{ dispatch, rejectWithValue })=>{
+    async( _,{ rejectWithValue })=>{
         const response = await fetch('/logout',{
             method: 'DELETE'
         })
 
         const data = await response
 
-        if(response.ok){
-            dispatch(removeUser())
-            return
-        }
+        if(response.ok)return
         return rejectWithValue(data)
 
     }
@@ -74,7 +69,6 @@ export const refreshSession = createAsyncThunk(
         const data = await response.json()
 
         if(response.ok){ 
-            dispatch(addUser(data.username))
             dispatch(addCart(data.cart.order_items))
             dispatch(addOrders(data.orders))
             return data

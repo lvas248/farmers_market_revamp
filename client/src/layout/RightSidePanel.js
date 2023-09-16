@@ -14,7 +14,7 @@ function RightSidePanel({isOpen, toggle}){
         setCurrentCart(cart)
     },[cart])
 
-    const renderCartItems = currentCart.map( i => {
+    const renderCartItems = currentCart?.map( i => {
         return <SideCartItem key={i.id} cartItem={i} />
             })
 
@@ -47,7 +47,7 @@ function RightSidePanel({isOpen, toggle}){
                     <h1 className='mb-2 text-sm font-bold'>shopping cart</h1>
                         
                     <div className='p-2 grid gap-2 border-t-2 border-b-2'>
-                        { renderCartItems.length > 0 ? renderCartItems : <p className='text-center'>cart empty</p>}
+                        { renderCartItems?.length > 0 ? renderCartItems : <p className='text-center'>cart empty</p>}
 
                     </div>     
 

@@ -243,4 +243,4 @@
   },
 ].each {|p| Product.create!(p)}
 
-user = User.create!({username: 'user', password: '123', password_confirmation:'123'})
+user = User.create!({email: 'lvas248@gmail.com', password: '123', password_confirmation:'123'})

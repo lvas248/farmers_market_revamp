@@ -3,10 +3,10 @@ class SessionsController < ApplicationController
     #login
     def create
         # binding.pry
-        user = User.find_by( username: params[:username])
+        user = User.find_by( email: params[:email])
         if user&.authenticate(params[:password])
             session[:user_id] = user.id
-            render json: user, include: [ 'orders.order_items.product'], status: :ok
+            render json: user, include: [ 'orders'], status: :ok
         else 
             render json: { error: 'Invalid username or password'}, status: :unauthorized
         end

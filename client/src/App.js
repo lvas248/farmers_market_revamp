@@ -8,6 +8,7 @@ import { refreshSession } from './redux/slices/sessionSlice';
 import Navbar from './layout/Navbar';
 import Shop from './pages/shop/Shop';
 import ProductDetailCard from './components/ProductDetailCard';
+import Login from './pages/Login';
 
 function App(){
 
@@ -29,17 +30,23 @@ function App(){
     dispatch(fetchProduct())
     dispatch(refreshSession())
   },[dispatch])
-  
+
+
   return (
-    <div className="relative min-w-[250px] h-screen">   
+    <div className="relative min-w-[250px] h-screen bg-[#f7f7f7] grid place-content-center">   
 
     <Navbar leftIsOpen={leftIsOpen} rightIsOpen={rightIsOpen} toggleLeft={toggleLeft} toggleRight={toggleRight} />
 
       <Switch>
 
-        <Route exact path='/'> <Shop /> </Route>
 
-        <Route exact path='/product/:id'> <ProductDetailCard toggleRight={toggleRight}/> </Route>
+        <Route path='/product/:id'> <ProductDetailCard toggleRight={toggleRight}/> </Route>
+
+        <Route path='/signup'> </Route>
+
+        <Route path='/login'> <Login /></Route>
+
+        <Route exact path='/'> <Shop /> </Route>
 
       </Switch>
 
