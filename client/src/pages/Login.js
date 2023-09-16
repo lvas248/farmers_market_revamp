@@ -1,6 +1,6 @@
-import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { loginuser } from '../redux/slices/sessionSlice'
+import { useState , useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { loginuser, removeErrors } from '../redux/slices/sessionSlice'
 import { useHistory } from 'react-router-dom'
 
 function Login() {
@@ -11,6 +11,14 @@ function Login() {
     })
     const dispatch = useDispatch()
     const history = useHistory()
+    const error = useSelector(state => state.session.error)
+
+    useEffect(()=>{
+        //removes errors when component unmounts
+        return()=>{
+            dispatch(removeErrors())
+        }
+    },[dispatch])
 
     function updateLoginObj(e){
         const copy = {...loginObj}
@@ -23,9 +31,7 @@ function Login() {
         dispatch(loginuser(loginObj)).then(res => {
             if(res.meta.requestStatus === 'fulfilled') history.push('/')
         })
-        
     }
-
 
     return ( 
 
@@ -36,7 +42,10 @@ function Login() {
                 <form onSubmit={login} className='grid pt-6 gap-3' >
 
                     <div className='grid gap-2'>
-                        <label className='text-sm'>Email</label>
+                        <div className='flex justify-between'>
+                            <label className='text-sm'>Email</label>
+                            <p className='error'>{error?.error && error?.error}</p>
+                        </div>                        
                         <input className='border-2 text-md px-1' name='email' value={loginObj.email} onChange={updateLoginObj} type='email' />
                     </div>
 
