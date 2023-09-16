@@ -25,11 +25,11 @@ function Collection() {
 
     return ( 
     
-      <div className='pt-[8vh] h-[95vh] w-screen bg-white grid gap-5'>
+      <div className='pt-[8vh] h-[95vh] w-screen bg-white grid gap-2'>
 
             <Filter filterText={filterText} updateFilterText={updateFilterText} produceType={produceType} updateProduceType={updateProduceType}/>
 
-            <h1 className='text-center text-3xl py-3'>{season.toUpperCase()} COLLECTION</h1>
+            <h1 className='text-center text:sm sm:text-3xl'>{season.toUpperCase()} COLLECTION</h1>
  
             <ProductList productList={products}/>
 
