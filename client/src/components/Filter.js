@@ -3,8 +3,8 @@
 function Filter({updateFilterText, filterText, updateProduceType, produceType}) {
     
     return ( 
-        <div className='border-b-[2px]'>
-            <div className='p-1 sm:p-5  bg-white w-[100%] flex text-[9px] justify-between max-w-[1050px] m-auto'>
+        <div className='py-1'>
+            <div className='sm:p-5  bg-white w-[100%] flex text-[9px] justify-between max-w-[1050px] m-auto'>
                     
                     <input type='text' value={filterText} onChange={updateFilterText} className='border-[2px]  px-4 text-sm' placeholder="search..."/>
                     

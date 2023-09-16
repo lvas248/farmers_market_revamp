@@ -11,21 +11,9 @@ import ProductDetailCard from './components/ProductDetailCard';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Collection from './pages/Collection';
-
+import Cart from './pages/Cart/Cart'
 function App(){
 
-  const [ leftIsOpen, setLeftisOpen ] = useState(false)
-  const [ rightIsOpen, setRightisOpen ] = useState(false)
-
-  function toggleLeft(){
-    setLeftisOpen(!leftIsOpen)
-    setRightisOpen(false)
-  }
-  function toggleRight(){
-    setRightisOpen(!rightIsOpen)
-    setLeftisOpen(false)
-  }
-  
   const dispatch = useDispatch()
 
   useEffect(()=>{
@@ -34,22 +22,25 @@ function App(){
   },[dispatch])
 
   const user = useSelector(state => state.user.entity)
-  console.log(user)
+  const cart = useSelector(state => state.cart.entity)
 
+  console.log(cart)
 
   return (
     <div className="relative min-w-[250px] bg-[#f7f7f7] grid place-content-center min-h-screen">   
 
-    <Navbar leftIsOpen={leftIsOpen} rightIsOpen={rightIsOpen} toggleLeft={toggleLeft} toggleRight={toggleRight} />
+    <Navbar />
 
       <Switch>
 
         
         <Route exact path='/'> <Shop /> </Route>
 
-        <Route path='/product/:id'> <ProductDetailCard toggleRight={toggleRight}/> </Route>
+        <Route path='/product/:id'> <ProductDetailCard /> </Route>
 
         <Route path='/collection/:season'> <Collection /></Route>
+
+        <Route path='/cart'> <Cart /> </Route>
 
         <Route path='/signup'><Signup /> </Route>
 

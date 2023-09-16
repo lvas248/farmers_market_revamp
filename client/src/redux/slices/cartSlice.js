@@ -12,9 +12,9 @@ export const addToCart = createAsyncThunk(
             body: JSON.stringify(obj)
         })
         const data = await response.json()
-
         if(response.ok) return data
         return rejectWithValue(data)
+
     }
 )
 
@@ -84,7 +84,6 @@ const cartSlice = createSlice({
             .addCase( addToCart.pending, ( state )=>{
                 state.status = 'pending'
                 state.error = null
-                state.entity = []
             })
             .addCase( addToCart.rejected, ( state, action )=>{
                 state.status = 'idle'
@@ -94,7 +93,19 @@ const cartSlice = createSlice({
             .addCase( addToCart.fulfilled, ( state, action )=>{
                 state.status = 'idle'
                 state.error = null
-                state.entity = [...state.entity, action.payload]
+                
+                const order_item = state.entity.find( i => i.id === action.payload.id)
+
+                if(order_item){
+                    state.entity = state.entity.map( p => {
+                        if(p.id === action.payload.id) return action.payload
+                        return p
+                    })
+                }else{
+                    state.entity = [...state.entity, action.payload]
+                }
+                // order_item ? order_item.order_qty = action.payload.order_qty : state.entity = [...state.entity, action.payload]
+    
             })
             .addCase( removeFromCart.pending, ( state )=>{
                 state.status = 'pending'

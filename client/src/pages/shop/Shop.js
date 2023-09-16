@@ -22,8 +22,8 @@ function Shop(){
 
 
     return ( 
-        <div className='pt-[8vh] h-[95vh] w-screen bg-white grid gap-2'>
-
+        <div className='pt-[6vh] h-[95vh] w-screen bg-white grid gap-2'>
+            
             <Filter filterText={filterText} updateFilterText={updateFilterText} produceType={produceType} updateProduceType={updateProduceType}/>
             
             <h1 className='text-center text-sm sm:text-3xl'>SHOP ALL</h1>

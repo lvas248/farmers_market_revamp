@@ -7,16 +7,12 @@ import SideCartItem from '../components/SideCardItem'
 function RightSidePanel({isOpen, toggle}){
 
     const history = useHistory()
-    const cart = useSelector( state => state.cart.entity)
-    const [ currentCart, setCurrentCart ] = useState([])
+    const cart = useSelector(state => state.cart.entity)
 
-    useEffect(()=>{
-        setCurrentCart(cart)
-    },[cart])
-
-    const renderCartItems = currentCart?.map( i => {
+    const renderCartItems = cart?.map( i => {
         return <SideCartItem key={i.id} cartItem={i} />
-            })
+    })
+    
 
     function continueShopping(){
         toggle()

@@ -1,32 +1,35 @@
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux' 
 import { useState } from 'react'
 import { addToCart } from '../redux/slices/cartSlice'
 
-function ProductDetailCard({toggleRight}){
-      
-    const { id } = useParams()
-    const products = useSelector(state => state.product?.entity)
-    const product = products?.find( p => p.id === parseInt(id))
+function ProductDetailCard({}){
+    const [ qty, setQty ] = useState(0)
 
-    const cart = useSelector(state => state.cart.entity)
+    const { id } = useParams()
+    const dispatch = useDispatch()
+    const history = useHistory()
+
+    const products = useSelector(state => state.product?.entity)
+    const cart = useSelector( state => state.cart.entity)
+   
+    const product = products?.find( p => p.id === parseInt(id))
     const productInCart = cart?.find(p => p.product?.id === product?.id)
     const availableQuantity = product?.qty_avail - (productInCart?.order_qty || 0) || 0 
-
-    const [ qty, setQty ] = useState(0)
-    const dispatch = useDispatch()
-
+   
     function updateQty(e){
         setQty(e.target.value)
     }
 
     function addProductToCart(){
         if(qty > 0 && qty <= product.qty_avail){
-            dispatch(addToCart({product:{ product_id: product.id, order_qty: qty}}))
-            setQty(0)
-            toggleRight()
-        }
-       
+            dispatch(addToCart({product:{ product_id: product.id, order_qty: qty}})).then( res => {
+                if(res.meta.requestStatus === 'fulfilled'){ 
+                        history.push('/cart')
+                        setQty(0)
+                    }
+            })
+        }  
     }
 
     return ( 

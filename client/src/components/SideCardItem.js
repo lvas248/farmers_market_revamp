@@ -26,7 +26,7 @@ function SideCartItem({cartItem}){
                 <p className='text-left'>{cartItem?.product.name}</p>
 
               
-                <input className='text-black text-center w-fit' type='number' value={qty} onChange={updateQty} min={0} max={10}/>
+                <input className='text-black text-center w-fit' type='number' value={qty} onChange={updateQty} min={1} max={10}/>
 
                 <div className='flex gap-1'>
                     <button onClick={deleteFromCart} className=''>remove</button>

@@ -13,7 +13,11 @@ module.exports = {
         glideInTop: {
           '0%': { transform: 'translateY(-100%)'},
           '100%': { transform: 'translateX(0)'},
-        },      
+        },   
+        glideInRight: {
+          '0%':{ transform: 'translateX(100%)', opacity: 0 },
+          '100%':{ transform: 'translateX(0)', opacity: 1}
+        },   
         rotateIn:{
           '0%': { transform: 'rotate(0)'},
           '100%':{ transform: 'rotate(180deg)'}
@@ -25,6 +29,7 @@ module.exports = {
         'fade-in-slow': 'fadeIn 3s forwards',
         'fade-in-fast': 'fadeIn .5s forwards',
         'glide-in-top': 'glideInTop .2s ease-out',
+        'glide-in-right': 'glideInRight .3s ease-in',
         'rotate-in':'rotateIn 0.5s ease-out',
       },
     },
