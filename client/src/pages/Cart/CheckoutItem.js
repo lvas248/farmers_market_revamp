@@ -1,12 +1,21 @@
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { useDispatch } from 'react-redux'
-import { useState } from 'react'
-import { removeFromCart, updateOrderItem } from "../../redux/slices/cartSlice";
+import { useDispatch, useSelector } from 'react-redux'
+import { useState, useEffect } from 'react'
+import { removeFromCart, updateOrderItem, removeErrors } from "../../redux/slices/cartSlice";
 
 function CheckoutItem({order_item}) {
 
     const history = useHistory()
     const dispatch = useDispatch()
+    const error = useSelector( state => state.cart.error)
+
+    useEffect(()=>{
+        //removes errors when component unmounts
+        return()=>{
+            dispatch(removeErrors())
+        }
+    },[dispatch])
+
 
     const [ editQty, setEditQty ] = useState(order_item?.order_qty)
 
@@ -26,8 +35,6 @@ function CheckoutItem({order_item}) {
     function updateItemQty(){
         dispatch(updateOrderItem({ order_item_id: order_item.id, submitObj: { product: { product_id: order_item.product.id, order_qty: editQty }}}))
     }
-
-
 
 
     return ( 
@@ -60,10 +67,16 @@ function CheckoutItem({order_item}) {
 
             <div className='col-span-4 flex flex-col sm:grid sm:grid-cols-3'>
 
-                <div className='flex gap-1 place-content-center my-auto'>
-                    <label className='my-auto'>qty</label>
-                    <input className=' h-[4vh] w-[4vh] border-2 text-center p-1 ' type='number' value={editQty} onChange={updateEditQty} min={0} />
+                
+                <div>
+                    
+                    <div className='flex gap-1 place-content-center my-auto'>
+                        <label className='my-auto'>qty</label>
+                        <input className=' h-[4vh] w-[4vh] border-2 text-center p-1 ' type='number' value={editQty} onChange={updateEditQty} min={0} max={order_item?.product?.qty_avail} />
+                    </div>
                 </div>
+
+                <p className='error text-right'>{error?.errors?.order_qty}</p>
 
                 <div className=' gap-1 place-content-center my-auto hidden sm:flex'>
                     <p>${(Math.round(order_item?.product?.price * 100)/100).toFixed(2)}</p>
@@ -73,9 +86,7 @@ function CheckoutItem({order_item}) {
                     <p>${(Math.round(order_item?.product?.price * order_item?.order_qty * 100)/100).toFixed(2)}</p>
                 </div>
 
-
             </div>
-            
         </div> 
         
     );

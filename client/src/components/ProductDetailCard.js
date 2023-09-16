@@ -24,7 +24,7 @@ function ProductDetailCard(){
     }
 
     function addProductToCart(){
-        if(qty > 0 && qty <= product.qty_avail){
+        if(qty > 0 &&( qty <= ( product?.qty_avail - productInCart.order_qty))){
             dispatch(addToCart({product:{ product_id: product.id, order_qty: qty}})).then( res => {
                 if(res.meta.requestStatus === 'fulfilled'){ 
                         history.push('/cart')
@@ -34,7 +34,6 @@ function ProductDetailCard(){
         }  
     }
 
-    console.log(error)
 
     return ( 
     

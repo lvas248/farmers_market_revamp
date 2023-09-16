@@ -77,6 +77,9 @@ const cartSlice = createSlice({
         }, 
         emptyCart: ( state ) =>{
             state.entity = []
+        }, 
+        removeErrors: ( state )=>{
+            state.error = null
         }
     },
     extraReducers: ( builder )=>{
@@ -154,4 +157,4 @@ const cartSlice = createSlice({
 })
 
 export default cartSlice.reducer
-export const { addCart, emptyCart } = cartSlice.actions
+export const { addCart, emptyCart, removeErrors } = cartSlice.actions
