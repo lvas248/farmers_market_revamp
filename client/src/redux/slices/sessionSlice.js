@@ -7,7 +7,7 @@ import { addOrders } from "./orderSlice";
 //create signup async
 export const signupUser = createAsyncThunk(
     'signup/user',
-    async(obj, { dispatch, rejectWithValue })=>{
+    async(obj, { dispatch,  rejectWithValue })=>{
         const response = await fetch('/signup',{
             method:'POST',
             headers: {
@@ -21,7 +21,9 @@ export const signupUser = createAsyncThunk(
             dispatch(addUser(data.email))
             return data
         }
+
         return rejectWithValue(data)
+        
     }
 )
 //create login async
@@ -99,6 +101,9 @@ const sessionSlice = createSlice({
         },
         logout: ( state )=>{
             state.loggedIn = false
+        }, 
+        removeErrors: ( state )=>{
+            state.error = null
         }
 
     }, 
@@ -167,5 +172,5 @@ const sessionSlice = createSlice({
     }
 })
 
-export const { login, logout } = sessionSlice.actions
+export const { login, logout, removeErrors } = sessionSlice.actions
 export default sessionSlice.reducer
