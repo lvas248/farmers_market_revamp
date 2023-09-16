@@ -4,7 +4,6 @@ import ProductList from "../../components/ProductList";
 function Shop(){
 
     const allProduct = useSelector( state => state.product.entity)
-    
 
     return ( 
         <div className='pt-[8vh] h-[92vh] w-screen'>

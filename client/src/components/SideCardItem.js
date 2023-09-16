@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { removeFromCart, updateOrderItem } from "../redux/slices/cartSlice";
 import { useState} from 'react'
 
@@ -17,13 +17,8 @@ function SideCartItem({cartItem}){
     }
 
     function updateCart(){
-
         dispatch(updateOrderItem({ order_item_id: cartItem.id,  submitObj: { product: { product_id: cartItem.product.id, order_qty: qty }}})).then(res => console.log(res))
-     
     }
-
-    const cart = useSelector( state => state.cart.entity )
-    console.log(cart)
 
     return ( 
             <div className='grid grid-cols-3 gap-10 text-center'>
