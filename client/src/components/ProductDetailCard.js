@@ -31,7 +31,7 @@ function ProductDetailCard({toggleRight}){
     return ( 
     
         <div
-            className='max-w-[1050px] m-auto'
+            className='max-w-[1050px] w-[100vw] m-auto'
         >
             <div className='
                 w-full h-[78vh] border-stone-200 border-b

@@ -9,7 +9,7 @@ function ProductList({productList}) {
 
     return ( 
           <div className='
-              grid grid-cols-2 lg:grid-cols-4 gap-2 overflow-y-auto pt-2
+              grid grid-cols-2 lg:grid-cols-4 gap-2 overflow-y-auto pt-2 min-h-[75vh] overflow-hidden
               '
           >
           { renderProduct}

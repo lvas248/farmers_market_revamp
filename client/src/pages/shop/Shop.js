@@ -24,7 +24,7 @@ function Shop(){
 
             <Filter filterText={filterText} updateFilterText={updateFilterText} produceType={produceType} updateProduceType={updateProduceType}/>
             
-            <h1 className='text-center text-3xl py-3'>SHOP ALL</h1>
+            <h1 className='text-center text-3xl py-1'>SHOP ALL</h1>
         
             <ProductList productList={filteredProduct}/>
             
