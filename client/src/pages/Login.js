@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { loginuser } from '../redux/slices/sessionSlice'
+import { useHistory } from 'react-router-dom'
 
 function Login() {
 
@@ -9,6 +10,7 @@ function Login() {
         password: ''
     })
     const dispatch = useDispatch()
+    const history = useHistory()
 
     function updateLoginObj(e){
         const copy = {...loginObj}
@@ -18,7 +20,9 @@ function Login() {
 
     function login(e){
         e.preventDefault()
-        dispatch(loginuser(loginObj)).then(res => console.log(res))
+        dispatch(loginuser(loginObj)).then(res => {
+            if(res.meta.requestStatus === 'fulfilled') history.push('/')
+        })
         
     }
 

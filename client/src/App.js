@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { Switch, Route } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { fetchProduct } from './redux/slices/productSlice';
 import { refreshSession } from './redux/slices/sessionSlice';
 
@@ -30,6 +30,9 @@ function App(){
     dispatch(fetchProduct())
     dispatch(refreshSession())
   },[dispatch])
+
+  const user = useSelector(state => state.user.entity)
+  console.log(user)
 
 
   return (
