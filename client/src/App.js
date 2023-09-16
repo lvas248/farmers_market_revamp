@@ -9,6 +9,7 @@ import Navbar from './layout/Navbar';
 import Shop from './pages/shop/Shop';
 import ProductDetailCard from './components/ProductDetailCard';
 import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 function App(){
 
@@ -45,10 +46,9 @@ function App(){
 
         <Route path='/product/:id'> <ProductDetailCard toggleRight={toggleRight}/> </Route>
 
-        <Route path='/signup'> </Route>
+        <Route path='/signup'><Signup /> </Route>
 
         <Route path='/login'> <Login /></Route>
-
         <Route exact path='/'> <Shop /> </Route>
 
       </Switch>

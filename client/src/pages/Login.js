@@ -29,7 +29,7 @@ function Login() {
 
     return ( 
 
-            <div className='bg-white w-[80vw] h-[33vh] text-black p-8 border-2 flex flex-col max-w-[410px]'>
+            <div className='bg-white w-[80vw] text-black p-8 border-2 flex flex-col max-w-[410px]'>
                 
                 <h1 className='text-xl'>LOGIN</h1>
 
