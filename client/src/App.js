@@ -10,6 +10,7 @@ import Shop from './pages/shop/Shop';
 import ProductDetailCard from './components/ProductDetailCard';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Collection from './pages/Collection';
 
 function App(){
 
@@ -37,19 +38,23 @@ function App(){
 
 
   return (
-    <div className="relative min-w-[250px] h-screen bg-[#f7f7f7] grid place-content-center">   
+    <div className="relative min-w-[250px] bg-[#f7f7f7] grid place-content-center">   
 
     <Navbar leftIsOpen={leftIsOpen} rightIsOpen={rightIsOpen} toggleLeft={toggleLeft} toggleRight={toggleRight} />
 
       <Switch>
 
+        
+        <Route exact path='/'> <Shop /> </Route>
 
         <Route path='/product/:id'> <ProductDetailCard toggleRight={toggleRight}/> </Route>
+
+        <Route path='/collection/:season'> <Collection /></Route>
 
         <Route path='/signup'><Signup /> </Route>
 
         <Route path='/login'> <Login /></Route>
-        <Route exact path='/'> <Shop /> </Route>
+
 
       </Switch>
 
