@@ -1,5 +1,5 @@
 import { Squash as Hamburger} from 'hamburger-react'
-// import cart from '../assets/Icons/cart.png'
+import cart from '../assets/Icons/cart.png'
 // import filled_cart from '../Assets/Icons/filled_cart.png'
 import LeftSideMenu from './LeftSideMenu';
 import RightSidePanel from './RightSidePanel';
@@ -21,7 +21,7 @@ function Navbar({leftIsOpen, rightIsOpen, toggleLeft, toggleRight}){
             <button 
                 onClick={toggleRight} 
                 className='w-fit p-4'>
-                <img className='h-[30px] my-auto' alt='cart' src='https://res.cloudinary.com/dfbe9u9zm/image/upload/v1694832453/icons8-x-100_1_gunedt.png' />
+                <img className='h-[30px] my-auto' alt='cart' src='https://res.cloudinary.com/dfbe9u9zm/image/upload/v1694832739/cart_e7zbid.png' />
             </button>
 
             <LeftSideMenu isOpen={leftIsOpen} toggle={toggleLeft} />

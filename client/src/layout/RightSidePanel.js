@@ -3,8 +3,6 @@ import  { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import SideCartItem from '../components/SideCardItem'
 
-import x from '../assets/Icons/x.png'
-
 
 function RightSidePanel({isOpen, toggle}){
 
@@ -38,7 +36,7 @@ function RightSidePanel({isOpen, toggle}){
             ${isOpen && 'w-[60vw] sm:w-[33vw]'}
             `} >
 
-                <button onClick={toggle} className='absolute top-5 right-3 text-2xl z-20'><img className='h-[34px]' alt='x' src={x} /></button>
+                <button onClick={toggle} className='absolute top-5 right-3 text-2xl z-20'><img className='h-[34px]' alt='x' src='https://res.cloudinary.com/dfbe9u9zm/image/upload/v1694832453/icons8-x-100_1_gunedt.png' /></button>
 
                 <div className={`
                     ${!isOpen && 'hidden'}
