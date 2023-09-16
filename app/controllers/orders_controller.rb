@@ -35,6 +35,7 @@ class OrdersController < ApplicationController
     def submit_order
         order = get_cart
         order.finalize_order
+        binding.pry
         render json: order, inlcude: ['order_items','order_items.product'], status: :created
     end
 
