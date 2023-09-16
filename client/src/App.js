@@ -38,7 +38,7 @@ function App(){
 
 
   return (
-    <div className="relative min-w-[250px] bg-[#f7f7f7] grid place-content-center">   
+    <div className="relative min-w-[250px] bg-[#f7f7f7] grid place-content-center min-h-screen">   
 
     <Navbar leftIsOpen={leftIsOpen} rightIsOpen={rightIsOpen} toggleLeft={toggleLeft} toggleRight={toggleRight} />
 

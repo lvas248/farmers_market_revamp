@@ -38,17 +38,17 @@ function Signup() {
 
                     <div className='grid gap-2'>
                         <label className='text-sm'>Email</label>
-                        <input className='border-2 text-md' name='email' value={signupObj.email} onChange={updateSignupObj} type='email' />
+                        <input className='border-2 text-md px-1' name='email' value={signupObj.email} onChange={updateSignupObj} type='email' />
                     </div>
 
                     <div className='grid gap-2'>
                         <label className='text-sm'>Password</label>
-                        <input className='border-2 text-md' name='password' type='password' value={signupObj.password} onChange={updateSignupObj} />
+                        <input className='border-2 text-md px-1' name='password' type='password' value={signupObj.password} onChange={updateSignupObj} />
                     </div>
 
                     <div className='grid gap-2'>
                         <label className='text-sm'>Confirm Password</label>
-                        <input className='border-2 text-md' name='password_confirmation' type='password' value={signupObj.password_confirmation} onChange={updateSignupObj} />
+                        <input className='border-2 text-md px-1' name='password_confirmation' type='password' value={signupObj.password_confirmation} onChange={updateSignupObj} />
                     </div>
 
                     <button className='bg-black text-white text-xs h-[35px]'>Sign Up</button>

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { addUser, removeUser } from './userSlice'
-import { addCart } from "./cartSlice";
+import { addCart, emptyCart } from "./cartSlice";
 import { addOrders } from "./orderSlice";
 
 
@@ -59,6 +59,7 @@ export const logoutSession = createAsyncThunk(
 
         if(response.ok){
             dispatch(removeUser())
+            dispatch(emptyCart())
             return 
         }
         return rejectWithValue(data)

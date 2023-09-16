@@ -37,12 +37,12 @@ function Login() {
 
                     <div className='grid gap-2'>
                         <label className='text-sm'>Email</label>
-                        <input className='border-2 text-md' name='email' value={loginObj.email} onChange={updateLoginObj} type='email' />
+                        <input className='border-2 text-md px-1' name='email' value={loginObj.email} onChange={updateLoginObj} type='email' />
                     </div>
 
                     <div className='grid gap-2'>
                         <label className='text-sm'>Password</label>
-                        <input className='border-2 text-md' name='password' type='password' value={loginObj.password} onChange={updateLoginObj} />
+                        <input className='border-2 text-md px-1' name='password' type='password' value={loginObj.password} onChange={updateLoginObj} />
                     </div>
 
                     <button className='bg-black text-white text-xs h-[35px]'>Login</button>

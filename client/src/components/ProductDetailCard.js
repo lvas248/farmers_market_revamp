@@ -6,10 +6,11 @@ import { addToCart } from '../redux/slices/cartSlice'
 function ProductDetailCard({toggleRight}){
       
     const { id } = useParams()
-    const product = useSelector(state => state.product?.entity.find( p => p.id === parseInt(id)))
+    const products = useSelector(state => state.product?.entity)
+    const product = products?.find( p => p.id === parseInt(id))
 
     const cart = useSelector(state => state.cart.entity)
-    const productInCart = cart.find(p => p.product?.id === product?.id)
+    const productInCart = cart?.find(p => p.product?.id === product?.id)
     const availableQuantity = product?.qty_avail - (productInCart?.order_qty || 0) || 0 
 
     const [ qty, setQty ] = useState(0)
@@ -34,17 +35,17 @@ function ProductDetailCard({toggleRight}){
             className='max-w-[1050px] w-[100vw] m-auto'
         >
             <div className='
-                w-full h-[78vh] border-stone-200 border-b
+                w-full h-[78vh]
                 '>
 
                 <div
                     className='
                         mx-8
-                        m-auto h-[100%] bg-stone-100 grid place-content-center
+                        m-auto h-[100%] bg-stone-100 grid place-content-center drop-shadow-md
                         '
                 >
                     <img 
-                        className='h-[200px]' 
+                        className='h-[200px] ' 
                         alt={product?.name} src={product?.image} />
 
                 </div>

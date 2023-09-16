@@ -21,16 +21,16 @@ function SideCartItem({cartItem}){
     }
 
     return ( 
-            <div className='grid grid-cols-3 gap-10 text-center'>
+            <div className='grid grid-cols-3 gap-5 text-center text-[9px]'>
 
                 <p className='text-left'>{cartItem?.product.name}</p>
 
               
                 <input className='text-black text-center w-fit' type='number' value={qty} onChange={updateQty} min={0} max={10}/>
 
-                <div className='flex gap-2'>
-                    <button onClick={deleteFromCart} className='text-[8px]'>remove</button>
-                    <button onClick={updateCart} className='text-[8px]'>update</button>
+                <div className='flex gap-1'>
+                    <button onClick={deleteFromCart} className=''>remove</button>
+                    <button onClick={updateCart} className=''>update</button>
                 </div>
                 
 

@@ -16,7 +16,9 @@ function Shop(){
         setProduceType (e.target.value)
       }
 
-    const filteredProduct = useSelector( state => state.product.entity.filter(  p => p.produce_type.includes(produceType) && p.name.toLowerCase().includes(filterText.toLowerCase())))
+    const products = useSelector( state => state.product.entity)
+    const filteredProducts = products.filter( p => p.produce_type.includes(produceType) && p.name.toLowerCase().includes(filterText.toLowerCase()))
+
 
 
     return ( 
@@ -26,7 +28,7 @@ function Shop(){
             
             <h1 className='text-center text-sm sm:text-3xl'>SHOP ALL</h1>
         
-            <ProductList productList={filteredProduct}/>
+            <ProductList productList={filteredProducts}/>
             
         </div>
      );

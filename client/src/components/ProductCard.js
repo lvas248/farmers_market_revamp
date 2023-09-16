@@ -10,11 +10,11 @@ function ProductCard({product}){
 
     return ( 
     <div
-        className='flex flex-col h-[35vh] md:h-[40vh] cursor-pointer'
+        className='flex flex-col h-[35vh] md:h-[40vh] cursor-pointer border-2 '
         onClick={navigateTo}
     >
         <div id='imageContainer'
-            className='bg-stone-100 h-[86%] grid'
+            className='bg-stone-100 h-[86%] grid drop-shadow-sm'
         >
             <img className='m-auto h-[55px]' alt={product.name} src={product.image} />
         </div>
