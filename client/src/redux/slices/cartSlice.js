@@ -26,8 +26,7 @@ export const removeFromCart = createAsyncThunk(
             method:'DELETE',
          })
         const data = await response
-
-        if(response.ok) return obj.id
+        if(response.ok) return obj.order_item_id
         return rejectWithValue(data)
     }
 )

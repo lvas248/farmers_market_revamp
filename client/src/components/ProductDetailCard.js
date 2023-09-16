@@ -10,7 +10,7 @@ function ProductDetailCard({toggleRight}){
 
     const cart = useSelector(state => state.cart.entity)
     const productInCart = cart.find(p => p.product?.id === product?.id)
- 
+    const availableQuantity = product?.qty_avail - (productInCart?.order_qty || 0) || 0 
 
     const [ qty, setQty ] = useState(0)
     const dispatch = useDispatch()
@@ -28,9 +28,6 @@ function ProductDetailCard({toggleRight}){
        
     }
 
-
-
-    
     return ( 
     
         <div
@@ -66,12 +63,12 @@ function ProductDetailCard({toggleRight}){
                         <p>Seasons: {product?.season?.split(',').join(' | ')}</p>
                     </div>  
                  
-                        <p>Qty avail: {product?.qty}</p>
+                        <p>Qty avail: {availableQuantity}</p>
                         <p> ${product?.price}</p>
         
                     <div className='flex gap-2 place-content-end mr-5'>
                         select qty
-                        <input className='text-center w-10' type='number' value={qty} min={0} max={(product?.qty_avail - productInCart?.order_qty)||0} onChange={updateQty}  />
+                        <input className='text-center w-10' type='number' value={qty} min={0} max={availableQuantity} onChange={updateQty}  />
                     </div>
                     
                 </div>
