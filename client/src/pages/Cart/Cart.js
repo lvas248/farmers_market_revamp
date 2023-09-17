@@ -22,7 +22,7 @@ function Cart() {
 
                 <div className='grid grid-cols-9 text-center mb-2'>
 
-                    <h3 className='col-span-5 text-left text-lg'>My Bag({cart?.length})</h3>
+                    <h3 className='col-span-5 text-left text-lg'>My Bag({cart?.length || 0})</h3>
                     <div className='col-span-4  grid-cols-3 text-xs text-stone-400 hidden sm:grid'>
                         <p className='col-span-1'>QUANTITY</p>
                         <p className='col-span-1'>PRICE</p>

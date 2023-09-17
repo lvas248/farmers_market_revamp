@@ -24,7 +24,7 @@ function LeftSideMenu({isOpen, toggle}){
         dispatch(logoutSession())
     }
     function resetInventory(){
-        dispatch(resetInventoryLevels())
+        dispatch(resetInventoryLevels()).then(res => console.log(res))
     }
 
     return ( 
