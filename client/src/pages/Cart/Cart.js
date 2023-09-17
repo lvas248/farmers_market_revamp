@@ -5,8 +5,6 @@ function Cart() {
 
     const cart = useSelector(state => state.cart.entity)
 
-    console.log(cart)
-
     const subtotal = cart?.reduce((acc, order_item) =>{
         return acc + order_item.product.price * order_item.order_qty
     }, 0)
@@ -41,7 +39,7 @@ function Cart() {
                 
                 <div className='flex justify-between text-xs px-2 py-3 border-b'>
                     <p className='text-stone-300'>SUBTOTAL:</p>
-                    <p>${Math.round(subtotal * 100)/100}</p>
+                    <p>${(Math.round(subtotal * 100)/100).toFixed(2)}</p>
                 </div>
 
                 <div className='flex justify-between text-xs px-2 py-3 border-b'>

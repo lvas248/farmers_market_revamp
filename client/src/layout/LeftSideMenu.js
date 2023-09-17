@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom'
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { logoutSession } from '../redux/slices/sessionSlice'
+import { resetInventoryLevels } from '../redux/slices/productSlice'
 
 function LeftSideMenu({isOpen, toggle}){
 
@@ -21,6 +22,9 @@ function LeftSideMenu({isOpen, toggle}){
 
     function logout(){
         dispatch(logoutSession())
+    }
+    function resetInventory(){
+        dispatch(resetInventoryLevels())
     }
 
     return ( 
@@ -57,7 +61,7 @@ function LeftSideMenu({isOpen, toggle}){
 
 
 
-                <button className='text-[8px] absolute bottom-5 right-5 underline'>RESET INVENTORY LEVELS</button>
+                <button onClick={resetInventory} className='text-[8px] absolute bottom-5 right-5 underline'>RESET INVENTORY LEVELS</button>
             </div>
 
           

@@ -15,16 +15,20 @@ function ProductDetailCard(){
     const products = useSelector(state => state.product.entity)
     const cart = useSelector( state => state.cart.entity)
    
-    const product = products?.find( p => p.id === parseInt(id))
+    const product = products?.find( p => p.id === parseInt(id)
+    )
+    //debug product in cart
     const productInCart = cart?.find(p => p.product?.id === product?.id)
     const availableQuantity = product?.qty_avail - (productInCart?.order_qty || 0) || 0 
    
+   
+
     function updateQty(e){
         setQty(e.target.value)
     }
 
     function addProductToCart(){
-        if(qty > 0 &&( qty <= ( product?.qty_avail - productInCart.order_qty))){
+        if(qty > 0 &&( qty <= ( product?.qty_avail - ( productInCart?.order_qty || 0)))){
             dispatch(addToCart({product:{ product_id: product.id, order_qty: qty}})).then( res => {
                 if(res.meta.requestStatus === 'fulfilled'){ 
                         history.push('/cart')
