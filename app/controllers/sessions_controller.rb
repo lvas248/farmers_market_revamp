@@ -2,8 +2,8 @@ class SessionsController < ApplicationController
 
     #login
     def create
-        user = User.find_by( email: params[:email])
-        if user&.authenticate(params[:password])
+        user = User.find_by( email: user_params[:email])
+        if user&.authenticate(user_params[:password])
 
             guest = Guest.find_by(id: session[:guest_id])
             
@@ -32,7 +32,9 @@ class SessionsController < ApplicationController
 
     private
 
-
+    def user_params
+        params.require(:user).permit(:email, :password)
+    end
 
 
 end

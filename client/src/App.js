@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { Switch, Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -13,6 +13,7 @@ import Signup from './pages/Signup';
 import Collection from './pages/Collection';
 import Cart from './pages/Cart/Cart'
 import EmptyCart from './pages/Cart/EmptyCart';
+import Checkout from './pages/Checkout';
 
 function App(){
 
@@ -27,8 +28,8 @@ function App(){
   },[dispatch])
 
   const cart = useSelector(state => state.cart.entity)
-
-  console.log(cart)
+  const user = useSelector(state => state.user.entity)
+  console.log(user)
   return (
     <div className="relative min-w-[250px] bg-[#f7f7f7] grid place-content-center min-h-screen">   
 
@@ -51,6 +52,7 @@ function App(){
 
         <Route path='/login'> <Login /></Route>
 
+        <Route path='/checkout'> <Checkout /></Route>
 
       </Switch>
 

@@ -1,10 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const addToCart = createAsyncThunk(
-    // obj = { "product": { "product_id": 6, "order_qty": 1 } }
     'addTo/cart',
     async( obj, { rejectWithValue })=>{
-        const response = await fetch('/orders',{
+        const response = await fetch('/cart',{
             method:'POST',
             headers: {
                 'Content-type':'application/json'
@@ -19,10 +18,9 @@ export const addToCart = createAsyncThunk(
 )
 
 export const removeFromCart = createAsyncThunk(
-    // obj = {order_item: 2} 
     'removeFrom/cart',
     async( obj, { rejectWithValue })=>{
-        const response = await fetch(`/orders/${obj.order_item_id}`,{
+        const response = await fetch(`/cart/${obj.order_item_id}`,{
             method:'DELETE',
          })
         const data = await response
@@ -37,7 +35,7 @@ export const updateOrderItem = createAsyncThunk(
     // { "order_item_id": 2,  submitObj: { "product": { "product_id": 6, "order_qty": 9 } } } 
     'updateCartItemQty/cart',
     async( obj, { rejectWithValue })=>{
-        const response = await fetch(`/orders/${obj.order_item_id}`,{
+        const response = await fetch(`/cart/${obj.order_item_id}`,{
             method:'PATCH',
             headers: {
                 'Content-type':'application/json'

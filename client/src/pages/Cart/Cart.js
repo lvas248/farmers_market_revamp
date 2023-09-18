@@ -1,16 +1,17 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { clearCart } from "../../redux/slices/cartSlice";
 import CheckoutItem from "./CheckoutItem";
+import getSubtotal from "../../helpers/subtotal";
 
 function Cart() {
 
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const cart = useSelector(state => state.cart.entity)
 
-    const subtotal = cart?.reduce((acc, order_item) =>{
-        return acc + order_item.product.price * order_item.order_qty
-    }, 0)
+    const subtotal = getSubtotal(cart)
 
     const renderCheckoutItems = cart?.map( i =>{
         return <CheckoutItem key={i.id} order_item={i} />
@@ -18,6 +19,9 @@ function Cart() {
 
     function emptyCart(){
         dispatch(clearCart())
+    }
+    function navigateToCheckout(){
+        history.push('/checkout')
     }
 
     return ( 
@@ -58,7 +62,7 @@ function Cart() {
 
                 </div> 
 
-                <button className='mt-4 place-content-center border-2 h-[50px] bg-black text-white drop-shadow-sm'>CHECKOUT</button>
+                <button onClick={navigateToCheckout} className='mt-4 place-content-center border-2 h-[50px] bg-black text-white drop-shadow-sm'>CHECKOUT</button>
 
             </div>
             

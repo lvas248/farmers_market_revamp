@@ -8,12 +8,13 @@ import { addOrders } from "./orderSlice";
 export const signupUser = createAsyncThunk(
     'signup/user',
     async(obj, { dispatch,  rejectWithValue })=>{
+        debugger
         const response = await fetch('/signup',{
             method:'POST',
             headers: {
                 'Content-type':'application/json'
             },
-            body: JSON.stringify(obj)
+            body: JSON.stringify({user: obj})
         })
         const data = await response.json()
 
@@ -35,7 +36,7 @@ export const loginuser = createAsyncThunk(
             headers: {
                 'Content-type':'application/json'
             },
-            body: JSON.stringify(obj)
+            body: JSON.stringify({user: obj})
         })
 
         const data = await response.json()

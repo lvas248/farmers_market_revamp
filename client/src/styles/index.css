@@ -26,5 +26,10 @@
     @apply
       leftPanel right-0
   }
+
+  .addressInput{
+    @apply
+      text-xs p-4 w-[80vw] max-w-[500px] rounded-xl
+  }
 }
 
