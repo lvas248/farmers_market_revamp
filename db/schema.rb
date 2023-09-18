@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_17_031756) do
+ActiveRecord::Schema.define(version: 2023_09_18_180443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "carts", force: :cascade do |t|
+    t.string "cartable_type"
+    t.bigint "cartable_id"
+    t.string "shipping_address"
+    t.string "email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cartable_type", "cartable_id"], name: "index_carts_on_cartable"
+  end
 
   create_table "guests", force: :cascade do |t|
     t.string "email"
@@ -22,22 +32,23 @@ ActiveRecord::Schema.define(version: 2023_09_17_031756) do
   end
 
   create_table "order_items", force: :cascade do |t|
-    t.bigint "product_id", null: false
-    t.bigint "order_id", null: false
+    t.string "itemable_type"
+    t.bigint "itemable_id"
+    t.bigint "product_id"
     t.integer "order_qty"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["itemable_type", "itemable_id"], name: "index_order_items_on_itemable"
     t.index ["product_id"], name: "index_order_items_on_product_id"
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string "imageable_type"
-    t.bigint "imageable_id"
-    t.boolean "open", default: true
+    t.bigint "user_id"
+    t.string "shipping_address"
+    t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["imageable_type", "imageable_id"], name: "index_orders_on_imageable"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -59,6 +70,4 @@ ActiveRecord::Schema.define(version: 2023_09_17_031756) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "order_items", "orders"
-  add_foreign_key "order_items", "products"
 end

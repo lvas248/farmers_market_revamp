@@ -1,8 +1,10 @@
 class CreateOrders < ActiveRecord::Migration[6.1]
   def change
     create_table :orders do |t|
-      t.references :imageable, polymorphic: true
-      t.boolean :open, default: true
+      
+      t.references :user, index: true
+      t.string :shipping_address
+      t.string :email
 
       t.timestamps
     end

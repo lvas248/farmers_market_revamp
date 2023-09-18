@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
 
+  resources :carts
   post '/orders', to: 'orders#add_to_cart'
   delete '/orders/:order_item_id', to: 'orders#remove_from_cart'
   patch '/orders/:order_item_id', to: 'orders#updateOrderItemQtyInCart'

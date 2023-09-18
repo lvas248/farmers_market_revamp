@@ -23,6 +23,7 @@ class OrdersController < ApplicationController
     end
 
     def remove_from_cart
+
         user = User.find_by(id: session[:user_id]) || Guest.find_by(id: session[:guest_id])
         if user.present?
             order = user.get_cart
@@ -66,13 +67,6 @@ class OrdersController < ApplicationController
 
     private
 
-    def get_user
-        User.find_by(id: session[:user_id])
-    end
-
-    def get_cart
-        get_user.orders.find_by(open: true)
-    end
 
     def order_item_params
         params.require(:order_item).permit(:product_id, :order_qty)
