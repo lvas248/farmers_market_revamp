@@ -1,7 +1,10 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { clearCart } from "../../redux/slices/cartSlice";
 import CheckoutItem from "./CheckoutItem";
 
 function Cart() {
+
+    const dispatch = useDispatch()
 
     const cart = useSelector(state => state.cart.entity)
 
@@ -13,6 +16,10 @@ function Cart() {
         return <CheckoutItem key={i.id} order_item={i} />
     })
 
+    function emptyCart(){
+        dispatch(clearCart())
+    }
+
     return ( 
         <div
             className='pt-[7vh] p-5 w-[100vw] max-w-[700px] m-auto min-h-screen animate-glide-in-right'
@@ -21,8 +28,9 @@ function Cart() {
             <div className='p-2 mt-4 h-[65vh] sm:h-[73vh] overflow-y-auto m-auto'>
 
                 <div className='grid grid-cols-9 text-center mb-2'>
-
+                    
                     <h3 className='col-span-5 text-left text-lg'>My Bag({cart?.length || 0})</h3>
+
                     <div className='col-span-4  grid-cols-3 text-xs text-stone-400 hidden sm:grid'>
                         <p className='col-span-1'>QUANTITY</p>
                         <p className='col-span-1'>PRICE</p>
@@ -31,6 +39,8 @@ function Cart() {
                 </div>
 
                 { renderCheckoutItems}
+
+                <button onClick={emptyCart} className='float-right text-xs underline'>clear cart</button>
 
             </div>
 

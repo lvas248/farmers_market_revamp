@@ -1,5 +1,5 @@
 class OrderSerializer < ActiveModel::Serializer
-  attributes :id, :open, :subtotal
+  attributes :id, :open, :subtotal, :imageable_type
 
   has_many :order_items
 

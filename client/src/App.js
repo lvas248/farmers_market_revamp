@@ -20,11 +20,15 @@ function App(){
 
   useEffect(()=>{
     dispatch(fetchProduct())
+  },[dispatch])
+
+  useEffect(()=>{
     dispatch(refreshSession())
   },[dispatch])
 
   const cart = useSelector(state => state.cart.entity)
 
+  console.log(cart)
   return (
     <div className="relative min-w-[250px] bg-[#f7f7f7] grid place-content-center min-h-screen">   
 

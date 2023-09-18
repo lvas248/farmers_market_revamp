@@ -42,7 +42,7 @@ export const loginuser = createAsyncThunk(
 
         if(response.ok){ 
             dispatch(addUser(data.email))
-            dispatch(addCart(data.cart.order_items))
+            if(data.cart.order_items) dispatch(addCart(data.cart.order_items))
             dispatch(addOrders(data.orders))
             return data
         }
@@ -78,10 +78,12 @@ export const refreshSession = createAsyncThunk(
 
         if(response.ok){ 
             dispatch(addUser(data.email))
-            dispatch(addCart(data.cart.order_items))
+            if(data.cart.order_items) dispatch(addCart(data.cart.order_items))
             dispatch(addOrders(data.orders))
-            return data
+            return 
+           
         }
+        if(data.cart.order_items) dispatch(addCart(data.cart.order_items))
         return rejectWithValue(data)
     }
 )
@@ -112,17 +114,15 @@ const sessionSlice = createSlice({
             .addCase(signupUser.pending, state =>{
                 state.status = 'pending'
                 state.error = null
-                state.entity = {}
             })
             .addCase( signupUser.rejected, (state, action) =>{
                 state.status = 'idle'
                 state.error = action.payload.errors
-                state.entity = {}
             })
             .addCase( signupUser.fulfilled, (state, action) =>{
                 state.status = 'idle'
                 state.error = null
-                state.entity = action.payload
+                state.loggedIn = true
             })
 
             .addCase( loginuser.pending, state => {

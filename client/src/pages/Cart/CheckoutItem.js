@@ -28,12 +28,12 @@ function CheckoutItem({order_item}) {
     }
 
     function deleteCheckoutItem(){
-        dispatch(removeFromCart({order_item_id: order_item.id}))
+        dispatch(removeFromCart({order_item_id: order_item.id})).then(res => console.log(res))
     }
 
 
     function updateItemQty(){
-        dispatch(updateOrderItem({ order_item_id: order_item.id, submitObj: { product: { product_id: order_item.product.id, order_qty: editQty }}}))
+        dispatch(updateOrderItem({ order_item_id: order_item.id, submitObj: { order_item: { product_id: order_item.product.id, order_qty: editQty }}}))
     }
 
 

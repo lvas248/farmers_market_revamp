@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_14_215159) do
+ActiveRecord::Schema.define(version: 2023_09_17_031756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "guests", force: :cascade do |t|
+    t.string "email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "order_items", force: :cascade do |t|
     t.bigint "product_id", null: false
@@ -26,11 +32,12 @@ ActiveRecord::Schema.define(version: 2023_09_14_215159) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.string "imageable_type"
+    t.bigint "imageable_id"
     t.boolean "open", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_orders_on_user_id"
+    t.index ["imageable_type", "imageable_id"], name: "index_orders_on_imageable"
   end
 
   create_table "products", force: :cascade do |t|
@@ -54,5 +61,4 @@ ActiveRecord::Schema.define(version: 2023_09_14_215159) do
 
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
-  add_foreign_key "orders", "users"
 end

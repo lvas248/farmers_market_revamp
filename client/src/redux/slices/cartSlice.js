@@ -19,14 +19,16 @@ export const addToCart = createAsyncThunk(
 )
 
 export const removeFromCart = createAsyncThunk(
-    // obj = {order_item_id: 2} 
+    // obj = {order_item: 2} 
     'removeFrom/cart',
     async( obj, { rejectWithValue })=>{
         const response = await fetch(`/orders/${obj.order_item_id}`,{
             method:'DELETE',
          })
         const data = await response
+
         if(response.ok) return obj.order_item_id
+
         return rejectWithValue(data)
     }
 )
@@ -96,19 +98,15 @@ const cartSlice = createSlice({
             .addCase( addToCart.fulfilled, ( state, action )=>{
                 state.status = 'idle'
                 state.error = null
-                
-                const order_item = state.entity.find( i => i.id === action.payload.id)
 
-                if(order_item){
-                    state.entity = state.entity.map( p => {
-                        if(p.id === action.payload.id) return action.payload
-                        return p
-                    })
+                const index = state.entity.findIndex( i => i.id === action.payload.id)
+
+                if(index >= 0){
+                    state.entity[index] = action.payload
                 }else{
                     state.entity = [...state.entity, action.payload]
                 }
-                // order_item ? order_item.order_qty = action.payload.order_qty : state.entity = [...state.entity, action.payload]
-    
+                    
             })
             .addCase( removeFromCart.pending, ( state )=>{
                 state.status = 'pending'
