@@ -1,23 +1,18 @@
 class Guest < ApplicationRecord
 
-    after_create :create_guest_cart
+    after_create :create_cart
 
-    has_many :orders, as: :imageable, dependent: :destroy
+    has_one :cart, as: :cartable, dependent: :destroy
 
-    def get_cart
-        self.orders.find_by(open: true)
-    end
 
     def empty_cart
-        self.get_cart.order_items.each {|i| i.destroy }
+        self.cart
     end
 
     private
 
-    def create_guest_cart
-        self.orders.create!()
+    def create_cart
+        self.create_cart!
     end
-
-
 
 end
