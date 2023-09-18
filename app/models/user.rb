@@ -6,15 +6,13 @@ class User < ApplicationRecord
 
     has_secure_password
 
-    has_many :orders, as: :imageable, dependent: :destroy
+    has_many :orders
+    has_one :cart, as: :cartable, dependent: :destroy
+
+    private
 
     def create_cart
-        self.orders.create()
-    end
-
-
-    def get_cart
-        self.orders.find_by(open: true)
+        self.create_cart!
     end
 
 end

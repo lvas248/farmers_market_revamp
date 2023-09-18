@@ -25,21 +25,21 @@ class Order < ApplicationRecord
 
     def merge_with_order(guest_cart)
       
-    # For each order_item in guest_cart, search user cart to if it has an order_item with the same product
-      guest_cart.order_items.each do |i|
+      # For each order_item in guest_cart, search user cart to if it has an order_item with the same product
+        guest_cart.order_items.each do |i|
 
-        order_item = self.order_items.find_by(product_id: i.product_id)
-     
-    # if user_cart has product already, update user_cart.order_item.order_qty => guest_cart qty + user_cart qty
-       
-      if order_item
-          order_item.update!(order_qty: order_item.order_qty + i.order_qty)
-        else
-          self.order_items.create!(product_id: i.product_id, order_qty: i.order_qty)
+          order_item = self.order_items.find_by(product_id: i.product_id)
+      
+      # if user_cart has product already, update user_cart.order_item.order_qty => guest_cart qty + user_cart qty
+        
+        if order_item
+            order_item.update!(order_qty: order_item.order_qty + i.order_qty)
+          else
+            self.order_items.create!(product_id: i.product_id, order_qty: i.order_qty)
+          end
         end
-      end
 
-     
+      
     end
 
     
