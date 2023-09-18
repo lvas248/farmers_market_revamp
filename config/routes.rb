@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   
+  post '/cart', to: 'carts#add_to_cart'
+  delete '/cart/:order_item_id', to: 'carts#remove_from_cart'
+  patch '/cart/:order_item_id', to: 'carts#updateOrderItemQtyInCart'
+  delete '/clear_cart', to: 'carts#clear_cart'
 
-  resources :carts
-  post '/orders', to: 'orders#add_to_cart'
-  delete '/orders/:order_item_id', to: 'orders#remove_from_cart'
-  patch '/orders/:order_item_id', to: 'orders#updateOrderItemQtyInCart'
+  
   post '/submit_order', to: 'orders#submit_order'
 
   delete '/clear_cart', to: 'orders#clear_cart'
