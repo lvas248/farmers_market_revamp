@@ -21,7 +21,6 @@ class UsersController < ApplicationController
         def show
     
             user = get_user
-
             if user.present?
                 
                 render json: user, status: :ok
@@ -29,9 +28,8 @@ class UsersController < ApplicationController
             else 
 
                 guest = Guest.find_by(id: session[:guest_id])
-    
                 if guest.present?
-                    
+                    # binding.pry
                     render json: guest, status: :unauthorized
                 
                 else

@@ -56,10 +56,11 @@ ActiveRecord::Schema.define(version: 2023_09_18_235610) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.bigint "user_id"
+    t.string "orderable_type"
+    t.bigint "orderable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_orders_on_user_id"
+    t.index ["orderable_type", "orderable_id"], name: "index_orders_on_orderable"
   end
 
   create_table "products", force: :cascade do |t|

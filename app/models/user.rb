@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
     has_secure_password
 
-    has_many :orders
+    has_many :orders, as: :orderable, dependent: :destroy
 
     has_one :cart, as: :cartable, dependent: :destroy
 

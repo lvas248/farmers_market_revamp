@@ -28,8 +28,8 @@ function App(){
   },[dispatch])
 
   const cart = useSelector(state => state.cart.entity)
-  const user = useSelector(state => state.user.entity)
-  console.log(user)
+  // const order = useSelector(state => state.order.entity)
+  // console.log(order)
   return (
     <div className="relative min-w-[250px] bg-[#f7f7f7] grid place-content-center min-h-screen">   
 

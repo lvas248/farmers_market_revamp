@@ -1,7 +1,7 @@
 class GuestSerializer < ActiveModel::Serializer
   attributes :email
 
-  has_one :cart
+  has_one :cart, serializer: UserOrderSerializer
 
 
 end

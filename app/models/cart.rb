@@ -1,6 +1,7 @@
 class Cart < ApplicationRecord
     
     belongs_to :cartable, polymorphic: true
+    
     has_many :order_items, as: :itemable, dependent: :destroy
 
 

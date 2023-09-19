@@ -43,7 +43,7 @@ export const loginuser = createAsyncThunk(
 
         if(response.ok){ 
             dispatch(addUser(data.email))
-            if(data.cart.order_items) dispatch(addCart(data.cart.order_items))
+            if(data.cart.filtered_order_items) dispatch(addCart(data.cart.filtered_order_items))
             dispatch(addOrders(data.orders))
             return data
         }
@@ -79,12 +79,12 @@ export const refreshSession = createAsyncThunk(
 
         if(response.ok){ 
             dispatch(addUser(data.email))
-            if(data.cart.order_items) dispatch(addCart(data.cart.order_items))
+            if(data.cart.filtered_order_items) dispatch(addCart(data.cart.filtered_order_items))
             dispatch(addOrders(data.orders))
             return 
            
         }
-        if(data.cart.order_items) dispatch(addCart(data.cart.order_items))
+        if(data.cart.filtered_order_items) dispatch(addCart(data.cart.filtered_order_items))
         return rejectWithValue(data)
     }
 )
