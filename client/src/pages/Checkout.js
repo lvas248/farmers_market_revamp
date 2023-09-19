@@ -1,70 +1,87 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState } from 'react'
+import { useHistory } from "react-router-dom";
 import getSubtotal from "../helpers/subtotal";
 import ShippingAddressForm from "../components/ShippingAddressForm";
-
+import { submitOrder } from "../redux/slices/orderSlice";
 function Checkout(){
 
     const [ shippingAddress, setShippingAddress ] = useState({
-        firstName: '',
-        lastName: '',
-        addressLine1: '',
-        apartment: '',
-        city: '',
-        state: '',
-        zipcode: '',
-        phone: ''
+        name: '',
+        email: '',
+        phone: '',
+        address_attributes:{
+            street: '',
+            apartment: '',
+            city: '',
+            state: '',
+            zipcode: '',
+            phone: '',  
+            country: ''          
+        }
     })
 
-    const [ saveInfo, setSaveInfo ] = useState(false)
-
-    function toggleSaveInfo(){
-        setSaveInfo(!saveInfo)
-    }
-
-    console.log(saveInfo)
+    const dispatch = useDispatch()
+    const history = useHistory()
 
     const cart = useSelector(state => state.cart.entity)
     const loggedIn = useSelector(state => state.session.loggedIn)
+    const user = useSelector(state => state.user.entity)
+
     const subtotal = getSubtotal(cart)
 
-    function updateShippingAddress(e){
+    function updateShippingUserInfo(e){
+        console.log(e.target.value)
         const copy = {...shippingAddress}
         copy[e.target.name] = e.target.value
         setShippingAddress(copy)
     }
+    function updateShippingAddressinfo(e){
+        const copy = {...shippingAddress.address_attributes}
+        copy[e.target.name] = e.target.value
+        setShippingAddress({...shippingAddress, address_attributes: copy})
+    }
+
+    function submitForm(e){
+        e.preventDefault()
+        dispatch(submitOrder({shipping_detail: shippingAddress})).then(res => {
+            if(res.meta.requestStatus === 'fulfilled') history.push('/order_confirmation')
+        })
+    }
 
     return ( 
-        <form className='pt-[8vh] pb-[15vh] flex flex-col max-w-[1050px]'>
+        <form onSubmit={submitForm} className='pt-[8vh] pb-[15vh] flex flex-col max-w-[1050px]'>
+            
+            <button type='button' className='text-left text-xs underline mt-3'>back to cart</button>
 
             <div className='h-[10vh] flex justify-between items-center border-b px-5'>
                 <p className='font-bold text-xl'>SUBTOTAL</p>
                 <p className='text-xl'>${subtotal}</p>
             </div>
 
-            <div className='h-[12vh] flex flex-col border-b px-5 py-3 gap-2'>
+            <div className=' flex flex-col border-b px-5 py-3 gap-2'>
 
                 <p className='font- text-lg'>CONTACT</p>
 
                 <div className='flex flex-col '>
+
+                <div className='flex flex-col gap-2'>
+
+                    <input name='name' value={shippingAddress.name} onChange={updateShippingUserInfo} className={`addressInput `}  placeholder='name' type='text' />
+                    <input name='email' value={shippingAddress.email} onChange={updateShippingUserInfo} className={`addressInput `}  placeholder='email' type='email' />
+                    <input required name='phone' value={shippingAddress.phone} onChange={updateShippingUserInfo} placeholder='Phone' className={`addressInput`} type='text' />
+                
+                </div>
                     
 
-                    <input className={`text-xs p-3 ${loggedIn && 'hidden'}`}  placeholder='email' type='email' />
-
-                    <p className={`${!loggedIn && 'hidden'}`}>EMAIL ADDRESS</p>
-
+               
                 </div>
 
             </div>
 
             <div className='border-b pb-5'>
 
-                <ShippingAddressForm shippingAddress={shippingAddress} updateShippingAddress={updateShippingAddress}/>
- 
-                <div className='flex gap-1 items-center'>
-                    <input type='checkbox' onClick={toggleSaveInfo} />
-                    <label className='text-xs'>save info for next time</label>
-                </div>
+                <ShippingAddressForm shippingAddress={shippingAddress} updateShippingAddressinfo={updateShippingAddressinfo} />
 
             </div>
 

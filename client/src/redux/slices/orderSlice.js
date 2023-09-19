@@ -2,9 +2,13 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const submitOrder = createAsyncThunk(
     'submit/order',
-    async( _, { rejectWithValue })=>{
+    async( obj, { rejectWithValue })=>{
         const response = await fetch('/submit_order',{
             method:'POST',
+            headers: {
+                'Content-type':'application/json'
+            },
+            body: JSON.stringify(obj)
          })
         const data = await response.json()
 

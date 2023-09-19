@@ -14,6 +14,7 @@ import Collection from './pages/Collection';
 import Cart from './pages/Cart/Cart'
 import EmptyCart from './pages/Cart/EmptyCart';
 import Checkout from './pages/Checkout';
+import OrderInfo from './components/OrderInfo'
 
 function App(){
 
@@ -53,6 +54,8 @@ function App(){
         <Route path='/login'> <Login /></Route>
 
         <Route path='/checkout'> <Checkout /></Route>
+
+        <Route path='/order_confirmation'> <OrderInfo /></Route>
 
       </Switch>
 
