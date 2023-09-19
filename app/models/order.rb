@@ -1,27 +1,23 @@
 class Order < ApplicationRecord
-    
-  belongs_to :imageable, polymorphic: true
+
+
+  validates :shipping_detail, presence: true
 
   has_many :order_items, as: :itemable, dependent: :destroy
 
   has_many :products, through: :order_items
 
-  def update_or_create_order_item(product_params)
-    order_item = self.order_items.find_by(product_id: product_params[:product_id])
-    order_item ? order_item.add_to_qty(product_params[:order_qty]) : ( 
-      order_item = self.order_items.create!(product_params) )
-    order_item
+  has_one :shipping_detail
+  
+  accepts_nested_attributes_for :shipping_detail
+
+  def transfer_cart_to_order(cart)
+    cart.order_items.each { |i| self.order_items.create!(product: i.product, order_qty: i.order_qty)}
   end
 
-  def remove_order_item_by_id(order_item_id)
-    self.order_items.find_by(id: order_item_id).destroy
-  end
-
-  def finalize_order
+  def update_product_inventory_for_order_items
     #update product qtys
     self.order_items.each{ |o| o.fulfill_order_item }
-    #closes order
-    self.update!(open: false)
   end
 
 

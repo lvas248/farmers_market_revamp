@@ -21,22 +21,25 @@ class UsersController < ApplicationController
         def show
     
             user = get_user
-    
+
             if user.present?
-                render json: user, include: ['cart.order_items.product','orders.order_items.product'],  status: :ok
+                
+                render json: user, status: :ok
             
             else 
+
                 guest = Guest.find_by(id: session[:guest_id])
     
                 if guest.present?
                     
-                    render json: guest, include: ['cart.order_items.product'], status: :unauthorized
+                    render json: guest, status: :unauthorized
                 
                 else
                     new_guest = Guest.create!()
                     session[:guest_id] = new_guest.id
-                    render json: new_guest, include: ['cart.order_items.product'], status: :unauthorized
+                    render json: new_guest, status: :unauthorized
                 end
+
             end
     
         end

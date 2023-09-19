@@ -16,7 +16,8 @@ class SessionsController < ApplicationController
             end
 
             session[:user_id] = user.id
-            render json: user, include: ['cart.order_items.product'], status: :ok
+            render json: user, include: ['orders.order_items', 'cart.order_items.product'], status: :ok
+
         else 
             render json: { error: 'Invalid username or password'}, status: :unauthorized
         end

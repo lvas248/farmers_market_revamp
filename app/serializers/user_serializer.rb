@@ -1,9 +1,11 @@
 class UserSerializer < ActiveModel::Serializer
   attributes :email
 
-  has_one :cart
+  has_many :orders, serializer: UserOrderSerializer
 
-  has_many :orders
+  belongs_to :cart, serializer: UserCartSerializer
+
+
 
  
 

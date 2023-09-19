@@ -1,5 +1,5 @@
 class OrderItemSerializer < ActiveModel::Serializer
-  attributes :id, :order_qty
+  attributes :id, :order_qty, :product
 
   has_one :product
 
