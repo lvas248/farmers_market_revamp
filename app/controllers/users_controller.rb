@@ -22,16 +22,12 @@ class UsersController < ApplicationController
     
             user = get_user
             if user.present?
-                
                 render json: user, status: :ok
-            
             else 
-
                 guest = Guest.find_by(id: session[:guest_id])
                 if guest.present?
                     # binding.pry
-                    render json: guest, status: :unauthorized
-                
+                    render json: guest, status: :unauthorized        
                 else
                     new_guest = Guest.create!()
                     session[:guest_id] = new_guest.id

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   patch '/cart/:order_item_id', to: 'carts#updateOrderItemQtyInCart'
   delete '/clear_cart', to: 'carts#clear_cart'
 
+  get '/orders', to: 'orders#index'
   
   post '/submit_order', to: 'orders#submit_order'
 

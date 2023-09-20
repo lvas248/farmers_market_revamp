@@ -44,7 +44,7 @@ export const loginuser = createAsyncThunk(
         if(response.ok){ 
             dispatch(addUser(data.email))
             if(data.cart.filtered_order_items) dispatch(addCart(data.cart.filtered_order_items))
-            dispatch(addOrders(data.orders))
+            dispatch(addOrders(data.orders.reverse()))
             return data
         }
         return rejectWithValue(data)
@@ -76,13 +76,12 @@ export const refreshSession = createAsyncThunk(
         const response = await fetch('/me')
 
         const data = await response.json()
-
         if(response.ok){ 
+         
             dispatch(addUser(data.email))
             if(data.cart.filtered_order_items) dispatch(addCart(data.cart.filtered_order_items))
-            dispatch(addOrders(data.orders))
+            dispatch(addOrders(data.orders.reverse()))
             return 
-           
         }
         if(data.cart.filtered_order_items) dispatch(addCart(data.cart.filtered_order_items))
         return rejectWithValue(data)

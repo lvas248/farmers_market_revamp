@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom"
 import getSubtotal from "../helpers/subtotal";
 
-function OrderInfo(){
+function OrderConfirmation(){
 
     const { order_id } = useParams()
     const orders = useSelector(state => state.order.entity)
@@ -19,8 +19,10 @@ function OrderInfo(){
                 </div>
     })
 
+    
+
     return ( 
-        <div className='text-left flex flex-col gap-4'>
+        <div className='text-left flex flex-col gap-4 px-5'>
 
             <h3 className='font-bold text-center mb-[5vh]'>Confirmation Number: {order?.id}</h3>
             
@@ -59,4 +61,4 @@ function OrderInfo(){
     );
 }
 
-export default OrderInfo;
+export default OrderConfirmation;

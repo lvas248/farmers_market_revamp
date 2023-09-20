@@ -25,8 +25,8 @@ function Checkout(){
     const history = useHistory()
 
     const cart = useSelector(state => state.cart.entity)
-    const loggedIn = useSelector(state => state.session.loggedIn)
-    const user = useSelector(state => state.user.entity)
+    // const loggedIn = useSelector(state => state.session.loggedIn)
+    // const user = useSelector(state => state.user.entity)
 
     const subtotal = getSubtotal(cart)
 
@@ -46,7 +46,7 @@ function Checkout(){
         e.preventDefault()
         dispatch(submitOrder({shipping_detail: shippingAddress})).then(res => {
             console.log(res)
-            if(res.meta.requestStatus === 'fulfilled') history.push(`/order_confirmation/${res.payload.id}`)
+            if(res.meta.requestStatus === 'fulfilled') history.push(`/checkout/order_confirmation/${res.payload.id}`)
         })
     }
 
@@ -64,7 +64,6 @@ function Checkout(){
 
                 <p className='font- text-lg'>CONTACT</p>
 
-                <div className='flex flex-col '>
 
                 <div className='flex flex-col gap-2'>
 
@@ -76,8 +75,6 @@ function Checkout(){
                     
 
                
-                </div>
-
             </div>
 
             <div className='border-b pb-5'>

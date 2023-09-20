@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { clearCart } from "../../redux/slices/cartSlice";
-import CheckoutItem from "./CheckoutItem";
+import CheckoutItem from "../../components/CheckoutItem";
 import getSubtotal from "../../helpers/subtotal";
 
 function Cart() {

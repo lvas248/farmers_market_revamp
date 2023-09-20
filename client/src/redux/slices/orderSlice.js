@@ -1,6 +1,18 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { emptyCart } from "./cartSlice";
 
+
+export const getOrders = createAsyncThunk(
+    'get/order',
+    async( _, { rejectWithValue })=>{
+        const response = await fetch('/orders')
+        const data = await response.json()
+
+        if(response.ok) return data
+        return rejectWithValue(data)
+    }
+)
+
 export const submitOrder = createAsyncThunk(
     'submit/order',
     async( obj, { dispatch, rejectWithValue })=>{
@@ -50,8 +62,22 @@ export const orderSlice = createSlice({
             .addCase( submitOrder.fulfilled, ( state, action ) =>{
                 state.status = 'idle'
                 state.error = null
-                state.entity = [...state.entity, action.payload]
+                state.entity = [action.payload, ...state.entity]
             } )
+            .addCase( getOrders.pending, state =>{
+                state.status = 'pending'
+                state.error = null
+            })
+            .addCase( getOrders.rejected, ( state, action )=>{
+                state.status = 'idle'
+                state.error = action.payload
+            })
+            .addCase( getOrders.fulfilled, ( state, action ) =>{
+                state.status = 'idle'
+                state.error = null
+                state.entity = action.payload
+            } )
+
     }
 })
 

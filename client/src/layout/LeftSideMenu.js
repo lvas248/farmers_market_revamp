@@ -7,13 +7,17 @@ import { resetInventoryLevels } from '../redux/slices/productSlice'
 function LeftSideMenu({isOpen, toggle}){
 
     const [ collectionIsOpen, setCollectionIsOpen ] = useState(false)
-    
+    const [ accountIsOpen, setAccountIsOpen ] = useState(false)
+   
     const loggedIn = useSelector( state => state.session.loggedIn)
 
     const dispatch = useDispatch()
 
     function collectionToggle(){
         setCollectionIsOpen(!collectionIsOpen)
+    }
+    function accounToggle(){
+        setAccountIsOpen(!accountIsOpen)
     }
 
     const renderCollectionNavs = ['SUMMER', 'SPRING', 'FALL', 'WINTER'].map( s =>{
@@ -43,8 +47,8 @@ function LeftSideMenu({isOpen, toggle}){
                
                 
                 <NavLink onClick={toggle} className='' to={'/'}>SHOP ALL</NavLink>
-                
-                <button onClick={collectionToggle} className='text-left'>COLLECTIONS </button>
+               
+                <button onClick={collectionToggle} className='text-left'>COLLECTIONS {collectionIsOpen ? '↑' : '↓' }</button>
                 
                 <div className={`flex flex-col px-2 gap-1 ${!collectionIsOpen && 'hidden'} animate-fade-in-fast`}>
                     {renderCollectionNavs}
@@ -52,12 +56,22 @@ function LeftSideMenu({isOpen, toggle}){
             
                 <NavLink onClick={toggle} className='' to={'/about'}>ABOUT</NavLink>
                 
-                { !loggedIn && <>
-                    <NavLink onClick={toggle} className='' to={'/signup'}>SIGNUP</NavLink>
-                    <NavLink onClick={toggle} className='' to={'/login'}>LOGIN</NavLink>
-                </>}
+                <button onClick={accounToggle} className='text-left'>ACCOUNT {accountIsOpen ? '↑' : '↓' }</button>
+
+                <div className={`flex flex-col px-2 gap-1 ${!accountIsOpen && 'hidden'} animate-fade-in-fast`}>
+                    { !loggedIn && <>
+                        <NavLink onClick={toggle} className='' to={'/account/signup'}>SIGNUP</NavLink>
+                        <NavLink onClick={toggle} className='' to={'/account/login'}>LOGIN</NavLink>
+                    </>}
+
                 
-                { loggedIn && <NavLink onClick={logout} className='' to={'#'}>LOGOUT</NavLink>}
+                    
+                    { loggedIn && <>
+                        <NavLink onClick={toggle} to='/account/my_orders'>MY ORDERS</NavLink>
+                        <NavLink onClick={logout} className='' to={'#'}>LOGOUT</NavLink>
+                    </>}
+
+                </div>
 
 
 

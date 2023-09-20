@@ -1,7 +1,7 @@
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
-import { removeFromCart, updateOrderItem, removeErrors } from "../../redux/slices/cartSlice";
+import { removeFromCart, updateOrderItem, removeErrors } from "../redux/slices/cartSlice";
 
 function CheckoutItem({order_item}) {
 

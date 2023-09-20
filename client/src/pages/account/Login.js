@@ -1,6 +1,6 @@
 import { useState , useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { loginuser, removeErrors } from '../redux/slices/sessionSlice'
+import { loginuser, removeErrors } from '../../redux/slices/sessionSlice'
 import { useHistory } from 'react-router-dom'
 
 function Login() {
@@ -29,6 +29,7 @@ function Login() {
     function login(e){
         e.preventDefault()
         dispatch(loginuser(loginObj)).then(res => {
+            console.log(res)
             if(res.meta.requestStatus === 'fulfilled') history.push('/')
         })
     }

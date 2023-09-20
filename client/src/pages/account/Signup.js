@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { signupUser, removeErrors } from '../redux/slices/sessionSlice'
+import { signupUser, removeErrors } from '../../redux/slices/sessionSlice'
 import { useHistory } from 'react-router-dom'
 
 function Signup() {

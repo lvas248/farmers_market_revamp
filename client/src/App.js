@@ -8,13 +8,15 @@ import { refreshSession } from './redux/slices/sessionSlice';
 import Navbar from './layout/Navbar';
 import Shop from './pages/shop/Shop';
 import ProductDetailCard from './components/ProductDetailCard';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
+import Login from './pages/account/Login';
+import Signup from './pages/account/Signup';
 import Collection from './pages/Collection';
 import Cart from './pages/Cart/Cart'
 import EmptyCart from './pages/Cart/EmptyCart';
 import Checkout from './pages/Checkout';
-import OrderInfo from './components/OrderInfo'
+import MyOrders from './pages/account/MyOrders';
+import OrderConfirmation from './components/OrderConfirmation';
+import OrderDetails from './pages/account/OrderDetails';
 
 function App(){
 
@@ -29,8 +31,8 @@ function App(){
   },[dispatch])
 
   const cart = useSelector(state => state.cart.entity)
-  // const order = useSelector(state => state.order.entity)
-  // console.log(order)
+  const order = useSelector(state => state.order.entity)
+  console.log(order)
   return (
     <div className="relative min-w-[250px] bg-[#f7f7f7] grid place-content-center min-h-screen">   
 
@@ -49,13 +51,26 @@ function App(){
           { cart?.length > 0 ? <Cart /> : <EmptyCart /> }
         </Route>
 
-        <Route path='/signup'><Signup /> </Route>
+        <Route path='/checkout'>
 
-        <Route path='/login'> <Login /></Route>
+          <Route exact path='/checkout/order_confirmation/:order_id'><OrderConfirmation /></Route>
 
-        <Route path='/checkout'> <Checkout /></Route>
+          <Route exact path='/checkout'> <Checkout /></Route>
+          
+        </Route>
 
-        <Route path='/order_confirmation/:order_id'> <OrderInfo /></Route>
+
+
+        <Route path='/account'>
+
+          <Route path='/account/my_orders/:order_id'> <OrderDetails /> </Route>
+          <Route exact path='/account/my_orders'> <MyOrders />  </Route>
+         
+          <Route exact path='/account/signup'> <Signup /> </Route>
+          <Route exact path='/account/login'> <Login /> </Route>
+
+        </Route>
+
 
       </Switch>
 
