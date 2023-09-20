@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { emptyCart } from "./cartSlice";
 
 export const submitOrder = createAsyncThunk(
     'submit/order',
-    async( obj, { rejectWithValue })=>{
+    async( obj, { dispatch, rejectWithValue })=>{
         const response = await fetch('/submit_order',{
             method:'POST',
             headers: {
@@ -12,7 +13,10 @@ export const submitOrder = createAsyncThunk(
          })
         const data = await response.json()
 
-        if(response.ok) return data
+        if(response.ok){ 
+            dispatch(emptyCart())
+            return data
+        }
         return rejectWithValue(data)
     }
 )

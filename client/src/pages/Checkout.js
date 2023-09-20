@@ -45,7 +45,8 @@ function Checkout(){
     function submitForm(e){
         e.preventDefault()
         dispatch(submitOrder({shipping_detail: shippingAddress})).then(res => {
-            if(res.meta.requestStatus === 'fulfilled') history.push('/order_confirmation')
+            console.log(res)
+            if(res.meta.requestStatus === 'fulfilled') history.push(`/order_confirmation/${res.payload.id}`)
         })
     }
 

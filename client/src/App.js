@@ -55,7 +55,7 @@ function App(){
 
         <Route path='/checkout'> <Checkout /></Route>
 
-        <Route path='/order_confirmation'> <OrderInfo /></Route>
+        <Route path='/order_confirmation/:order_id'> <OrderInfo /></Route>
 
       </Switch>
 
