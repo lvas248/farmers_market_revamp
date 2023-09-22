@@ -8,7 +8,7 @@ export const addToCart = createAsyncThunk(
             headers: {
                 'Content-type':'application/json'
             },
-            body: JSON.stringify(obj)
+            body: JSON.stringify({cart_item: obj})
         })
         const data = await response.json()
         if(response.ok) return data
@@ -40,7 +40,7 @@ export const updateOrderItem = createAsyncThunk(
             headers: {
                 'Content-type':'application/json'
             },
-            body: JSON.stringify(obj.submitObj)
+            body: JSON.stringify({ cart_item: obj.submitObj})
         })
         const data = await response.json()
 

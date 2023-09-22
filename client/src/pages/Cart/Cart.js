@@ -61,7 +61,6 @@ function Cart() {
 
                 <div className='flex justify-between text-xs px-2 py-3 border-b'>
                     <p className='text-stone-300'>SHIPPING:</p>
-                    <p className='text-[8px]'>FREE SHIPPING ON ORDER OVER $100</p>
 
                 </div> 
 

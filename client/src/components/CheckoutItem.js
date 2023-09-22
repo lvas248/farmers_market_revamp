@@ -33,7 +33,7 @@ function CheckoutItem({order_item}) {
 
 
     function updateItemQty(){
-        dispatch(updateOrderItem({ order_item_id: order_item.id, submitObj: { order_item: { product_id: order_item.product.id, order_qty: editQty }}}))
+        dispatch(updateOrderItem({ order_item_id: order_item.id, submitObj: { product_id: order_item.product.id, order_qty: editQty } }))
     }
 
 

@@ -29,7 +29,7 @@ function ProductDetailCard(){
 
     function addProductToCart(){
         if(qty > 0 &&( qty <= ( product?.qty_avail - ( productInCart?.order_qty || 0)))){
-            dispatch(addToCart({order_item:{ product_id: product.id, order_qty: qty}})).then( res => {
+            dispatch(addToCart({ product_id: product.id, order_qty: qty})).then( res => {
                 if(res.meta.requestStatus === 'fulfilled'){ 
                         history.push('/cart')
                         setQty(0)
