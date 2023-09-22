@@ -6,6 +6,8 @@ import { useHistory } from 'react-router-dom'
 function Signup() {
 
     const [ signupObj, setSignupObj ] = useState({
+        name:'',
+        phone: '',
         email: '',
         password: '',
         password_confirmation: ''
@@ -30,10 +32,12 @@ function Signup() {
     function signup(e){
         e.preventDefault()
         dispatch(signupUser(signupObj)).then(res => {
+            console.log(res)
             if(res.meta.requestStatus === 'fulfilled') history.push('/')
         })
         
     }
+
 
 
     return ( 
@@ -44,12 +48,29 @@ function Signup() {
 
                 <form onSubmit={signup} className='grid pt-6 gap-3' >
 
+
+                    <div className='grid gap-2'>
+                        <div className='flex justify-between'>
+                            <label className='text-sm'>Full Name</label>
+                            <p className='error'>{error?.name && error?.name}</p>
+                        </div>
+                        <input className='border-2 text-md px-1' name='name' value={signupObj.name} onChange={updateSignupObj} type='text' />
+                    </div>
+
                     <div className='grid gap-2'>
                         <div className='flex justify-between'>
                             <label className='text-sm'>Email</label>
                             <p className='error'>{error?.email && error?.email}</p>
                         </div>
-                        <input className='border-2 text-md px-1' name='email' value={signupObj.email} onChange={updateSignupObj} type='email' />
+                        <input required className='border-2 text-md px-1' name='email' value={signupObj.email} onChange={updateSignupObj} type='email' />
+                    </div>
+
+                    <div className='grid gap-2'>
+                        <div className='flex justify-between'>
+                            <label className='text-sm'>Phone</label>
+                            <p className='error'>{error?.phone && error?.phone}</p>
+                        </div>
+                        <input className='border-2 text-md px-1' placeholder='10 digits - No dashes or spaces' name='phone' value={signupObj.phone} onChange={updateSignupObj}   />
                     </div>
 
                     <div className='grid gap-2'>

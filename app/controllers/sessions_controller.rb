@@ -2,7 +2,9 @@ class SessionsController < ApplicationController
 
     #login
     def create
+
         user = User.find_by( email: user_params[:email])
+        
         if user&.authenticate(user_params[:password])
 
             guest = Guest.find_by(id: session[:guest_id])
@@ -10,13 +12,15 @@ class SessionsController < ApplicationController
             #if guest is in session, merge carts, destroy that session
             
             if guest
-                user.cart.merge_with_order(guest.cart)
+                user.cart.merge_carts(guest.cart)
                 guest.cart.clear_cart
                 session.delete :guest_id
             end
 
             session[:user_id] = user.id
-            render json: user, include: ['orders.order_items', 'cart.order_items.product'], status: :ok
+            render json: user, status: :ok
+
+            # render json: user, include: ['orders.order_items', 'cart.order_items.product'], status: :ok
 
         else 
             render json: { error: 'Invalid username or password'}, status: :unauthorized

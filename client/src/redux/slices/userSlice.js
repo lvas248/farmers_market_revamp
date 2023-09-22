@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const initialState = {
-    entity: { email: ''},
+    entity: {},
     status: 'idle',
     error: null
 }
@@ -12,12 +12,12 @@ const userSlice = createSlice({
     initialState,
     reducers:{
         removeUser: ( state )=>{
-            state.entity = { email: ''}
+            state.entity = {}
             state.error = null
             state.status = 'idle'
         },
         addUser: ( state, action )=>{
-            state.entity.email = action.payload
+            state.entity = action.payload
             state.error = null
             state.status = 'idle'
         }

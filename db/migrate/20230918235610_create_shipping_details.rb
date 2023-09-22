@@ -4,8 +4,14 @@ class CreateShippingDetails < ActiveRecord::Migration[6.1]
       t.string :name
       t.string :email
       t.string :phone
-      t.references :order, index: true
+      t.string :street
+      t.string :apartment
+      t.string :city
+      t.string :state
+      t.string :country
+      t.string :zipcode
 
+      t.references :order, index: true
       t.timestamps
     end
   end

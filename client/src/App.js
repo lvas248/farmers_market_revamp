@@ -31,8 +31,8 @@ function App(){
   },[dispatch])
 
   const cart = useSelector(state => state.cart.entity)
-  const order = useSelector(state => state.order.entity)
-  console.log(order)
+  const addresses = useSelector(state => state.address.entity)
+  console.log('addresses: ',addresses)
   return (
     <div className="relative min-w-[250px] bg-[#f7f7f7] grid place-content-center min-h-screen">   
 

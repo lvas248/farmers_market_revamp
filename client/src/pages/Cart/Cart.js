@@ -20,8 +20,8 @@ function Cart() {
     function emptyCart(){
         dispatch(clearCart())
     }
-    function navigateToCheckout(){
-        history.push('/checkout')
+    function navigateTo(string){
+        history.push(`/${string}`)
     }
 
     return ( 
@@ -30,9 +30,12 @@ function Cart() {
         >
 
             <div className='p-2 mt-4 h-[65vh] sm:h-[73vh] overflow-y-auto m-auto'>
-
+                
+                <button onClick={()=>navigateTo('')} className='text-xs underline my-4'>continue shopping</button>
+                
                 <div className='grid grid-cols-9 text-center mb-2'>
                     
+
                     <h3 className='col-span-5 text-left text-lg'>My Bag({cart?.length || 0})</h3>
 
                     <div className='col-span-4  grid-cols-3 text-xs text-stone-400 hidden sm:grid'>
@@ -62,7 +65,8 @@ function Cart() {
 
                 </div> 
 
-                <button onClick={navigateToCheckout} className='mt-4 place-content-center border-2 h-[50px] bg-black text-white drop-shadow-sm'>CHECKOUT</button>
+                
+                <button onClick={()=>navigateTo('checkout')} className='mt-4 place-content-center border-2 h-[50px] bg-black text-white drop-shadow-sm'>CHECKOUT</button>
 
             </div>
             

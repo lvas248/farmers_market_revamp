@@ -1,51 +1,49 @@
 class Cart < ApplicationRecord
     
-    belongs_to :cartable, polymorphic: true
-    
-    has_many :order_items, as: :itemable, dependent: :destroy
+    has_many :cart_items, dependent: :destroy
 
 
     def clear_cart
-        self.order_items.each { |i| i.destroy}
+        self.cart_items.each { |i| i.destroy}
     end
 
-    def merge_with_order(guest_cart)
+    def merge_carts(guest_cart)
         # For each order_item in guest_cart, search user cart to if it has an order_item with the same product
-          guest_cart.order_items.each do |i|
+          guest_cart.cart_items.each do |i|
     
-            order_item = self.order_items.find_by(product_id: i.product_id)
+            cart_item = self.cart_items.find_by(product_id: i.product_id)
          
         # if user_cart has product already, update user_cart.order_item.order_qty => guest_cart qty + user_cart qty
            
-          if order_item
-              order_item.update!(order_qty: order_item.order_qty + i.order_qty)
+          if cart_item
+              cart_item.update!(order_qty: cart_item.order_qty + i.order_qty)
             else
-              self.order_items.create!(product_id: i.product_id, order_qty: i.order_qty)
+              self.cart_items.create!(product_id: i.product_id, order_qty: i.order_qty)
             end
           end
     
          
     end
 
-    def update_or_create_order_item(order_item_params)
+    def update_or_create_cart_item(cart_item_params)
 
         #check if cart already has an order with a product id =  order_item_params[:product_id]
         
-        order_item =  self.order_items.find_by(product_id: order_item_params[:product_id])
+        cart_item =  self.cart_items.find_by(product_id: cart_item_params[:product_id])
        
-        if !order_item.nil?
+        if !cart_item.nil?
 
-            order_item.add_to_qty(order_item_params[:order_qty]) 
-            return order_item
+            cart_item.add_to_qty(cart_item_params[:order_qty]) 
+            return cart_item
         else 
-            order_item = self.order_items.create!(order_item_params) 
-            return order_item
+            cart_item = self.cart_items.create!(cart_item_params) 
+            return cart_item
         end
 
     end
 
-    def remove_order_item_by_id(order_item_id)
-        self.order_items.find_by(id: order_item_id).destroy
+    def remove_cart_item_by_id(cart_item_id)
+        self.cart_items.find_by(id: cart_item_id).destroy
     end
     
 end

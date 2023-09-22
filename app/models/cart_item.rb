@@ -1,22 +1,15 @@
-class OrderItem < ApplicationRecord
-
-  
-  
-  belongs_to :order
-
+class CartItem < ApplicationRecord
+  belongs_to :cart
   belongs_to :product
 
   validate :confirm_inventory_available
 
+  after_update :destroy_if_order_qty_zero
+
   def add_to_qty(qty)
-    
     self.update!(order_qty: self.order_qty + qty.to_i)
   end
 
-  def fulfill_order_item
-    self.product.reduce_inventory_by(self.order_qty)
-  end
-  
   private
 
   def confirm_inventory_available
@@ -25,6 +18,9 @@ class OrderItem < ApplicationRecord
     end
   end
 
+  def destroy_if_order_qty_zero
+    self.destroy unless self.order_qty > 0
+  end
 
 
 end

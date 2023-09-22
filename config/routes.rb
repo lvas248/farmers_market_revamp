@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   
   post '/cart', to: 'carts#add_to_cart'
-  delete '/cart/:order_item_id', to: 'carts#remove_from_cart'
-  patch '/cart/:order_item_id', to: 'carts#updateOrderItemQtyInCart'
+  delete '/cart/:cart_item_id', to: 'carts#remove_from_cart'
+  patch '/cart/:cart_item_id', to: 'carts#updateOrderItemQtyInCart'
   delete '/clear_cart', to: 'carts#clear_cart'
 
   get '/orders', to: 'orders#index'

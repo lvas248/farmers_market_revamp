@@ -2,13 +2,13 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { addUser, removeUser } from './userSlice'
 import { addCart, emptyCart } from "./cartSlice";
 import { addOrders } from "./orderSlice";
+import { addAddresses, removeAddresses } from "./addressSlice";
 
 
 //create signup async
 export const signupUser = createAsyncThunk(
     'signup/user',
     async(obj, { dispatch,  rejectWithValue })=>{
-        debugger
         const response = await fetch('/signup',{
             method:'POST',
             headers: {
@@ -19,7 +19,7 @@ export const signupUser = createAsyncThunk(
         const data = await response.json()
 
         if(response.ok){
-            dispatch(addUser(data.email))
+            dispatch(addUser({name: data.name, email: data.email, phone: data.phone}))
             return data
         }
 
@@ -42,7 +42,8 @@ export const loginuser = createAsyncThunk(
         const data = await response.json()
 
         if(response.ok){ 
-            dispatch(addUser(data.email))
+            dispatch(addUser({name: data.name, email: data.email, phone: data.phone}))
+            dispatch(addAddresses(data.addresses))
             if(data.cart.filtered_order_items) dispatch(addCart(data.cart.filtered_order_items))
             dispatch(addOrders(data.orders.reverse()))
             return data
@@ -63,6 +64,7 @@ export const logoutSession = createAsyncThunk(
         if(response.ok){
             dispatch(removeUser())
             dispatch(emptyCart())
+            dispatch(removeAddresses())
             return 
         }
         return rejectWithValue(data)
@@ -78,7 +80,8 @@ export const refreshSession = createAsyncThunk(
         const data = await response.json()
         if(response.ok){ 
          
-            dispatch(addUser(data.email))
+            dispatch(addUser({name: data.name, email: data.email, phone: data.phone}))
+            dispatch(addAddresses(data.addresses))
             if(data.cart.filtered_order_items) dispatch(addCart(data.cart.filtered_order_items))
             dispatch(addOrders(data.orders.reverse()))
             return 

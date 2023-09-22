@@ -10,48 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_18_235610) do
+ActiveRecord::Schema.define(version: 2023_09_22_180335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "addresses", force: :cascade do |t|
-    t.string "addressable_type"
-    t.bigint "addressable_id"
-    t.string "street"
-    t.string "apartment"
-    t.string "city"
-    t.string "state"
-    t.string "zipcode"
-    t.string "country"
+  create_table "cart_items", force: :cascade do |t|
+    t.bigint "cart_id", null: false
+    t.bigint "product_id", null: false
+    t.integer "order_qty"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable"
+    t.index ["cart_id"], name: "index_cart_items_on_cart_id"
+    t.index ["product_id"], name: "index_cart_items_on_product_id"
   end
 
   create_table "carts", force: :cascade do |t|
     t.string "cartable_type"
     t.bigint "cartable_id"
-    t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["cartable_type", "cartable_id"], name: "index_carts_on_cartable"
   end
 
   create_table "guests", force: :cascade do |t|
-    t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "order_items", force: :cascade do |t|
-    t.string "itemable_type"
-    t.bigint "itemable_id"
+    t.bigint "order_id"
     t.bigint "product_id"
     t.integer "order_qty"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["itemable_type", "itemable_id"], name: "index_order_items_on_itemable"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
     t.index ["product_id"], name: "index_order_items_on_product_id"
   end
 
@@ -79,6 +72,12 @@ ActiveRecord::Schema.define(version: 2023_09_18_235610) do
     t.string "name"
     t.string "email"
     t.string "phone"
+    t.string "street"
+    t.string "apartment"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.string "zipcode"
     t.bigint "order_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -86,10 +85,14 @@ ActiveRecord::Schema.define(version: 2023_09_18_235610) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "phone"
     t.string "email"
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "cart_items", "carts"
+  add_foreign_key "cart_items", "products"
 end

@@ -29,7 +29,6 @@ function Login() {
     function login(e){
         e.preventDefault()
         dispatch(loginuser(loginObj)).then(res => {
-            console.log(res)
             if(res.meta.requestStatus === 'fulfilled') history.push('/')
         })
     }
