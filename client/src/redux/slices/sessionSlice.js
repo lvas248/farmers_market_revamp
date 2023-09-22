@@ -20,6 +20,7 @@ export const signupUser = createAsyncThunk(
 
         if(response.ok){
             dispatch(addUser({name: data.name, email: data.email, phone: data.phone}))
+            dispatch(addCart(data.filtered_cart_items))
             return data
         }
 
@@ -43,8 +44,8 @@ export const loginuser = createAsyncThunk(
 
         if(response.ok){ 
             dispatch(addUser({name: data.name, email: data.email, phone: data.phone}))
-            dispatch(addAddresses(data.addresses))
-            if(data.cart.filtered_order_items) dispatch(addCart(data.cart.filtered_order_items))
+            dispatch(addAddresses(data.shipping_details))
+            if(data.cart.filtered_cart_items) dispatch(addCart(data.cart.filtered_cart_items))
             dispatch(addOrders(data.orders.reverse()))
             return data
         }
@@ -81,12 +82,12 @@ export const refreshSession = createAsyncThunk(
         if(response.ok){ 
          
             dispatch(addUser({name: data.name, email: data.email, phone: data.phone}))
-            dispatch(addAddresses(data.addresses))
-            if(data.cart.filtered_order_items) dispatch(addCart(data.cart.filtered_order_items))
+            dispatch(addAddresses(data.shipping_details))
+            if(data.cart.filtered_cart_items) dispatch(addCart(data.cart.filtered_cart_items))
             dispatch(addOrders(data.orders.reverse()))
             return 
         }
-        if(data.cart.filtered_order_items) dispatch(addCart(data.cart.filtered_order_items))
+        if(data.cart.filtered_cart_items) dispatch(addCart(data.cart.filtered_cart_items))
         return rejectWithValue(data)
     }
 )
