@@ -36,7 +36,13 @@ const initialState = {
 const productSlice = createSlice({
     name: 'product',
     initialState,
-    reducers:{},
+    reducers:{
+        updateProductQtys:(state, action) =>{
+            action.payload.forEach( i =>{
+                state.entity.find(p => p.id === i.product.id).qty_avail = i.product.qty_avail
+            })
+        }
+    },
     extraReducers: ( builder ) =>{
         builder
             .addCase( fetchProduct.pending, ( state )=>{
@@ -73,3 +79,4 @@ const productSlice = createSlice({
 })
 
 export default productSlice.reducer
+export const { updateProductQtys } = productSlice.actions
