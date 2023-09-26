@@ -1,16 +1,29 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 
-// export const fetchProduct = createAsyncThunk(
-//     'fetch/products',
-//     async( _, { rejectWithValue })=>{
-//         const response = await fetch('/products')
-//         const data = await response.json()
+export const validateAddress = createAsyncThunk(
+    'validate/address',
+    async( _, { rejectWithValue })=>{
+        const apiKey = process.env.REACT_APP_HERE_API_KEY
+        const response = await fetch(`https://addressvalidation.googleapis.com/v1:validateAddress&key=${apiKey}`,{
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify({
+                address: {
+                    addressLines: [ '1879 greene ave, 3r', 'ridgewood, ny']
+                }
+            })
+        })
+        const data = await response.json()
 
-//         if(response.ok) return data
-//         return rejectWithValue(data)
-//     }
-// )
+        debugger
+
+        if(response.ok) return data
+        return rejectWithValue(data)
+    }
+)
 
 
 

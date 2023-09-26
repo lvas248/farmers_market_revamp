@@ -13,10 +13,11 @@ import Signup from './pages/account/Signup';
 import Collection from './pages/Collection';
 import Cart from './pages/Cart/Cart'
 import EmptyCart from './pages/Cart/EmptyCart';
-import Checkout from './pages/Checkout';
+import Checkout from './pages/checkout/Checkout';
 import MyOrders from './pages/account/MyOrders';
 import OrderConfirmation from './components/OrderConfirmation';
 import OrderDetails from './pages/account/OrderDetails';
+import { validateAddress } from './redux/slices/addressSlice';
 
 function App(){
 
@@ -34,7 +35,9 @@ function App(){
   const cart = useSelector(state => state.cart.entity)
   const addresses = useSelector(state => state.address.entity)
 
+
   console.log('addresses: ',addresses, 'cart: ', cart, 'user: ', user)
+  
   return (
     <div className="relative min-w-[250px] bg-[#f7f7f7] grid place-content-center min-h-screen">   
 
@@ -49,17 +52,9 @@ function App(){
 
         <Route path='/collection/:season'> <Collection /></Route>
 
-        <Route path='/cart'>
-          { cart?.length > 0 ? <Cart /> : <EmptyCart /> }
-        </Route>
+        <Route path='/cart'>{ cart?.length > 0 ? <Cart /> : <EmptyCart /> }</Route>
 
-        <Route path='/checkout'>
-
-          <Route exact path='/checkout/order_confirmation/:order_id'><OrderConfirmation /></Route>
-
-          <Route exact path='/checkout'> <Checkout /></Route>
-          
-        </Route>
+        <Route path='/checkout'><Checkout /></Route>
 
 
 

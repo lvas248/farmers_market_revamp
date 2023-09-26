@@ -8,6 +8,7 @@ function Cart() {
 
     const dispatch = useDispatch()
     const history = useHistory()
+    const loggedIn = useSelector(state => state.session.loggedIn)
 
     const cart = useSelector(state => state.cart.entity)
 
@@ -29,7 +30,7 @@ function Cart() {
             className='pt-[7vh] p-5 w-[100vw] max-w-[700px] m-auto min-h-screen animate-glide-in-right'
         >
 
-            <div className='p-2 mt-4 h-[65vh] sm:h-[73vh] overflow-y-auto m-auto'>
+            <div className='p-2 mt-4 min-h-[35vh] sm:h-[60vh] overflow-y-auto m-auto'>
                 
                 <button onClick={()=>navigateTo('')} className='text-xs underline my-4'>continue shopping</button>
                 
@@ -64,8 +65,11 @@ function Cart() {
 
                 </div> 
 
-                
-                <button onClick={()=>navigateTo('checkout')} className='mt-4 place-content-center border-2 h-[50px] bg-black text-white drop-shadow-sm'>CHECKOUT</button>
+                <button onClick={()=>navigateTo('checkout/shipping_info')} className={`mt-4 place-content-center border-2 h-[50px] bg-black text-white drop-shadow-sm`}>{ loggedIn ? 'CHECKOUT' : 'CHECKOUT AS GUEST'}</button>
+                            
+                <button onClick={()=>navigateTo('account/login')} className={` ${loggedIn && 'hidden'} mt-4 place-content-center border-2 h-[50px] bg-black text-white drop-shadow-sm`}>SIGN IN</button>
+
+               
 
             </div>
             

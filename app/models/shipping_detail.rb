@@ -8,7 +8,5 @@ class ShippingDetail < ApplicationRecord
     validates :email, presence: true
     validates :phone, presence: true
 
-    belongs_to :order
-    
 end
 

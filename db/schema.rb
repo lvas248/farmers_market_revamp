@@ -51,9 +51,11 @@ ActiveRecord::Schema.define(version: 2023_09_22_180335) do
   create_table "orders", force: :cascade do |t|
     t.string "orderable_type"
     t.bigint "orderable_id"
+    t.bigint "shipping_detail_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["orderable_type", "orderable_id"], name: "index_orders_on_orderable"
+    t.index ["shipping_detail_id"], name: "index_orders_on_shipping_detail_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -78,10 +80,8 @@ ActiveRecord::Schema.define(version: 2023_09_22_180335) do
     t.string "state"
     t.string "country"
     t.string "zipcode"
-    t.bigint "order_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["order_id"], name: "index_shipping_details_on_order_id"
   end
 
   create_table "users", force: :cascade do |t|

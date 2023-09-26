@@ -11,7 +11,6 @@ class CreateShippingDetails < ActiveRecord::Migration[6.1]
       t.string :country
       t.string :zipcode
 
-      t.references :order, index: true
       t.timestamps
     end
   end

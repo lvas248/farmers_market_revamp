@@ -21,7 +21,7 @@ export const submitOrder = createAsyncThunk(
             headers: {
                 'Content-type':'application/json'
             },
-            body: JSON.stringify(obj)
+            body: JSON.stringify({ order: obj})
          })
         const data = await response.json()
 

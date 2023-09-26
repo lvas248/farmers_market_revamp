@@ -56,9 +56,9 @@ function CheckoutItem({order_item}) {
                         <p className='text-stone-400 hidden sm:block'>{order_item?.product?.season?.split(',').join(' | ')}</p>
                     </div>
 
-                    <div className='flex gap-1 text-[9px]'>
-                        <button onClick={deleteCheckoutItem} className=''>remove</button>
-                        <button onClick={updateItemQty} className=''>update</button>
+                    <div className='flex gap-1 text-[10px]'>
+                        <button onClick={deleteCheckoutItem} className='underline'>remove</button>
+                        <button onClick={updateItemQty} className='underline'>update</button>
                     </div>
                 </div>
 

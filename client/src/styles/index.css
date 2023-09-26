@@ -29,7 +29,7 @@
 
   .addressInput{
     @apply
-      text-xs p-4 w-[80vw] max-w-[500px] rounded-xl
+      text-xs p-4 w-[80vw] max-w-[500px] rounded-xl mx-auto
   }
 }
 

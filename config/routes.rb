@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  post '/validate_address', to: 'address#validate_address'
+
   post '/cart', to: 'carts#add_to_cart'
   delete '/cart/:cart_item_id', to: 'carts#remove_from_cart'
   patch '/cart/:cart_item_id', to: 'carts#updateOrderItemQtyInCart'
