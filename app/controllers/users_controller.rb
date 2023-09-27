@@ -8,7 +8,7 @@ class UsersController < ApplicationController
                 
             #if guest is in session, merge carts, destroy that session
             if guest
-                user.cart.merge_with_order(guest.cart)
+                user.cart.merge_carts(guest.cart)
                 guest.cart.clear_cart
                 session.delete :guest_id
             end

@@ -19,7 +19,7 @@ function MyOrders( ){
     
     const renderOrders = orders?.map( o => {
 
-        return <button onClick={()=>navigateTo(o.id)} key={o.id} className='flex justify-between w-[90vw] max-w-[500px] text-[8px] p-5 border-2 bg-white rounded-lg'>
+        return <button onClick={()=>navigateTo(o.id)} key={o.id} className='flex justify-between w-[90vw] max-w-[500px] text-[10px] p-5 border-2 bg-white rounded-lg font-semibold'>
             
             <p>Order#:{o.id}</p>            
             <p>{formatDate(o?.created_at)}</p>
@@ -35,7 +35,7 @@ function MyOrders( ){
 
             <h1 className='text-center text:sm sm:text-3xl'>ORDERS</h1>
 
-            <div className='flex flex-col gap-1'>
+            <div className='flex flex-col gap-2'>
                 {renderOrders}
             </div>
 

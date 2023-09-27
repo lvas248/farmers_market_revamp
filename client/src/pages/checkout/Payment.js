@@ -17,13 +17,17 @@ function Payment({shippingAddress}){
     }
 
     function pushOrder(){
-        if(parseInt(shippingAddress.id)>0){
-            dispatch(submitOrder( { shipping_detail_id: shippingAddress.id, order_items_attributes: formatCart() } ) ).then(res => {
-                if(res.meta.requestStatus === 'fulfilled') history.push(`/order_confirmation/${res.payload.id}`)
-            })
-        }else{
-            dispatch(submitOrder( { shipping_detail_attributes: shippingAddress, order_items_attributes: formatCart()} )).then(res => {
-                if(res.meta.requestStatus === 'fulfilled') history.push(`/order_confirmation/${res.payload.id}`)})}
+        if( paymentAdded){
+            if(parseInt(shippingAddress.id)>0){
+                dispatch(submitOrder( { shipping_detail_id: shippingAddress.id, order_items_attributes: formatCart() } ) ).then(res => {
+                    if(res.meta.requestStatus === 'fulfilled') history.push(`/order_confirmation/${res.payload.id}`)
+                })
+            }else{
+                dispatch(submitOrder( { shipping_detail_attributes: shippingAddress, order_items_attributes: formatCart()} )).then(res => {
+                    if(res.meta.requestStatus === 'fulfilled') history.push(`/order_confirmation/${res.payload.id}`)})
+                }
+        }
+    
 
     }
     

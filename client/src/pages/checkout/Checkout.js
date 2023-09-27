@@ -24,13 +24,14 @@ function Checkout(){
         zipcode: '',
         country: ''          
     })
-    const [ paid, setPaid ] = useState(false)
+    const [ shippingInputIsOpen, setShippingInputIsOpen ] = useState(!loggedIn)
 
-    const [ shippingInputIsOpen, setShippingInputIsOpen ] = useState(false)
-
-    const dispatch = useDispatch()
     const history = useHistory()
     const subtotal = getSubtotal(cart)
+
+    function navigateToCart(){
+        history.push('/cart')
+    }
 
     function toggleShippingInput(){
         resetShippingAddressObj()
@@ -63,23 +64,11 @@ function Checkout(){
         setShippingAddress(address)
     }
 
-
-   
-
-
-    // function submitForm(e){
-    //     e.preventDefault()
-    //     dispatch(submitOrder(shippingAddress)).then(res => {
-    //         console.log(res)
-    //         if(res.meta.requestStatus === 'fulfilled') history.push(`/checkout/order_confirmation/${res.payload.id}`)
-    //     })
-    // }
-
     return ( 
         <div className='pt-[10vh] h-screen w-[80vw] pb-[15vh] flex flex-col max-w-[1050px]'>
     
             <div className='flex justify-between text-xs mt-3 items-center'>
-                <button type='button' className='text-left underline '>back to cart</button>
+                <button onClick={navigateToCart} type='button' className='text-left underline '>back to cart</button>
             </div>
 
             <div className='h-[10vh] flex w-full place-content-end items-center border-b px-5'>

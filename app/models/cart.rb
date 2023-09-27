@@ -4,7 +4,7 @@ class Cart < ApplicationRecord
 
 
     def clear_cart
-        self.cart_items.each { |i| i.destroy}
+        self.cart_items.destroy_all
     end
 
     def merge_carts(guest_cart)

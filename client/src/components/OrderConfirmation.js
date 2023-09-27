@@ -19,8 +19,6 @@ function OrderConfirmation(){
                 </div>
     })
 
-    console.log(order_id)
-
     return ( 
         <div className='text-left flex flex-col gap-4 px-5'>
 

@@ -7,6 +7,7 @@ function ShippingAddressForm({shippingAddress, updateShippingInfo, shippingInput
 
     const history = useHistory()
     const addresses = useSelector( state => state.address.entity )
+    const loggedIn = useSelector( state => state.session.loggedIn )
 
     const [ addressSubmitted, setAddressSubmitted ] = useState(false)
     
@@ -25,14 +26,14 @@ function ShippingAddressForm({shippingAddress, updateShippingInfo, shippingInput
         <div className='mx-auto w-[80vw] max-w-[1050px] flex flex-col '>
 
             <div className={`${addressSubmitted && 'hidden'}`}>
-                <p className='underline text-center'>SELECT SHIPPING OPTIONS</p>
+                <p className='underline text-center my-[5vh]'>SELECT SHIPPING OPTIONS</p>
 
-                <button onClick={toggleShippingInput} className='text-xs underline text-left'>{shippingInputIsOpen ? 'or select from previous addresses' : 'or add address'}</button>
+                <button onClick={toggleShippingInput} className={`${!loggedIn && 'hidden' } text-xs underline text-left`}>{shippingInputIsOpen ? 'or select from previous addresses' : 'or add address'}</button>
 
-                <div className={`${shippingInputIsOpen && 'hidden'} grid place-content-center`}>
-                <p  className='text-lg text-center'>MY SAVED ADDRESSES</p> 
+                <div className={`${shippingInputIsOpen && 'hidden'} grid place-content-center p-5`}>
+                    <p  className='text-lg text-center'>MY SAVED ADDRESSES</p> 
 
-                <select className='p-4 m-auto text-center' name='id' value={shippingAddress.id} onChange={selectSavedAddress}>{[<option key={0} value='' >SELECT</option>, ...renderAddressOptions]}</select>
+                    <select className='p-4 m-auto text-xs text-center' name='id' value={shippingAddress.id} onChange={selectSavedAddress}>{[<option key={0} value='' >SELECT</option>, ...renderAddressOptions]}</select>
                 </div>
 
                 <div className={`${!shippingInputIsOpen && 'hidden'} flex flex-col mx-auto gap-2`}>

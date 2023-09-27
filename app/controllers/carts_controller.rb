@@ -46,7 +46,7 @@ class CartsController < ApplicationController
 
     def clear_cart
         user = User.find_by(id: session[:user_id]) || Guest.find_by(id: session[:guest_id])
-        user.cart.cart_items.each{ |i| i.destroy }
+        user.cart.cart_items.destroy_all
         head :ok
     end
 

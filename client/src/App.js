@@ -32,16 +32,8 @@ function App(){
     dispatch(refreshSession())
   },[dispatch])
 
-  
-
-  const user = useSelector(state => state.user.entity)
   const cart = useSelector(state => state.cart.entity)
 
-  const addresses = useSelector(state => state.address.entity)
-
-
-  console.log('addresses: ',addresses, 'cart: ', cart, 'user: ', user)
-  
   return (
     <div className="relative min-w-[250px] bg-[#f7f7f7] grid place-content-center min-h-screen">   
 

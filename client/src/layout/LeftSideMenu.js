@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { logoutSession } from '../redux/slices/sessionSlice'
@@ -12,6 +12,7 @@ function LeftSideMenu({isOpen, toggle}){
     const loggedIn = useSelector( state => state.session.loggedIn)
 
     const dispatch = useDispatch()
+    const history = useHistory()
 
     function collectionToggle(){
         setCollectionIsOpen(!collectionIsOpen)
@@ -25,6 +26,8 @@ function LeftSideMenu({isOpen, toggle}){
     })
 
     function logout(){
+        history.push('/')
+        toggle()
         dispatch(logoutSession())
     }
     function resetInventory(){

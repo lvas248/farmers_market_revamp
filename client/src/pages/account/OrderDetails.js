@@ -38,7 +38,7 @@ function OrderDetails() {
         <div className='flex justify-around'>
 
             <div className='text-xs '>
-                    <p className='underline'>Contact:</p>
+                    <p className='underline font-semibold'>Contact:</p>
                     <p>{order?.shipping_detail?.name}</p>
                     <p>{order?.shipping_detail?.phone}</p>
                     <p>{order?.shipping_detail?.email}</p>
@@ -46,7 +46,7 @@ function OrderDetails() {
 
             <div className='text-xs'>
 
-                    <p className='underline'>Shipping Address: </p>
+                    <p className='underline font-semibold'>Shipping Address: </p>
 
                     <div className='flex gap-1'>
                         <p>{order?.shipping_detail?.street}</p>
