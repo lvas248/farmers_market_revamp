@@ -26,7 +26,7 @@ function ShippingAddressForm({shippingAddress, updateShippingInfo, shippingInput
                 <div className={`${shippingInputIsOpen && 'hidden'} grid place-content-center p-5`}>
                     <p  className='text-lg text-center'>MY SAVED ADDRESSES</p> 
 
-                    <select className='p-4 m-auto text-xs text-center' name='id' value={shippingAddress.id} onChange={selectSavedAddress}>{[<option key={0} value='' >SELECT</option>, ...renderAddressOptions]}</select>
+                    <select className='p-4 m-auto text-xs text-center w-[75%]' name='id' value={shippingAddress.id} onChange={selectSavedAddress}>{[<option key={0} value='' >SELECT</option>, ...renderAddressOptions]}</select>
                 </div>
 
                 <div className={`${!shippingInputIsOpen && 'hidden'} flex flex-col mx-auto gap-2`}>
