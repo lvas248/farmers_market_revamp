@@ -23,8 +23,7 @@ function Payment({shippingAddress}){
             })
         }else{
             dispatch(submitOrder( { shipping_detail_attributes: shippingAddress, order_items_attributes: formatCart()} )).then(res => {
-                if(res.meta.requestStatus === 'fulfilled') history.push('/')
-            })}
+                if(res.meta.requestStatus === 'fulfilled') history.push(`/order_confirmation/${res.payload.id}`)})}
 
     }
     

@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { emptyCart } from "./cartSlice";
 import { updateProductQtys } from "./productSlice";
+import { addAddress } from "./addressSlice";
 
 export const getOrders = createAsyncThunk(
     'get/order',
@@ -26,8 +27,10 @@ export const submitOrder = createAsyncThunk(
         const data = await response.json()
 
         if(response.ok){ 
+            debugger
             dispatch(emptyCart())
             dispatch(updateProductQtys(data.filtered_order_items))
+            dispatch(addAddress(data.shipping_detail))
             return data
         }
         return rejectWithValue(data)

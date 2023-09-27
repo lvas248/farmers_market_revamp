@@ -40,13 +40,15 @@ const addressSlice = createSlice({
     reducers:{
         removeAddresses: ( state )=>{
             state.entity = []
-            state.error = null
-            state.status = 'idle'
+
         },
         addAddresses: ( state, action )=>{
             state.entity = action.payload
-            state.error = null
-            state.status = 'idle'
+        },
+        addAddress: ( state, action )=>{
+            if(!state.entity.find( a => a.id === action.payload.id)){
+                state.entity = [...state.entity, action.payload ]
+            }
         }
     },
     // extraReducers: ( builder ) =>{
@@ -59,6 +61,6 @@ const addressSlice = createSlice({
             
     // }
 })
-export const { removeAddresses, addAddresses } = addressSlice.actions
+export const { removeAddresses, addAddresses, addAddress } = addressSlice.actions
 
 export default addressSlice.reducer
