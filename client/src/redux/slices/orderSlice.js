@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { emptyCart } from "./cartSlice";
 import { updateProductQtys } from "./productSlice";
-import { addAddress } from "./addressSlice";
+import { addAddress, clearValidatedAddresses } from "./addressSlice";
 
 export const getOrders = createAsyncThunk(
     'get/order',
@@ -30,6 +30,7 @@ export const submitOrder = createAsyncThunk(
             dispatch(emptyCart())
             dispatch(updateProductQtys(data.filtered_order_items))
             dispatch(addAddress(data.shipping_detail))
+            dispatch(clearValidatedAddresses())
             return data
         }
         return rejectWithValue(data)
@@ -50,6 +51,9 @@ export const orderSlice = createSlice({
     reducers: {
         addOrders: (state, action)=>{
             state.entity = action.payload
+        }, 
+        removeOrders: ( state ) => {
+            state.entity = []
         }
     },
     extraReducers: ( builder ) =>{
@@ -86,4 +90,4 @@ export const orderSlice = createSlice({
 
 export default orderSlice.reducer
 
-export const { addOrders } = orderSlice.actions
+export const { addOrders, removeOrders } = orderSlice.actions

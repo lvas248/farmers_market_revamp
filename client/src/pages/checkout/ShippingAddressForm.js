@@ -1,11 +1,10 @@
 import { useSelector } from "react-redux";
-import { useHistory } from 'react-router-dom'
 import { useState } from 'react'
+import AddressValidator from "./AddressValidator";
 
-function ShippingAddressForm({shippingAddress, updateShippingInfo, shippingInputIsOpen, toggleShippingInput, selectSavedAddress}) {
+function ShippingAddressForm({shippingAddress, updateShippingInfo, shippingInputIsOpen, toggleShippingInput, selectSavedAddress, updateWithValidatedAddress}) {
 
 
-    const history = useHistory()
     const addresses = useSelector( state => state.address.entity )
     const loggedIn = useSelector( state => state.session.loggedIn )
 
@@ -17,18 +16,12 @@ function ShippingAddressForm({shippingAddress, updateShippingInfo, shippingInput
         </option>
     })
 
-    function navigateTo(){
-        history.push(`/checkout/payment`)
-    }
-
     return ( 
 
-        <div className='mx-auto w-[80vw] max-w-[1050px] flex flex-col '>
+        <div className='mx-auto w-[80vw] max-w-[1050px] flex flex-col border-b-2 py-[2vh]'>
 
             <div className={`${addressSubmitted && 'hidden'}`}>
-                <p className='underline text-center my-[5vh]'>SELECT SHIPPING OPTIONS</p>
 
-                <button onClick={toggleShippingInput} className={`${!loggedIn && 'hidden' } text-xs underline text-left`}>{shippingInputIsOpen ? 'or select from previous addresses' : 'or add address'}</button>
 
                 <div className={`${shippingInputIsOpen && 'hidden'} grid place-content-center p-5`}>
                     <p  className='text-lg text-center'>MY SAVED ADDRESSES</p> 
@@ -40,31 +33,23 @@ function ShippingAddressForm({shippingAddress, updateShippingInfo, shippingInput
 
                     <p className='text-center'>ADD NEW SHIPPING INFO</p>
 
-                    <input name='name' value={shippingAddress.name} onChange={updateShippingInfo} className={`addressInput `}  placeholder='name' type='text' />
+                    <input required name='name' value={shippingAddress.name} onChange={updateShippingInfo} className={`addressInput `}  placeholder='name' type='text' />
 
-                    <input name='email' value={shippingAddress.email} onChange={updateShippingInfo} className={`addressInput `}  placeholder='email' type='email' />
+                    <input required name='email' value={shippingAddress.email} onChange={updateShippingInfo} className={`addressInput `}  placeholder='email' type='email' />
 
                     <input required name='phone' value={shippingAddress.phone} onChange={updateShippingInfo} placeholder='Phone' className={`addressInput`} type='text' />
                     
-                    <input required name='street' value={shippingAddress.street} onChange={updateShippingInfo} placeholder='street' className={`addressInput`} type='text' />
-
-                    <input name='apartment' value={shippingAddress.apartment} onChange={updateShippingInfo} placeholder='Apartment' className={`addressInput`} type='text' />
-
-                    <input name='city' value={shippingAddress.city} onChange={updateShippingInfo} required placeholder='City' className={`addressInput`} type='text' />
-
-                    <input name='state' value={shippingAddress.state} onChange={updateShippingInfo} required placeholder='State' className={`addressInput`} type='state' />
-
-                    <input required name='zipcode' value={shippingAddress.zipcode} onChange={updateShippingInfo} placeholder='Zipcode' className={`addressInput`} type='number' />
-
-                
                 </div>
-               
+
+                <div className={`${!shippingInputIsOpen && 'hidden'}`}>
+                    <AddressValidator updateWithValidatedAddress={updateWithValidatedAddress}/>
+                </div>
+  
             </div>
 
-
+            <button onClick={toggleShippingInput} className={`${!loggedIn && 'hidden' } text-xs underline text-right`} type='button'>{shippingInputIsOpen ? 'or select from previous addresses' : 'or add address'}</button>
 
            
-            <button  onClick={()=>navigateTo('checkout/payment')} className={`mt-4 place-content-center border-2 h-[50px] bg-black text-white drop-shadow-sm`}>CONTINUE TO PAYMENT</button>
         </div>
     );
 }

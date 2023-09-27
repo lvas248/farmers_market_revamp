@@ -3,24 +3,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const validateAddress = createAsyncThunk(
     'validate/address',
-    async( _, { rejectWithValue })=>{
-        const apiKey = process.env.REACT_APP_HERE_API_KEY
-        const response = await fetch(`https://addressvalidation.googleapis.com/v1:validateAddress&key=${apiKey}`,{
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/json'
-            },
-            body: JSON.stringify({
-                address: {
-                    addressLines: [ '1879 greene ave, 3r', 'ridgewood, ny']
-                }
-            })
-        })
+    async( addressText, { rejectWithValue })=>{
+        const response = await fetch(`https://api.geoapify.com/v1/geocode/autocomplete?text=${addressText}&format=json&apiKey=${process.env.REACT_APP_GEOAPIFY_API_KEY}`)
+        
         const data = await response.json()
 
-        debugger
-
-        if(response.ok) return data
+        if(response.ok) return data.results
         return rejectWithValue(data)
     }
 )
@@ -30,6 +18,7 @@ export const validateAddress = createAsyncThunk(
 
 const initialState = {
     entity: [],
+    validationResults: [],
     status: 'idle',
     error: null
 }
@@ -49,18 +38,30 @@ const addressSlice = createSlice({
             if(!state.entity.find( a => a.id === action.payload.id)){
                 state.entity = [...state.entity, action.payload ]
             }
+        },
+        clearValidatedAddresses: ( state ) =>{
+            state.validationResults = []
         }
     },
-    // extraReducers: ( builder ) =>{
-    //     builder
-    //         .addCase( fetchProduct.pending, ( state )=>{
-    //             state.status = 'pending'
-    //             state.error = null
-    //         })
+    extraReducers: ( builder ) =>{
+        builder
+            .addCase( validateAddress.pending, ( state )=>{
+                state.status = 'pending'
+                state.error = null
+            })
+            .addCase( validateAddress.rejected, ( state, action )=>{
+                state.status = 'idle'
+                state.error = action.payload
+            })
+            .addCase( validateAddress.fulfilled, ( state, action )=>{
+                state.status = 'idle'
+                state.error = null
+                state.validationResults = action.payload
+            })
   
             
-    // }
+    }
 })
-export const { removeAddresses, addAddresses, addAddress } = addressSlice.actions
+export const { removeAddresses, addAddresses, addAddress, clearValidatedAddresses } = addressSlice.actions
 
 export default addressSlice.reducer

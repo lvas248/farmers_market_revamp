@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { addUser, removeUser } from './userSlice'
 import { addCart, emptyCart } from "./cartSlice";
-import { addOrders } from "./orderSlice";
+import { addOrders, removeOrders } from "./orderSlice";
 import { addAddresses, removeAddresses } from "./addressSlice";
 
 
@@ -21,6 +21,7 @@ export const signupUser = createAsyncThunk(
         if(response.ok){
             dispatch(addUser({name: data.name, email: data.email, phone: data.phone}))
             dispatch(addCart(data.filtered_cart_items))
+            dispatch(removeOrders())
             return data
         }
 

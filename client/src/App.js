@@ -17,7 +17,6 @@ import Checkout from './pages/checkout/Checkout';
 import MyOrders from './pages/account/MyOrders';
 import OrderConfirmation from './components/OrderConfirmation';
 import OrderDetails from './pages/account/OrderDetails';
-import { validateAddress } from './redux/slices/addressSlice';
 import LoadingIcon from './components/LoadingIcon';
 
 function App(){

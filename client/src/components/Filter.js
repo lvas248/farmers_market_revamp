@@ -6,7 +6,7 @@ function Filter({updateFilterText, filterText, updateProduceType, produceType}) 
         <div className='py-1'>
             <div className='sm:p-5  bg-white w-[100%] flex text-[9px] justify-between max-w-[1050px] m-auto'>
                     
-                    <input type='text' value={filterText} onChange={updateFilterText} className='border-[2px]  px-4 text-sm' placeholder="search..."/>
+                    <input type='text' value={filterText} onChange={updateFilterText} className='border-[2px] ml-4 px-4 text-sm' placeholder="search..."/>
                     
                     <div className='flex justify-between px-4 gap-3 place-content-center sm:text-sm'>
                         
