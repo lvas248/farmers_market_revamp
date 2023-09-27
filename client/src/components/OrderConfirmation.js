@@ -9,9 +9,9 @@ function OrderConfirmation(){
     const order = orders.find( o => {
         return o.id === parseInt(order_id)
     })
-    const subtotal = getSubtotal(order?.order_items)
+    const subtotal = getSubtotal(order?.filtered_order_items)
 
-    const renderOrderItems = order?.order_items?.map( i =>{
+    const renderOrderItems = order?.filtered_order_items?.map( i =>{
         return <div key={i?.id} className='text-xs text-left grid grid-cols-3 border-t-2 py-4'>                
                     <p>{i.product?.name}</p>
                     <p className=''>{i.product?.description}</p>
@@ -19,7 +19,7 @@ function OrderConfirmation(){
                 </div>
     })
 
-    
+    console.log(order_id)
 
     return ( 
         <div className='text-left flex flex-col gap-4 px-5'>
@@ -39,14 +39,14 @@ function OrderConfirmation(){
 
                 <div className='text-left text-xs'>               
                     <p className='underline'>SHIPPING:</p>
-                    <p>{order?.shipping_detail?.address?.street}</p>              
-                    <p>{order?.shipping_detail?.address?.apartment}</p> 
+                    <p>{order?.shipping_detail?.street}</p>              
+                    <p>{order?.shipping_detail?.apartment}</p> 
                     <div className='flex gap-1'>
-                        <p>{order?.shipping_detail?.address?.city}</p>              
-                        <p>{order?.shipping_detail?.address?.zipcode}</p>
-                         <p>{order?.shipping_detail?.address?.state}</p>              
+                        <p>{order?.shipping_detail?.city}</p>              
+                        <p>{order?.shipping_detail?.zipcode}</p>
+                         <p>{order?.shipping_detail?.state}</p>              
                     </div>
-                    <p>{order?.shipping_detail?.address?.country}</p>              
+                    <p>{order?.shipping_detail?.country}</p>              
                 </div>
 
             </div>

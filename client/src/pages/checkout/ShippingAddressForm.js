@@ -57,8 +57,6 @@ function ShippingAddressForm({shippingAddress, updateShippingInfo, shippingInput
 
                 
                 </div>
-
-                {/* <button onClick={navigateTo} className='underline mx-auto'>submit</button> */}
                
             </div>
 

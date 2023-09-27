@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom'
 import { submitOrder } from '../../redux/slices/orderSlice';
 
 function Payment({shippingAddress}){
 
     const [ paymentAdded, setPaymentAdded ] = useState(false)
     const dispatch = useDispatch()
+    const history = useHistory()
     const cart = useSelector( state => state.cart.entity)
 
     function formatCart(){
@@ -16,16 +18,13 @@ function Payment({shippingAddress}){
 
     function pushOrder(){
         if(parseInt(shippingAddress.id)>0){
-            
-            dispatch(submitOrder( { shipping_detail_id: shippingAddress.id, order_items_attributes: formatCart() } ) ).then(res => console.log(res))
-
-            // dispatch(submitOrder({ id: shippingAddress.id})).then(res => console.log(res))
+            dispatch(submitOrder( { shipping_detail_id: shippingAddress.id, order_items_attributes: formatCart() } ) ).then(res => {
+                if(res.meta.requestStatus === 'fulfilled') history.push(`/order_confirmation/${res.payload.id}`)
+            })
         }else{
-            dispatch(submitOrder( { shipping_detail_attributes: shippingAddress, order_items_attributes: formatCart()} )).then(res => console.log(res))
-
-            // dispatch(submitOrder(shippingAddress)).then(res => console.log(res))
-        }
-
+            dispatch(submitOrder( { shipping_detail_attributes: shippingAddress, order_items_attributes: formatCart()} )).then(res => {
+                if(res.meta.requestStatus === 'fulfilled') history.push('/')
+            })}
 
     }
     
@@ -61,4 +60,4 @@ function Payment({shippingAddress}){
     );
 }
 
-export default Payment;
+export default Payment

@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
 
     def index
-        render json: Product.all, status: :ok
+        render json: Product.all.order(:name), status: :ok
     end
 
     def reset_inventory_levels

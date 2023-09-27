@@ -27,7 +27,7 @@ export const submitOrder = createAsyncThunk(
 
         if(response.ok){ 
             dispatch(emptyCart())
-            dispatch(updateProductQtys(data.order_items))
+            dispatch(updateProductQtys(data.filtered_order_items))
             return data
         }
         return rejectWithValue(data)

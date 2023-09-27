@@ -39,9 +39,9 @@ function OrderDetails() {
 
             <div className='text-xs '>
                     <p className='underline'>Contact:</p>
-                    <p>{order?.filtered_shipping_detail?.name}</p>
-                    <p>{order?.filtered_shipping_detail?.phone}</p>
-                    <p>{order?.filtered_shipping_detail?.email}</p>
+                    <p>{order?.shipping_detail?.name}</p>
+                    <p>{order?.shipping_detail?.phone}</p>
+                    <p>{order?.shipping_detail?.email}</p>
             </div>
 
             <div className='text-xs'>
@@ -49,14 +49,16 @@ function OrderDetails() {
                     <p className='underline'>Shipping Address: </p>
 
                     <div className='flex gap-1'>
-                        <p>{order?.filtered_shipping_detail?.address?.street}</p>
-                        <p>{order?.filtered_shipping_detail?.address?.apartment}</p>
+                        <p>{order?.shipping_detail?.street}</p>
+                        <p>{order?.hipping_detail?.apartment}</p>
                     </div>
                     <div className='flex gap-1'>
-                        <p>{order?.filtered_shipping_detail?.address?.city}</p>
-                        <p>{order?.filtered_shipping_detail?.address?.zipcode}</p>
-                        <p>{order?.filtered_shipping_detail?.address?.state}</p>
-                    </div>
+                        <p>{order?.shipping_detail?.city}</p>
+                        <p>{order?.shipping_detail?.zipcode}</p>
+                        <p>{order?.shipping_detail?.state}</p>
+                    </div>                       
+                     <p>{order?.shipping_detail?.country}</p>
+
             </div>
 
         </div>
