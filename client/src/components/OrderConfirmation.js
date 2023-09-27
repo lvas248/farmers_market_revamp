@@ -20,7 +20,7 @@ function OrderConfirmation(){
     })
 
     return ( 
-        <div className='text-left flex flex-col gap-4 px-5'>
+        <div className='text-left flex flex-col gap-4 px-5 animate-glide-in-top'>
 
             <h3 className='font-bold text-center mb-[5vh]'>Confirmation Number: {order?.id}</h3>
             

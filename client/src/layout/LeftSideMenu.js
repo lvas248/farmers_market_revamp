@@ -26,12 +26,22 @@ function LeftSideMenu({isOpen, toggle}){
     })
 
     function logout(){
-        history.push('/')
-        toggle()
-        dispatch(logoutSession())
+        
+        dispatch(logoutSession()).then(res => {
+            if(res.meta.requestStatus === 'fulfilled'){
+                history.push('/account/login')
+                toggle()                
+            }
+        })
+
     }
     function resetInventory(){
-        dispatch(resetInventoryLevels()).then(res => console.log(res))
+        dispatch(resetInventoryLevels()).then(res => {
+            if(res.meta.requestStatus === 'fulfilled'){
+                history.push('/')
+                toggle()
+            }
+        })
     }
 
     return ( 
