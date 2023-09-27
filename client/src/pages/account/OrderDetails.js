@@ -25,7 +25,7 @@ function OrderDetails() {
 
     return ( 
     <div className='flex flex-col gap-6 h-screen pt-[10vh]'>
-        <button onClick={navigateTo} className='text-left text-xs underline'>back to orders</button>
+        <button onClick={navigateTo} className='text-left text-xs underline p-5'>back to orders</button>
 
         <h1 className='text-center font-bold text:sm sm:text-3xl'>ORDER DETAILS</h1>
 

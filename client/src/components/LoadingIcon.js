@@ -6,8 +6,9 @@ function LoadingIcon() {
     const cartStatus = useSelector( state => state.cart.status)
     const orderStatus = useSelector( state => state.order.status)
     const productStatus = useSelector( state => state.product.status)
+    const sessionStatus = useSelector( state => state.session.status)
 
-    const display =  (orderStatus === 'pending' || cartStatus === 'pending' || productStatus === 'pending')
+    const display =  (orderStatus === 'pending' || cartStatus === 'pending' || productStatus === 'pending' || sessionStatus === 'pending')
 
     return ( 
         <div className={`${ !display && 'hidden'} absolute top-0 h-[100vh] w-[100vw] grid place-content-center`}>

@@ -35,19 +35,31 @@ function Payment({shippingAddress}){
     return ( 
         <div className='pt-[10vh] h-screen'>
 
-            <div className='text-xs'>
+            <div className='text-xs grid place-content-center text-center gap-2'>
                 <p className='text-sm font-bold'>Shipping Info:</p>
-                <p>{shippingAddress.name}</p>
-                <p>{shippingAddress.email}</p>
-                <p>{shippingAddress.phone}</p>
-                <p>{shippingAddress.street}</p>
-                <p>{shippingAddress.apartment}</p>
-                <p>{shippingAddress.city}</p>
 
-                <div className='flex gap-2'>
-                    <p>{shippingAddress.state}</p>
-                    <p>{shippingAddress.zipcode}</p>
+                <div className='m-auto'>
+                    <p>{shippingAddress.name}</p>
+                    <p>{shippingAddress.email}</p>
+                    <p>{shippingAddress.phone}</p>
                 </div>
+
+                <div>
+                    <div className='flex gap-1 m-auto text-center'>
+                        <p>{shippingAddress.street}</p>
+                        <p>{shippingAddress.apartment}</p>
+                    </div>
+
+                    <div className='flex gap-1 m-auto text-center'>
+                        <p>{shippingAddress.city},</p>
+                        <p>{shippingAddress.state}</p>
+                        <p>{shippingAddress.zipcode}</p>
+                    </div>
+
+                </div>
+
+
+          
 
             </div>
 
