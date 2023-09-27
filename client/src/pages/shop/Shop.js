@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 import { useState } from 'react'
 import ProductList from "../../components/ProductList";
 import Filter from "../../components/Filter";
-import LoadingIcon from '../../components/LoadingIcon'
 
 
 function Shop(){
@@ -19,7 +18,6 @@ function Shop(){
     }
 
     const products = useSelector( state => state.product.entity)
-    const productStatus = useSelector(state => state.product.status)
 
     const filteredProducts = products.filter( p => p.produce_type.includes(produceType) && p.name.toLowerCase().includes(filterText.toLowerCase()))
 
@@ -32,7 +30,6 @@ function Shop(){
         
             <ProductList productList={filteredProducts}/>
 
-            {/* <LoadingIcon status={productStatus}/> */}
             
         </div>
      );

@@ -2,7 +2,6 @@ import { useParams, useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux' 
 import { useState } from 'react'
 import { addToCart } from '../redux/slices/cartSlice'
-import LoadingIcon from './LoadingIcon'
 
 function ProductDetailCard(){
 
@@ -110,9 +109,6 @@ function ProductDetailCard(){
                 >add to cart</button>
 
             </div>
-
-
-            {/* <LoadingIcon status={cartStatus}/> */}
 
         </div> 
     );

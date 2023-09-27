@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom'
 import { submitOrder } from '../../redux/slices/orderSlice';
-import LoadingIcon from '../../components/LoadingIcon';
 
 function Payment({shippingAddress}){
 
@@ -10,7 +9,6 @@ function Payment({shippingAddress}){
     const dispatch = useDispatch()
     const history = useHistory()
     const cart = useSelector( state => state.cart.entity)
-    // const orderStatus = useSelector( state => state.order.status)
 
     function formatCart(){
         return cart?.map( i =>{
@@ -56,7 +54,6 @@ function Payment({shippingAddress}){
 
             <button onClick={pushOrder} className='bg-black text-white w-full p-2'>SUBMIT ORDER</button>
 
-            {/* <LoadingIcon status={orderStatus} /> */}
         </div> 
     );
 }
