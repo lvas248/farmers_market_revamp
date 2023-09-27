@@ -2,6 +2,7 @@ import { useParams, useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux' 
 import { useState } from 'react'
 import { addToCart } from '../redux/slices/cartSlice'
+import LoadingIcon from './LoadingIcon'
 
 function ProductDetailCard(){
 
@@ -14,10 +15,11 @@ function ProductDetailCard(){
 
     const products = useSelector(state => state.product.entity)
     const cart = useSelector( state => state.cart.entity)
+    // const cartStatus = useSelector( state => state.cart.status)
    
     const product = products?.find( p => p.id === parseInt(id)
     )
-    //debug product in cart
+    
     const productInCart = cart?.find(p => p.product?.id === product?.id)
     const availableQuantity = product?.qty_avail - (productInCart?.order_qty || 0) || 0 
    
@@ -109,6 +111,8 @@ function ProductDetailCard(){
 
             </div>
 
+
+            {/* <LoadingIcon status={cartStatus}/> */}
 
         </div> 
     );

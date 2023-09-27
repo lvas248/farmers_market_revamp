@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { clearCart } from "../../redux/slices/cartSlice";
 import CheckoutItem from "../../components/CheckoutItem";
 import getSubtotal from "../../helpers/subtotal";
+import LoadingIcon from "../../components/LoadingIcon";
 
 function Cart() {
 
@@ -11,6 +12,7 @@ function Cart() {
     const loggedIn = useSelector(state => state.session.loggedIn)
 
     const cart = useSelector(state => state.cart.entity)
+    const cartStatus = useSelector( state => state.cart.status)
 
     const subtotal = getSubtotal(cart)
 
@@ -74,7 +76,7 @@ function Cart() {
             </div>
             
 
-
+            <LoadingIcon status={cartStatus} />
 
         </div>
      );

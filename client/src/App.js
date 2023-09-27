@@ -18,6 +18,7 @@ import MyOrders from './pages/account/MyOrders';
 import OrderConfirmation from './components/OrderConfirmation';
 import OrderDetails from './pages/account/OrderDetails';
 import { validateAddress } from './redux/slices/addressSlice';
+import LoadingIcon from './components/LoadingIcon';
 
 function App(){
 
@@ -31,8 +32,11 @@ function App(){
     dispatch(refreshSession())
   },[dispatch])
 
+  
+
   const user = useSelector(state => state.user.entity)
   const cart = useSelector(state => state.cart.entity)
+
   const addresses = useSelector(state => state.address.entity)
 
 
@@ -73,6 +77,7 @@ function App(){
 
       </Switch>
 
+      <LoadingIcon />
     </div>
 
   );

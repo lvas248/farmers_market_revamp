@@ -27,7 +27,6 @@ export const submitOrder = createAsyncThunk(
         const data = await response.json()
 
         if(response.ok){ 
-            debugger
             dispatch(emptyCart())
             dispatch(updateProductQtys(data.filtered_order_items))
             dispatch(addAddress(data.shipping_detail))
