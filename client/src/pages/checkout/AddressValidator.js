@@ -34,12 +34,8 @@ function AddressValidator({updateWithValidatedAddress}) {
         setSelectedAddress('')
     }
 
-    console.log(validationResults)
-
-
-
     const renderResults = validationResults?.map( r =>{
-        return <button onClick={()=> selectAddress(r)} key={r.plus_code} type='button' className={`text-[10px] p-3 uppercase border border-black hover:bg-black hover:text-white ${ selectedAddress === r.plus_code && 'bg-black text-white '} ${(selectedAddress && selectedAddress !== r.plus_code && 'hidden')}`} >{r.formatted}</button>
+        return <button onClick={()=> selectAddress(r)} key={r.plus_code} type='button' className={`text-[10px] p-3 sm:w-[75%] m-auto uppercase border border-black hover:bg-black hover:text-white ${ selectedAddress === r.plus_code && 'bg-black text-white '} ${(selectedAddress && selectedAddress !== r.plus_code && 'hidden')}`} >{r.formatted}</button>
     })
 
 
@@ -56,7 +52,7 @@ function AddressValidator({updateWithValidatedAddress}) {
             {renderResults}
         </div>
 
-        <button onClick={resetAddressSelect} className={`${!selectedAddress && 'hidden'} underline text-[10px] text-right`} type='button'>reset selected address</button>
+        <button onClick={resetAddressSelect} className={`${!selectedAddress && 'hidden'} underline text-[10px] text-left`} type='button'>reset selected address</button>
     </div> 
 );
 }

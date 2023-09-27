@@ -11,6 +11,7 @@ function Checkout(){
     const cart = useSelector(state => state.cart.entity)
     const addresses = useSelector( state => state.address.entity)
     const loggedIn = useSelector(state => state.session.loggedIn)
+    const orderErrors = useSelector( state => state.order.error)
 
     const [ shippingAddress, setShippingAddress ] = useState({
         id:'',
@@ -28,9 +29,7 @@ function Checkout(){
 
     const [ paymentAdded, setPaymentAdded ] = useState(false)
 
-    const orderErrors = useSelector( state => state.order.error)
-
-    console.log(orderErrors)
+   
     const history = useHistory()
     const subtotal = getSubtotal(cart)
 
@@ -84,20 +83,16 @@ function Checkout(){
         if( paymentAdded){
             if(parseInt(shippingAddress.id)>0){
                 dispatch(submitOrder( { shipping_detail_id: shippingAddress.id, order_items_attributes: formatCart() } ) ).then(res => {
-                    console.log(res.payload)
                     if(res.meta.requestStatus === 'fulfilled') history.push(`/order_confirmation/${res.payload.id}`)
                 })
             }else{
                 dispatch(submitOrder( { shipping_detail_attributes: shippingAddress, order_items_attributes: formatCart()} )).then(res => {
-                    console.log(res.payload)
                     if(res.meta.requestStatus === 'fulfilled') history.push(`/order_confirmation/${res.payload.id}`)})
                 }
         }
     
 
     }
-
-    console.log(shippingAddress)
 
     return ( 
         <form onSubmit={pushOrder} className='pt-[10vh] h-screen w-[80vw] pb-[15vh] flex flex-col max-w-[1050px]'>
