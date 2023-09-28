@@ -87,7 +87,7 @@ function ProductDetailCard(){
                         { ( productInCart?.order_qty > 0 ) && ( availableQuantity === 0 )  ? (
                             <p className='error text-right'>all units in cart</p>
                         ):(
-                            <div className='flex gap-2 items-center place-content-end mr-5'>
+                            <div className={`flex gap-2 items-center place-content-end mr-5 ${product?.qty_avail === 0 && 'hidden'}`}>
                                 
                                 <button onClick={decrementOrderQty}>
                                     <img className='h-[20px] w-[20px]' alt='decrement' src={minus} />

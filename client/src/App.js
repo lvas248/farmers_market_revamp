@@ -36,39 +36,39 @@ function App(){
   return (
     <div className="relative min-w-[250px] bg-[#f7f7f7] grid place-content-center min-h-screen">   
 
-    <Navbar />
+      <Navbar />
 
-      <Switch>
+        <Switch>
 
-        
-        <Route exact path='/'> <Shop /> </Route>
+          
+          <Route exact path='/'> <Shop /> </Route>
 
-        <Route path='/product/:id'> <ProductDetailCard /> </Route>
+          <Route path='/product/:id'> <ProductDetailCard /> </Route>
 
-        <Route path='/collection/:season'> <Collection /></Route>
+          <Route path='/collection/:season'> <Collection /></Route>
 
-        <Route path='/cart'>{ cart?.length > 0 ? <Cart /> : <EmptyCart /> }</Route>
+          <Route path='/cart'>{ cart?.length > 0 ? <Cart /> : <EmptyCart /> }</Route>
 
-        <Route path='/checkout'><Checkout /></Route>
+          <Route path='/checkout'><Checkout /></Route>
 
-        <Route path='/order_confirmation/:order_id'><OrderConfirmation /></Route>
-
-
-
-        <Route path='/account'>
-
-          <Route path='/account/my_orders/:order_id'> <OrderDetails /> </Route>
-          <Route exact path='/account/my_orders'> <MyOrders />  </Route>
-         
-          <Route exact path='/account/signup'> <Signup /> </Route>
-          <Route exact path='/account/login'> <Login /> </Route>
-
-        </Route>
+          <Route path='/order_confirmation/:order_id'><OrderConfirmation /></Route>
 
 
-      </Switch>
 
-      <LoadingIcon />
+          <Route path='/account'>
+
+            <Route path='/account/my_orders/:order_id'> <OrderDetails /> </Route>
+            <Route exact path='/account/my_orders'> <MyOrders />  </Route>
+          
+            <Route exact path='/account/signup'> <Signup /> </Route>
+            <Route exact path='/account/login'> <Login /> </Route>
+
+          </Route>
+
+
+        </Switch>
+
+        <LoadingIcon />
     </div>
 
   );

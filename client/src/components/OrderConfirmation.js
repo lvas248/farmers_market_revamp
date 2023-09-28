@@ -1,9 +1,10 @@
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom"
+import { useParams, useHistory } from "react-router-dom"
 import getSubtotal from "../helpers/subtotal";
 
 function OrderConfirmation(){
 
+    const history = useHistory()
     const { order_id } = useParams()
     const orders = useSelector(state => state.order.entity)
     const order = orders.find( o => {
@@ -18,6 +19,10 @@ function OrderConfirmation(){
                     <p className='text-right'>x {i.order_qty}</p>
                 </div>
     })
+
+    function navigateHome(){
+        history.push('/')
+    }
 
     return ( 
         <div className='text-left flex flex-col gap-4 px-5 animate-glide-in-top'>
@@ -54,6 +59,9 @@ function OrderConfirmation(){
             </div>
 
             <p className='text-center mt-[5vh]'>Subtotal: ${subtotal}</p>
+
+
+            <button onClick={navigateHome} className='text-center text-xs underline mt-[5vh]'>continue shopping</button>
 
         </div> 
     );

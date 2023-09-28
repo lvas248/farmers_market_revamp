@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import { useState } from 'react'
 import AddressValidator from "./AddressValidator";
 
 function ShippingAddressForm({shippingAddress, updateShippingInfo, shippingInputIsOpen, toggleShippingInput, selectSavedAddress, updateWithValidatedAddress}) {
@@ -8,7 +7,6 @@ function ShippingAddressForm({shippingAddress, updateShippingInfo, shippingInput
     const addresses = useSelector( state => state.address.entity )
     const loggedIn = useSelector( state => state.session.loggedIn )
 
-    const [ addressSubmitted, setAddressSubmitted ] = useState(false)
     
     const renderAddressOptions = addresses?.map( a =>{
         return <option key={a.id} value={a.id} className='flex gap-1'>
@@ -20,7 +18,6 @@ function ShippingAddressForm({shippingAddress, updateShippingInfo, shippingInput
 
         <div className='mx-auto w-[80vw] max-w-[1050px] flex flex-col border-b-2 py-[2vh]'>
 
-            <div className={`${addressSubmitted && 'hidden'}`}>
 
 
                 <div className={`${shippingInputIsOpen && 'hidden'} grid place-content-center p-5`}>
@@ -45,7 +42,6 @@ function ShippingAddressForm({shippingAddress, updateShippingInfo, shippingInput
                     <AddressValidator updateWithValidatedAddress={updateWithValidatedAddress}/>
                 </div>
   
-            </div>
 
             <button onClick={toggleShippingInput} className={`${!loggedIn && 'hidden' } text-xs underline text-right`} type='button'>{shippingInputIsOpen ? 'or select from previous addresses' : 'or add address'}</button>
 

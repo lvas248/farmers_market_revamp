@@ -113,7 +113,7 @@ function Checkout(){
 
             <div className='my-[5vh]'>
                 <p className='underline text-left '>PAYMENT</p>
-                <p className='text-xs'>*payment must be added before checking out</p>
+                <p className={`text-[8px] ${paymentAdded && 'hidden'}`}>*payment must be added before checking out</p>
             </div>
 
             <div className='grid '>
