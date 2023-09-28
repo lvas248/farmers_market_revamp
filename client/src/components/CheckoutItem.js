@@ -2,6 +2,9 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { removeFromCart, updateOrderItem, removeErrors } from "../redux/slices/cartSlice";
+import plus from '../assets/Icons/icons8-plus-100.png'
+import minus from '../assets/Icons/icons8-minus-100.png'
+
 
 function CheckoutItem({order_item}) {
 
@@ -19,9 +22,13 @@ function CheckoutItem({order_item}) {
 
     const [ editQty, setEditQty ] = useState(order_item?.order_qty)
 
-    function updateEditQty(e){
-        setEditQty(e.target.value)
+    function incrementOrderQty(){
+        if(editQty < order_item?.product?.qty_avail) setEditQty(editQty + 1)
     }
+    function decrementOrderQty(){
+        if(editQty > 0 ) setEditQty(editQty - 1)
+    }
+   
 
     function navgateToProductDeatil(){
         history.push(`/product/${order_item.product?.id}`)
@@ -46,9 +53,9 @@ function CheckoutItem({order_item}) {
                     className='p-5 bg-stone-100'
                     onClick={navgateToProductDeatil}
                     >
-                    <img className='h-[60px] w-[60px]' alt={order_item?.product?.name} src={order_item?.product?.image}/>
-
+                    <img className='max-h-[50px]' alt={order_item?.product?.name} src={order_item?.product?.image}/>
                 </button>
+
                 <div className='p-2 h-[100%] flex flex-col  justify-between'>
                     <div className='grid gap-1'>
                         <button onClick={navgateToProductDeatil} className='text-left'>{order_item?.product?.name}</button>
@@ -71,8 +78,17 @@ function CheckoutItem({order_item}) {
                 <div>
                     
                     <div className='flex gap-1 place-content-center my-auto'>
-                        <label className='my-auto'>qty</label>
-                        <input className=' h-[4vh] w-[4vh] border-2 text-center p-1 ' type='number' value={editQty} onChange={updateEditQty} min={0} max={order_item?.product?.qty_avail} />
+                        {/* <label className='my-auto'>qty</label> */}
+                        <button onClick={decrementOrderQty}>
+                            <img className='h-[20px]' alt='decrement' src={minus} />
+                        </button>
+
+                        <p className='grid place-content-center text-md'>{editQty}</p>
+                    
+                        <button onClick={incrementOrderQty}>
+                            <img className='h-[20px]' alt='increment' src={plus} />
+                        </button>
+
                     </div>
                 </div>
 

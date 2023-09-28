@@ -1,11 +1,5 @@
 class OrdersController < ApplicationController
 
-
-    def index
-        user = get_user
-        render json: user.orders.order(created_at: :desc), status: :ok
-    end
-
     def submit_order
         cart_owner = get_cart_owner
         new_order = cart_owner.orders.create!(order_params)
