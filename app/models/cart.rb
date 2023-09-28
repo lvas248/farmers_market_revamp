@@ -7,7 +7,7 @@ class Cart < ApplicationRecord
         self.cart_items.destroy_all
     end
 
-    def merge_carts(guest_cart)
+    def merge_carts_with(guest_cart)
         # For each order_item in guest_cart, search user cart to if it has an order_item with the same product
           guest_cart.cart_items.each do |i|
     

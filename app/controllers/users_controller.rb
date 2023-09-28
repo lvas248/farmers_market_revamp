@@ -8,7 +8,7 @@ class UsersController < ApplicationController
                 
             #if guest is in session, merge carts, destroy that session
             if guest
-                user.cart.merge_carts(guest.cart)
+                user.cart.merge_carts_with(guest.cart)
                 guest.cart.clear_cart
                 session.delete :guest_id
             end
@@ -26,7 +26,6 @@ class UsersController < ApplicationController
             else 
                 guest = Guest.find_by(id: session[:guest_id])
                 if guest.present?
-                    # binding.pry
                     render json: guest, status: :unauthorized        
                 else
                     new_guest = Guest.create!()

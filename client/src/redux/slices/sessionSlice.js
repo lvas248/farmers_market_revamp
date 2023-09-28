@@ -17,10 +17,9 @@ export const signupUser = createAsyncThunk(
             body: JSON.stringify({user: obj})
         })
         const data = await response.json()
-
         if(response.ok){
             dispatch(addUser({name: data.name, email: data.email, phone: data.phone}))
-            dispatch(addCart(data.filtered_cart_items))
+            dispatch(addCart(data.cart.filtered_cart_items))
             dispatch(removeOrders())
             return data
         }

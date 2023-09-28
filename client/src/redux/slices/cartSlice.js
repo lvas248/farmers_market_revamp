@@ -96,7 +96,6 @@ const cartSlice = createSlice({
             .addCase( addToCart.fulfilled, ( state, action )=>{
                 state.status = 'idle'
                 state.error = null
-
                 const index = state.entity.findIndex( i => i.id === action.payload.id)
 
                 if(index >= 0){
