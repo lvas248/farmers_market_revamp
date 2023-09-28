@@ -4,7 +4,7 @@ class User < ApplicationRecord
     
     validates :email, presence: true, uniqueness: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }    
     validates :name, presence: true
-    # validates :phone, presence: true, format: { with: /\A\d{10}\z/, message: "must be a 10-digit number" }
+    validates :phone, presence: true, format: { with: /\A\d{10}\z/, message: "must be a 10-digit number" }
 
     has_secure_password
 
