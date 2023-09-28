@@ -1,11 +1,13 @@
 class CartsController < ApplicationController
 
     def add_to_cart
+        #get user/guest in session
+        cart_owner = get_cart_owner
 
-        user = User.find_by(id: session[:user_id]) || Guest.find_by(id: session[:guest_id])
-
-        if user.present?
-            cart = user.cart
+        #if user/guest is in session, add item(s) to cart
+        if cart_owner.present?
+            cart = cart_owner.cart
+            #search cart for cart_item w/ same product, if already exists in cart, update order_qty, else create new cart_item + add to cart
             cart_item = cart.update_or_create_cart_item(cart_item_params)
             render json: cart_item, status: :created
 
@@ -16,43 +18,35 @@ class CartsController < ApplicationController
             render json: cart_item, status: :created
         end
 
-
     end
 
     def remove_from_cart
-        user = User.find_by(id: session[:user_id]) || Guest.find_by(id: session[:guest_id])
-        
-        if user.present?
-            user.cart.remove_cart_item_by_id(params[:cart_item_id])
-            head :no_content
-        else 
-            render_not_found
-        end
-    
+        cart_owner = get_cart_owner
+        cart_owner.cart.remove_cart_item_by_id(params[:cart_item_id])
+        head :no_content
     end
 
     def updateOrderItemQtyInCart
-
-        user = User.find_by(id: session[:user_id]) || Guest.find_by(id: session[:guest_id])
-        if user.present?
-            cart_item = user.cart.cart_items.find(params[:cart_item_id])
-            cart_item.update!(cart_item_params)
-            render json: cart_item, status: :created
-        else 
-            render_not_found
-        end
-
+        cart_owner = get_cart_owner
+        # search cart for specific cart item
+        cart_item = cart_owner.cart.cart_items.find(params[:cart_item_id])
+        # update order_qty of cart_item
+        cart_item.update!(cart_item_params)
+        render json: cart_item, status: :created
+      
     end 
 
     def clear_cart
-        user = User.find_by(id: session[:user_id]) || Guest.find_by(id: session[:guest_id])
-        user.cart.cart_items.destroy_all
+        cart_owner = get_cart_owner
+        cart_owner.cart.clear_cart
         head :ok
     end
 
     private
 
-
+    def get_cart_owner
+        User.find_by(id: session[:user_id]) || Guest.find_by!(id: session[:guest_id])
+    end
 
     def cart_item_params
         params.require(:cart_item).permit(:product_id, :order_qty)

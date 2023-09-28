@@ -27,23 +27,18 @@ class Cart < ApplicationRecord
 
     def update_or_create_cart_item(cart_item_params)
 
-        #check if cart already has an order with a product id =  order_item_params[:product_id]
+        #check if cart already has an cart_item with a product id =  cart_item_params[:product_id]
         
         cart_item =  self.cart_items.find_by(product_id: cart_item_params[:product_id])
-       
-        if !cart_item.nil?
 
-            cart_item.add_to_qty(cart_item_params[:order_qty]) 
-            return cart_item
-        else 
-            cart_item = self.cart_items.create!(cart_item_params) 
-            return cart_item
-        end
+        cart_item.nil? ? cart_item = self.cart_items.create!(cart_item_params) : cart_item.add_to_qty(cart_item_params[:order_qty])
+        
+        cart_item
 
     end
 
     def remove_cart_item_by_id(cart_item_id)
-        self.cart_items.find_by(id: cart_item_id).destroy
+        self.cart_items.destroy_by(id: cart_item_id)
     end
     
 end
