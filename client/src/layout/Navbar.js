@@ -2,6 +2,7 @@ import { Squash as Hamburger} from 'hamburger-react'
 import LeftSideMenu from './LeftSideMenu';
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 import { useState } from 'react'
+import { useSelector } from 'react-redux';
 
 function Navbar(){
 
@@ -10,6 +11,7 @@ function Navbar(){
     function toggleLeft(){
       setLeftisOpen(!leftIsOpen)
     }
+    const cartLength = useSelector( state => state.cart.entity).length
 
     return ( 
         <div id='nav'
@@ -25,7 +27,10 @@ function Navbar(){
             <NavLink
                 to='/cart' 
                 className='w-fit p-4 grid place-content-center'>
-                <img className='h-[30px] my-auto' alt='cart' src='https://res.cloudinary.com/dfbe9u9zm/image/upload/v1694832739/cart_e7zbid.png' />
+                    <div className='relative flex justify-center items-center '>
+                        <p className='absolute left-[50%] text-[8px]'>{cartLength}</p>
+                        <img className='h-[30px] my-auto' alt='cart' src='https://res.cloudinary.com/dfbe9u9zm/image/upload/v1694832739/cart_e7zbid.png' />
+                    </div>
             </NavLink>
 
             <LeftSideMenu isOpen={leftIsOpen} toggle={toggleLeft} />

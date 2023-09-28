@@ -111,7 +111,10 @@ function Checkout(){
 
             <ShippingAddressForm shippingAddress={shippingAddress} updateShippingInfo={updateShippingInfo} selectSavedAddress={selectSavedAddress} shippingInputIsOpen={shippingInputIsOpen} toggleShippingInput={toggleShippingInput} updateWithValidatedAddress={updateWithValidatedAddress}/>
 
-            <p className='underline text-left my-[5vh]'>PAYMENT</p>
+            <div className='my-[5vh]'>
+                <p className='underline text-left '>PAYMENT</p>
+                <p className='text-xs'>*payment must be added before checking out</p>
+            </div>
 
             <div className='grid '>
                 <button type='button' onClick={()=>setPaymentAdded(true)} className={`bg-black text-white p-2 w-fit m-auto ${ paymentAdded && 'hidden'}`}>Add Payment Method</button>

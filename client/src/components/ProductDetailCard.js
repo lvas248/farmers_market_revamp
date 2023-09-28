@@ -56,7 +56,7 @@ function ProductDetailCard(){
                         '
                 >
                     <img 
-                        className='h-[100%] w-[100%] max-h-[200px] object-cover' 
+                        className='max-h-[200px] object-cover' 
                         alt={product?.name} src={product?.image} />
 
                 </div>
@@ -90,13 +90,13 @@ function ProductDetailCard(){
                             <div className='flex gap-2 items-center place-content-end mr-5'>
                                 
                                 <button onClick={decrementOrderQty}>
-                                    <img className='w-[100%] h-[100%] max-h-[25px]' alt='decrement' src={minus} />
+                                    <img className='h-[20px] w-[20px]' alt='decrement' src={minus} />
                                 </button>
                                
                                <p className='grid place-content-center text-xl'>{qty}</p>
                                 
                                 <button onClick={incrementOrderQty}>
-                                    <img className='w-[100%] h-[100%] max-h-[25px]' alt='increment' src={plus} />
+                                    <img className='h-[20px] w-[20px]' alt='increment' src={plus} />
                                 </button>
 
                             </div>                            
