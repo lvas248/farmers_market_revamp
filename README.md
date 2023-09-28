@@ -1,6 +1,7 @@
 
 # Farmer's Market
 
+![cover Image](/client/src/assets/readme/Screenshot%202023-09-28%20at%207.39.16 PM.png)
 
 
 WALKTHROUGH: 
