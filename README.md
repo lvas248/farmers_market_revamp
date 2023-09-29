@@ -51,20 +51,37 @@ REACT_APP_GEOAPIFY_API_KEY= geoapify_api_key
 #### 1. Product Listing
 Easily browse through a diverse range of farm-fresh fruits and vegetables. Each product listing comes with detailed descriptions and high-quality images to help you make informed choices.
 
+![gif](/client/src/assets/readme/gifs/product_list.gif)
+
+
 #### 2. Search and Filter
 Effortlessly find the products you're looking for using our robust search and filtering system. 
+
+![gif](/client/src/assets/readme/gifs/filter_search.gif)
+
 
 #### 3. Secure User Accounts
 Create your own secure account to view order history, save shipping addresses, save shopping carts.
 
+![Example Image](/client/src/assets/readme/gifs/secure_account.gif)
+
+
 #### 4. Saved Shopping carts
 Shopping carts can be saved by both guests and registered users. This feature eliminates concerns about losing selected items, allowing for a convenient completion of purchases at a later time. Even if an account hasn't been created, products can still be stored in the cart. For registered users, these saved carts can be accessed seamlessly across different devices.
+
+![gif](/client/src/assets/readme/gifs/save_cart.gif)
+
 
 #### 5. Responsive Design
 The app is designed with responsiveness in mind. Whether you're using a desktop, tablet, or smartphone, you can enjoy a smooth shopping experience on any device and screen size.
 
 #### 6. Address Validation
-Enhance the precision of your delivery information using our address validation feature, which helps prevent issues related to typographical errors or inaccurate addresses.
+Enhance the precision of your delivery information using our frontend address validation feature, which helps prevent issues related to typographical errors or inaccurate addresses.
+
+![Example Image](/client/src/assets/readme/gifs/address_validation.gif)
+
+
+
 ## Backend
 
 
@@ -76,7 +93,7 @@ Enhance the precision of your delivery information using our address validation 
 - `POST /signup`: Create a new user account.
 - `POST /login`: Log in with an existing user account.
 
-**Session**
+**Session**:
 - `GET /me`: Retrieve the user that is currently in session.
 - `DELETE /logout`: Remove current user from session.
 
