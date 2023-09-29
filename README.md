@@ -4,7 +4,7 @@
 ![cover Image](/client/src/assets/readme/Screenshot%202023-09-28%20at%207.39.16 PM.png)
 
 
-WALKTHROUGH: 
+WALKTHROUGH: https://youtu.be/Dg0Hv2BqMxE
 
 DEMO: https://farmers-market-c6jl.onrender.com
 

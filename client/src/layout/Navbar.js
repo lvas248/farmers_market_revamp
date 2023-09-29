@@ -22,7 +22,7 @@ function Navbar(){
             </div>
 
             
-            <NavLink to='/' className='my-auto'>Farmers Market</NavLink>
+            <NavLink to='/' className='my-auto'>Farmer's Market</NavLink>
      
             <NavLink
                 to='/cart' 
