@@ -2,7 +2,7 @@ class CartsController < ApplicationController
 
     def add_to_cart
         #get user/guest in session
-        cart_owner = get_cart_owner
+        cart_owner = User.find_by(id: session[:user_id]) || Guest.find_by(id: session[:guest_id])
 
         #if user/guest is in session, add item(s) to cart
         if cart_owner.present?
