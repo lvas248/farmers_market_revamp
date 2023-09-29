@@ -10,7 +10,7 @@ function ShippingAddressForm({shippingAddress, updateShippingInfo, shippingInput
     
     const renderAddressOptions = addresses?.map( a =>{
         return <option key={a.id} value={a.id} className='flex gap-1'>
-            {a.street}, {a.apartment}, {a.city}, {a.state} {a.zipcode} - {a.country}
+            {a.name} - {a.street} {a.apartment}, {a.city}, {a.state} {a.zipcode}, {a.country}
         </option>
     })
 
