@@ -116,13 +116,13 @@ function Checkout(){
                 <p className={`text-[8px] ${paymentAdded && 'hidden'}`}>*payment must be added before checking out</p>
             </div>
 
-            <div className='grid '>
+            <div className='grid h-[12vh] '>
                 <button type='button' onClick={()=>setPaymentAdded(true)} className={`bg-black text-white p-2 w-fit m-auto ${ paymentAdded && 'hidden'}`}>Add Payment Method</button>
                 <p className={`text-xs font-bold text-[#243c5a] m-auto w-fit ${ !paymentAdded && 'hidden'}`}>payment method added</p>
             </div>
 
 
-            <button className='bg-black text-white w-full p-2 mt-[5vh]'>SUBMIT ORDER</button>            
+            <button className={`${ paymentAdded ? 'bg-black text-white animate-fade-in-slow' : 'bg-white text-black border-2 border-black'}  w-full p-2 mt-[5vh]`}>SUBMIT ORDER</button>            
 
         </form> );
 }
