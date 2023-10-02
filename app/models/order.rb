@@ -13,12 +13,17 @@ class Order < ApplicationRecord
   
   accepts_nested_attributes_for :shipping_detail, :order_items
 
+  def calculate_subtotal
+    self.order_items.sum(:subtotal)
+  end
 
   private
 
   def update_inventory
     self.order_items.each{ |o| o.fulfill_order_item }
   end
+
+
 
 
 

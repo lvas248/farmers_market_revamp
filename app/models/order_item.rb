@@ -6,6 +6,8 @@ class OrderItem < ApplicationRecord
 
   validate :confirm_inventory_available
 
+  before_save :update_subtotal
+
   def add_to_qty(qty) 
     self.update!(order_qty: self.order_qty + qty.to_i)
   end
@@ -20,6 +22,10 @@ class OrderItem < ApplicationRecord
     unless self.order_qty <= self.product.qty_avail
       errors.add(:order_qty, "Not enough inventory to fulfill")
     end
+  end
+
+  def update_subtotal
+    self.subtotal = self.product.price * self.order_qty
   end
 
 

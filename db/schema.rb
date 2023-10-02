@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2023_09_22_180335) do
   create_table "order_items", force: :cascade do |t|
     t.bigint "order_id"
     t.bigint "product_id"
+    t.decimal "subtotal", precision: 6, scale: 2
     t.integer "order_qty"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
