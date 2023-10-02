@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2023_09_22_180335) do
     t.bigint "cart_id", null: false
     t.bigint "product_id", null: false
     t.integer "order_qty"
+    t.decimal "subtotal", precision: 6, scale: 2
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["cart_id"], name: "index_cart_items_on_cart_id"

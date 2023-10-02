@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { clearCart } from "../../redux/slices/cartSlice";
 import CheckoutItem from "../../components/CheckoutItem";
-import getSubtotal from "../../helpers/subtotal";
 
 function Cart() {
 
@@ -11,11 +10,9 @@ function Cart() {
     const loggedIn = useSelector(state => state.session.loggedIn)
 
     const cart = useSelector(state => state.cart.entity)
-
-    const subtotal = getSubtotal(cart)
-
-    const renderCheckoutItems = cart?.map( i =>{
-        return <CheckoutItem key={i.id} order_item={i} />
+  
+    const renderCheckoutItems = cart?.filtered_cart_items?.map( i =>{
+        return <CheckoutItem key={i.id} cart_item={i} />
     })
 
     function emptyCart(){
@@ -37,7 +34,7 @@ function Cart() {
                 <div className='grid grid-cols-9 text-center mb-2'>
                     
 
-                    <h3 className='col-span-5 text-left text-lg'>My Bag({cart?.length || 0})</h3>
+                    <h3 className='col-span-5 text-left text-lg'>My Bag({cart?.filtered_cart_items?.length || 0})</h3>
 
                     <div className='col-span-4  grid-cols-3 text-xs text-stone-400 hidden sm:grid'>
                         <p className='col-span-1'>QUANTITY</p>
@@ -57,7 +54,7 @@ function Cart() {
                 
                 <div className='flex justify-between text-xs px-2 py-3 border-b'>
                     <p className='text-stone-300'>SUBTOTAL:</p>
-                    <p>${(Math.round(subtotal * 100)/100).toFixed(2)}</p>
+                    <p>${cart?.cart_subtotal}</p>
                 </div>
 
                 <div className='flex justify-between text-xs px-2 py-3 border-b'>

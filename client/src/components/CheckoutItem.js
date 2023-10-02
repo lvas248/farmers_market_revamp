@@ -1,16 +1,16 @@
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
-import { removeFromCart, updateOrderItem, removeErrors } from "../redux/slices/cartSlice";
+import { removeFromCart, updateCartItem, removeErrors } from "../redux/slices/cartSlice";
 import plus from '../assets/Icons/icons8-plus-100.png'
 import minus from '../assets/Icons/icons8-minus-100.png'
 
 
-function CheckoutItem({order_item}) {
+function CheckoutItem({cart_item}) {
+    
 
     const history = useHistory()
     const dispatch = useDispatch()
-    const error = useSelector( state => state.cart.error)
 
     useEffect(()=>{
         //removes errors when component unmounts
@@ -20,10 +20,10 @@ function CheckoutItem({order_item}) {
     },[dispatch])
 
 
-    const [ editQty, setEditQty ] = useState(order_item?.order_qty)
+    const [ editQty, setEditQty ] = useState(cart_item?.order_qty)
 
     function incrementOrderQty(){
-        if(editQty < order_item?.product?.qty_avail) setEditQty(editQty + 1)
+        if(editQty < cart_item?.product?.qty_avail) setEditQty(editQty + 1)
     }
     function decrementOrderQty(){
         if(editQty > 0 ) setEditQty(editQty - 1)
@@ -31,16 +31,16 @@ function CheckoutItem({order_item}) {
    
 
     function navgateToProductDeatil(){
-        history.push(`/product/${order_item.product?.id}`)
+        history.push(`/product/${cart_item.product?.id}`)
     }
 
     function deleteCheckoutItem(){
-        dispatch(removeFromCart({order_item_id: order_item.id})).then(res => console.log(res))
+        dispatch(removeFromCart({cart_item_id: cart_item.id})).then(res => console.log(res))
     }
 
 
     function updateItemQty(){
-        dispatch(updateOrderItem({ order_item_id: order_item.id, submitObj: { product_id: order_item.product.id, order_qty: editQty } }))
+        dispatch(updateCartItem({ cart_item_id: cart_item.id, submitObj: { product_id: cart_item.product.id, order_qty: editQty } }))
     }
 
 
@@ -53,14 +53,14 @@ function CheckoutItem({order_item}) {
                     className='p-5 bg-stone-100'
                     onClick={navgateToProductDeatil}
                     >
-                    <img className='max-h-[50px]' alt={order_item?.product?.name} src={order_item?.product?.image}/>
+                    <img className='max-h-[50px]' alt={cart_item?.product?.name} src={cart_item?.product?.image}/>
                 </button>
 
                 <div className='p-2 h-[100%] flex flex-col  justify-between'>
                     <div className='grid gap-1'>
-                        <button onClick={navgateToProductDeatil} className='text-left'>{order_item?.product?.name}</button>
-                        <p className='text-stone-400 '>{order_item?.product?.description}</p>
-                        <p className='text-stone-400 hidden sm:block'>{order_item?.product?.season?.split(',').join(' | ')}</p>
+                        <button onClick={navgateToProductDeatil} className='text-left'>{cart_item?.product?.name}</button>
+                        <p className='text-stone-400 '>{cart_item?.product?.description}</p>
+                        <p className='text-stone-400 hidden sm:block'>{cart_item?.product?.season?.split(',').join(' | ')}</p>
                     </div>
 
                     <div className='flex gap-1 text-[10px]'>
@@ -75,7 +75,7 @@ function CheckoutItem({order_item}) {
             <div className='col-span-4 flex flex-col sm:grid sm:grid-cols-3'>
 
                 
-                <div>
+                <div className='grid place-content-center'>
                     
                     <div className='flex gap-1 place-content-center my-auto'>
                         {/* <label className='my-auto'>qty</label> */}
@@ -92,14 +92,13 @@ function CheckoutItem({order_item}) {
                     </div>
                 </div>
 
-                <p className='error text-right'>{error?.errors?.order_qty}</p>
 
                 <div className=' gap-1 place-content-center my-auto hidden sm:flex'>
-                    <p>${(Math.round(order_item?.product?.price * 100)/100).toFixed(2)}</p>
+                    <p>${cart_item?.product.price}</p>
                 </div>
 
                 <div className='flex gap-1 place-content-center my-auto'>
-                    <p>${(Math.round(order_item?.product?.price * order_item?.order_qty * 100)/100).toFixed(2)}</p>
+                    <p>${(Math.round(cart_item?.product?.price * cart_item?.order_qty * 100)/100).toFixed(2)}</p>
                 </div>
 
             </div>

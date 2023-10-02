@@ -40,5 +40,9 @@ class Cart < ApplicationRecord
     def remove_cart_item_by_id(cart_item_id)
         self.cart_items.destroy_by(id: cart_item_id)
     end
+
+    def calculate_subtotal
+      self.cart_items.sum(:subtotal)
+    end
     
 end

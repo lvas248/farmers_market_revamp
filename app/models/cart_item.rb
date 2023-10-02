@@ -3,8 +3,7 @@ class CartItem < ApplicationRecord
   belongs_to :product
 
   validate :confirm_inventory_available
-
-  after_update :destroy_if_order_qty_zero
+  before_save :update_subtotal
 
   def add_to_qty(qty)
     self.update!(order_qty: self.order_qty + qty.to_i)
@@ -20,6 +19,10 @@ class CartItem < ApplicationRecord
 
   def destroy_if_order_qty_zero
     self.destroy unless self.order_qty > 0
+  end
+
+  def update_subtotal
+    self.subtotal = self.product.price * self.order_qty
   end
 
 

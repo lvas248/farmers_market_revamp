@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import getSubtotal from '../../helpers/subtotal'    
 
 export const addToCart = createAsyncThunk(
     'addTo/cart',
@@ -20,22 +21,22 @@ export const addToCart = createAsyncThunk(
 export const removeFromCart = createAsyncThunk(
     'removeFrom/cart',
     async( obj, { rejectWithValue })=>{
-        const response = await fetch(`/cart/${obj.order_item_id}`,{
+        const response = await fetch(`/cart/${obj.cart_item_id}`,{
             method:'DELETE',
          })
         const data = await response
 
-        if(response.ok) return obj.order_item_id
+        if(response.ok) return obj.cart_item_id
 
         return rejectWithValue(data)
     }
 )
 
-export const updateOrderItem = createAsyncThunk(
+export const updateCartItem = createAsyncThunk(
     // { "order_item_id": 2,  submitObj: { "product": { "product_id": 6, "order_qty": 9 } } } 
     'updateCartItemQty/cart',
     async( obj, { rejectWithValue })=>{
-        const response = await fetch(`/cart/${obj.order_item_id}`,{
+        const response = await fetch(`/cart/${obj.cart_item_id}`,{
             method:'PATCH',
             headers: {
                 'Content-type':'application/json'
@@ -64,6 +65,7 @@ export const clearCart = createAsyncThunk(
 
 const initialState = {
     entity: [],
+    subtotal: 0,
     status: 'idle',
     error: null
 }
@@ -96,15 +98,25 @@ const cartSlice = createSlice({
             .addCase( addToCart.fulfilled, ( state, action )=>{
                 state.status = 'idle'
                 state.error = null
-                const index = state.entity.findIndex( i => i.id === action.payload.id)
+                const index = state.entity.filtered_cart_items.findIndex( i => i.id === action.payload.id)
 
                 if(index >= 0){
-                    state.entity[index] = action.payload
+                    //When a cart_item containing the product added already exists in cart
+                    const updatedCartItems = state.entity.filtered_cart_items.map( i =>{
+                        if(i.id === action.payload.id) return action.payload
+                        else return i
+                    })
+                    state.entity.filtered_cart_items = updatedCartItems
+                    state.entity.cart_subtotal = getSubtotal(updatedCartItems)
+
                 }else{
-                    state.entity = [...state.entity, action.payload]
+                    //When a cart_item continaing the product added does not already exist in cart
+                    const updateCartItems =  [...state.entity.filtered_cart_items, action.payload]
+                    state.entity.filtered_cart_items = updateCartItems
+                    state.entity.cart_subtotal = getSubtotal(updateCartItems)
                 }
-                    
             })
+
             .addCase( removeFromCart.pending, ( state )=>{
                 state.status = 'pending'
                 state.error = null
@@ -114,26 +126,34 @@ const cartSlice = createSlice({
                 state.error = action.payload
             })
             .addCase( removeFromCart.fulfilled, ( state, action )=>{
+                const filteredCartItems = state.entity.filtered_cart_items.filter( oItem => oItem.id !== action.payload)
+
                 state.status = 'idle'
                 state.error = null
-                state.entity = state.entity.filter( oItem => oItem.id !== action.payload)
+                state.entity.filtered_cart_items = filteredCartItems
+                state.entity.cart_subtotal = getSubtotal(filteredCartItems)
             })
-            .addCase( updateOrderItem.pending,  ( state ) =>{
+
+            .addCase( updateCartItem.pending,  ( state ) =>{
                 state.status = 'pending'
                 state.error = null
             })
-            .addCase( updateOrderItem.rejected, ( state, action )=>{
+            .addCase( updateCartItem.rejected, ( state, action )=>{
                 state.status = 'idle'
                 state.error = action.payload
             })
-            .addCase( updateOrderItem.fulfilled, ( state, action )=>{
-                state.status = 'idle'
-                state.error = null
-                state.entity = state.entity.map( oItem =>{
+            .addCase( updateCartItem.fulfilled, ( state, action )=>{
+                const updatedCartItems = state.entity.filtered_cart_items.map( oItem =>{
                     if( oItem.id === action.payload.id) return action.payload
                     else return oItem
                 })
+
+                state.status = 'idle'
+                state.error = null
+                state.entity.filtered_cart_items = updatedCartItems
+                state.entity.cart_subtotal = getSubtotal(updatedCartItems)
             })
+
             .addCase( clearCart.pending, state => {
                 state.status = 'pending'
                 state.error = null
@@ -145,7 +165,8 @@ const cartSlice = createSlice({
             .addCase( clearCart.fulfilled, ( state )=>{
                 state.status = 'idle'
                 state.error = null
-                state.entity = []
+                state.entity.filtered_cart_items = []
+                state.entity.subtotal = 0
             })
 
     }

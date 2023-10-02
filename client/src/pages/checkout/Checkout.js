@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from 'react'
 import { useHistory } from "react-router-dom";
-import getSubtotal from "../../helpers/subtotal";
 import ShippingAddressForm from "./ShippingAddressForm";
 import { submitOrder } from '../../redux/slices/orderSlice';
 
@@ -31,7 +30,6 @@ function Checkout(){
 
    
     const history = useHistory()
-    const subtotal = getSubtotal(cart)
 
     function navigateToCart(){
         history.push('/cart')
@@ -73,7 +71,7 @@ function Checkout(){
     }
 
     function formatCart(){
-        return cart?.map( i =>{
+        return cart?.filtered_cart_items.map( i =>{
             return { order_qty: i.order_qty, product_id: i.product.id}
         })
     }
@@ -103,7 +101,7 @@ function Checkout(){
 
             <div className='h-[10vh] flex w-full place-content-end items-center border-b px-5'>
                 <p className='font-bold text-xl'>SUBTOTAL</p>
-                <p className='text-xl'>${subtotal}</p>
+                <p className='text-xl'>${cart?.cart_subtotal}</p>
             </div>
 
             <p className='underline text-left'>SHIPPING OPTIONS</p>

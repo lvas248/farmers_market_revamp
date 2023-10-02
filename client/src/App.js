@@ -32,7 +32,7 @@ function App(){
   },[dispatch])
 
   const cart = useSelector(state => state.cart.entity)
-
+  console.log(cart)
   return (
     <div className="relative min-w-[250px] bg-[#f7f7f7] grid place-content-center min-h-screen">   
 
@@ -47,7 +47,7 @@ function App(){
 
           <Route path='/collection/:season'> <Collection /></Route>
 
-          <Route path='/cart'>{ cart?.length > 0 ? <Cart /> : <EmptyCart /> }</Route>
+          <Route path='/cart'>{ cart?.filtered_cart_items?.length > 0 ? <Cart /> : <EmptyCart /> }</Route>
 
           <Route path='/checkout'><Checkout /></Route>
 

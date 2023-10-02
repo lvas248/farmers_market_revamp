@@ -19,7 +19,7 @@ function ProductDetailCard(){
    
     const product = products?.find( p => p.id === parseInt(id))
 
-    const productInCart = cart?.find(p => p.product?.id === product?.id)
+    const productInCart = cart?.filtered_cart_items?.find(p => p.product?.id === product?.id)
     const availableQuantity = product?.qty_avail - (productInCart?.order_qty || 0) || 0 
    
     function incrementOrderQty(){

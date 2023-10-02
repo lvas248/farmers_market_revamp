@@ -45,8 +45,10 @@ export const loginuser = createAsyncThunk(
         if(response.ok){ 
             dispatch(addUser({name: data.name, email: data.email, phone: data.phone}))
             dispatch(addAddresses(data.shipping_details))
-            if(data.cart.filtered_cart_items) dispatch(addCart(data.cart.filtered_cart_items))
+
+            if(data.cart) dispatch(addCart(data.cart))
             dispatch(addOrders(data.orders.reverse()))
+            
             return data
         }
         return rejectWithValue(data)
@@ -83,11 +85,11 @@ export const refreshSession = createAsyncThunk(
          
             dispatch(addUser({name: data.name, email: data.email, phone: data.phone}))
             dispatch(addAddresses(data.shipping_details))
-            if(data.cart.filtered_cart_items) dispatch(addCart(data.cart.filtered_cart_items))
+            if(data.cart.filtered_cart_items) dispatch(addCart(data.cart))
             dispatch(addOrders(data.orders.reverse()))
             return 
         }
-        if(data.cart.filtered_cart_items) dispatch(addCart(data.cart.filtered_cart_items))
+        if(data.cart.filtered_cart_items) dispatch(addCart(data.cart))
         return rejectWithValue(data)
     }
 )

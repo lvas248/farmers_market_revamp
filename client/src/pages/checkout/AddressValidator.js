@@ -20,6 +20,7 @@ function AddressValidator({updateWithValidatedAddress}) {
     }
 
     function sendValidationRequest(){
+        console.log(addressText)
         dispatch(validateAddress(addressText))
     }
 

@@ -1,5 +1,5 @@
 class CartSerializer < ActiveModel::Serializer
-  attributes :id, :cart_items
+  attributes :id, :cart_items, :subtotal
 
 
 
