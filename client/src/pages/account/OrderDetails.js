@@ -1,7 +1,6 @@
 import { useParams, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import formatDate from "../../helpers/formatDate";
-import getSubtotal from "../../helpers/subtotal";
 
 function OrderDetails() {
 
@@ -68,7 +67,7 @@ function OrderDetails() {
             {renderOrderItems}
         </div>
 
-        <p className='text-center'>Total: ${getSubtotal(order?.filtered_order_items)}</p>
+        <p className='text-center'>Total: ${order?.order_subtotal}</p>
 
 
 

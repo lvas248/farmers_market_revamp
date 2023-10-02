@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom"
-import getSubtotal from "../helpers/subtotal";
 
 function OrderConfirmation(){
 
@@ -10,7 +9,7 @@ function OrderConfirmation(){
     const order = orders.find( o => {
         return o.id === parseInt(order_id)
     })
-    const subtotal = getSubtotal(order?.filtered_order_items)
+  
 
     const renderOrderItems = order?.filtered_order_items?.map( i =>{
         return <div key={i?.id} className='text-xs text-left grid grid-cols-3 border-t-2 py-4'>                
@@ -58,7 +57,7 @@ function OrderConfirmation(){
                 {renderOrderItems}
             </div>
 
-            <p className='text-center mt-[5vh]'>Subtotal: ${subtotal}</p>
+            <p className='text-center mt-[5vh]'>Subtotal: ${order?.order_subtotal}</p>
 
 
             <button onClick={navigateHome} className='text-center text-xs underline mt-[5vh]'>continue shopping</button>

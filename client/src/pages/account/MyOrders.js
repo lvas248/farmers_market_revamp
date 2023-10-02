@@ -24,7 +24,7 @@ function MyOrders( ){
             <p>Order#:{o.id}</p>            
             <p>{formatDate(o?.created_at)}</p>
             <p>Qty: {o?.filtered_order_items?.length}</p>
-            <p>${getSubtotal(o?.filtered_order_items)}</p>
+            <p>${o?.order_subtotal}</p>
 
         </button>
     })

@@ -148,6 +148,7 @@ Cart_Items
 - `cart_id`
 - `product_id`
 - `order_qty`
+- `subtotal`
 
 Orders (polymorphic)
 - `_id`
@@ -160,6 +161,7 @@ Order_Items
 - `order_id`
 - `product_id`
 - `order_qty`
+- `subtotal`
 
 Shipping_Details
 - `_id`
