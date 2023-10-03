@@ -11,7 +11,8 @@ function Navbar(){
     function toggleLeft(){
       setLeftisOpen(!leftIsOpen)
     }
-    const cartLength = useSelector( state => state.cart.entity).length
+    const cart= useSelector( state => state.cart.entity)
+
 
     return ( 
         <div id='nav'
@@ -28,7 +29,7 @@ function Navbar(){
                 to='/cart' 
                 className='w-fit p-4 grid place-content-center'>
                     <div className='relative flex justify-center items-center '>
-                        <p className='absolute left-[50%] text-[8px]'>{cartLength}</p>
+                        <p className='absolute left-[50%] text-[8px]'>{cart?.filtered_cart_items?.length}</p>
                         <img className='h-[30px] my-auto' alt='cart' src='https://res.cloudinary.com/dfbe9u9zm/image/upload/v1694832739/cart_e7zbid.png' />
                     </div>
             </NavLink>
