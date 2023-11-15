@@ -35,7 +35,7 @@ function AddressValidator({updateWithValidatedAddress}) {
     }
 
     const renderResults = validationResults?.map( r =>{
-        return <button onClick={()=> selectAddress(r)} key={r.plus_code} type='button' className={`text-[10px] p-3 sm:w-[75%] m-auto uppercase border border-black hover:bg-black hover:text-white ${ selectedAddress === r.plus_code && 'bg-black text-white '} ${(selectedAddress && selectedAddress !== r.plus_code && 'hidden')}`} >{r.formatted}</button>
+        return <button onClick={()=> selectAddress(r)} key={r.plus_code} type='button' className={`text-[10px] p-3 w-full sm:w-[75%] m-auto uppercase border border-black hover:bg-black hover:text-white ${ selectedAddress === r.plus_code && 'bg-black text-white '} ${(selectedAddress && selectedAddress !== r.plus_code && 'hidden')}`} >{r.formatted}</button>
     })
 
 
