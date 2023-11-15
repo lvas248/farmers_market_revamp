@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom'
 
 import formatDate from "../../helpers/formatDate";
-import getSubtotal from "../../helpers/subtotal";
+// import getSubtotal from "../../helpers/subtotal";
 
 function MyOrders( ){
 

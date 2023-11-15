@@ -65,7 +65,7 @@ export const clearCart = createAsyncThunk(
 
 const initialState = {
     entity: [],
-    subtotal: 0,
+    // subtotal: 0,
     status: 'idle',
     error: null
 }
@@ -78,7 +78,8 @@ const cartSlice = createSlice({
             state.entity = action.payload
         }, 
         emptyCart: ( state ) =>{
-            state.entity = []
+            state.entity.filtered_cart_items = []
+            state.entity.cart_subtotal = 0
         }, 
         removeErrors: ( state )=>{
             state.error = null
@@ -98,6 +99,7 @@ const cartSlice = createSlice({
             .addCase( addToCart.fulfilled, ( state, action )=>{
                 state.status = 'idle'
                 state.error = null
+
                 const index = state.entity.filtered_cart_items.findIndex( i => i.id === action.payload.id)
 
                 if(index >= 0){

@@ -7,7 +7,6 @@ export const validateAddress = createAsyncThunk(
         const response = await fetch(`https://api.geoapify.com/v1/geocode/autocomplete?text=${addressText}&format=json&apiKey=${process.env.REACT_APP_GEOAPIFY_API_KEY}`)
         
         const data = await response.json()
-
         if(response.ok) return data.results
         return rejectWithValue(data)
     }
