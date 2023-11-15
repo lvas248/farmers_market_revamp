@@ -7,7 +7,7 @@ function Login() {
 
     const [ loginObj, setLoginObj ] = useState({
         email: 'demo@gmail.com',
-        password: 'password'
+        password: 'Password1'
     })
     const dispatch = useDispatch()
     const history = useHistory()
